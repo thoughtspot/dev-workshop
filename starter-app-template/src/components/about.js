@@ -5,7 +5,7 @@ export default function About() {
        <div>
            <h1>About</h1>
            Starter react app template for attendees to embed ThoughtSpot content.
-
+            </br>
            Made with love by @quintonwall
        </div>
    )
