@@ -1,5 +1,5 @@
-## ThoughtSpot Everywhere Developer Workshop
 
+## ThoughtSpot Everywhere Developer Workshop
 
 
 ### Objectives / Goal:
@@ -26,4 +26,4 @@ The workshop is broken into 3 parts, with the learning objectives as follows:
 - A general understanding of RESTful APIs and HTTP
 
 
-[I'm ready to get started](/workshop.html){: .btn .btn-purple .mr-2 }
+[I'm ready to get started](/workshop.html){: .btn}
