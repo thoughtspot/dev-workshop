@@ -1,37 +1,29 @@
-## Welcome to GitHub Pages
+## ThoughtSpot Everywhere Developer Workshop
 
-You can use the [editor on GitHub](https://github.com/thoughtspot/dev-workshop/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+### Objectives / Goal:
+This workshop is designed to introduce developers to ThoughtSpot Everywhere, how to embed analytics into JavaScript-based web applications, and integrate ThoughtSpot into typical devops toolchains. No prior experience, or paid software licenses, is required.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### What you will learn:
+The workshop is broken into 3 parts, with the learning objectives as follows:
 
-```markdown
-Syntax highlighted code block
+#### Part 1
+- How to create search, visualizations, and liveboards to analyze data
+- How to use the developer playground to generate javascript code to embed ThoughtSpot elements into a web app
+- How to modify actions available to users and apply hidden runtime filters
 
-# Header 1
-## Header 2
-### Header 3
+#### Part 2
+- How to use the Visual Embed SDK to embed ThoughtSpot components into a ReactJS web app
 
-- Bulleted
-- List
+#### Part 3
+- How to use the ThoughtSpot Modeling Language and the ThoughtSpot Everywhere APIs to perform typical devops functions
 
-1. Numbered
-2. List
+### What you need:
+- A basic understanding of Git and GitHub (you must have Git command line tools installed prior to the workshop)
+- A laptop with administrator access. You will install some software and frameworks during the workshop
+- A general understanding of javascript and web development. The tutorial uses ReactJS for a web framework. You don't have to be an expert, but some knowledge helps.
+- A general understanding of RESTful APIs and HTTP
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/thoughtspot/dev-workshop/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+[I'm ready to get started](/workshop.html){: .btn .btn-purple .mr-2 }
