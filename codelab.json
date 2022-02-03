@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-02-03T14:25:36Z",
+  "id": "thoughtspot-everywhere-developer-workshop",
+  "duration": 190,
+  "title": "Embed Analytics with ThoughtSpot Everywhere",
+  "authors": "ThoughtSpot",
+  "summary": "xx",
+  "source": "1IX8GJdDarindCpk64nIx0RkTsJ9nwaNz4K_Qv_wBcBw",
+  "theme": "developers",
+  "status": [
+    "1xx"
+  ],
+  "category": [
+    "developers",
+    "thoughtspoteverywhere"
+  ],
+  "tags": [],
+  "ga": "UA-xx",
+  "url": "thoughtspot-everywhere-developer-workshop"
+}
