@@ -7,11 +7,13 @@
     color: #009900;
     border-color: #009933; 
     // background-color: #008CBA;
+   background-color: linear-gradient(to bottom, #00cc00 0%, #99ff99 100%);
   } 
 
   .btn:hover {
     color: #00cc66;
     text-decoration: none;
     //background-color: #7c940ea1;
+   background-color: linear-gradient(to bottom, #00cc00 0%, #99ff99 100%);
     border-color: #009933;
   }

@@ -21,7 +21,8 @@ The workshop is broken into 3 parts, with the learning objectives as follows:
 - A laptop with administrator access. You will install some software and frameworks during the workshop
 - A general understanding of javascript and web development. The tutorial uses ReactJS for a web framework. You don't have to be an expert, but some knowledge helps.
 - A general understanding of RESTful APIs and HTTP.
-
+ &nbsp;
+ &nbsp;
 
 [I'm ready to get started!](/workshop.html){: .btn }
 
