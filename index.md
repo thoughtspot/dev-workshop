@@ -23,6 +23,7 @@ The workshop is broken into 3 parts, with the learning objectives as follows:
 - A general understanding of RESTful APIs and HTTP.
  &nbsp;
  &nbsp;
+<br/> <br/>
 
 [I'm ready to get started!](/workshop.html){: .btn }
 
