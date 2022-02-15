@@ -1,3 +1,7 @@
+---
+description: Attendee workshop guide
+title: ThoughtSpot Everywhere Developer Workshop
+---
 
 ### Objectives / Goal:
 This workshop is designed to introduce developers to ThoughtSpot Everywhere, how to embed analytics into JavaScript-based web applications, and integrate ThoughtSpot into typical devops toolchains. No prior experience, or paid software licenses, is required.
