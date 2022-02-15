@@ -4,14 +4,14 @@
 @import "{{ site.theme }}";
 
   .btn {
-    color: #0000ff;
-    border-color: #0000ff; 
+    color: #009900;
+    border-color: #009933; 
     // background-color: #008CBA;
   } 
 
   .btn:hover {
-    color: #0bb6e1cc;
+    color: #00cc66;
     text-decoration: none;
     background-color: #7c940ea1;
-    border-color: #0000ff;
+    border-color: #009933;
   }
