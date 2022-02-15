@@ -22,5 +22,6 @@ The workshop is broken into 3 parts, with the learning objectives as follows:
 - A general understanding of javascript and web development. The tutorial uses ReactJS for a web framework. You don't have to be an expert, but some knowledge helps.
 - A general understanding of RESTful APIs and HTTP.
 
+
 [I'm ready to get started!](/workshop.html){: .btn }
 
