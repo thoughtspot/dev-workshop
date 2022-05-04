@@ -111,7 +111,7 @@
 <p class="image-container"><img style="width: 436.50px" src="img/268cfe242ec91ae8.png"></p>
 <p><em>Now pin the answer to the liveboard you created previously. </em></p>
 <ol type="1" start="4">
-<li>Select the ‘ <strong>Pin </strong>action, select the <strong>Sales Analysis Liveboard</strong> and finally select ‘ <strong>Pin  </strong> (at the bottom of the <strong><em>Pin to Liveboard</em></strong> window) to add it. </li>
+<li>Save the search by tapping the ... and calling it <strong>Top 15 last month</strong>, then select the ‘ <strong>Pin </strong>action, select the <strong>Sales Analysis Liveboard</strong> and finally select ‘ <strong>Pin  </strong> (at the bottom of the <strong><em>Pin to Liveboard</em></strong> window) to add it. </li>
 </ol>
 <p>5. View your liveboard:</p>
 <ol type="1" start="1">
@@ -325,8 +325,8 @@ const TSURL = &#34;https://try.thoughtspot.cloud&#34;;</pre>
 <p>Next, we want to add a new page to embed a search component. Within your IDE, select the components folder and add a new file <code>search.js</code></p>
 <p class="image-container"><img style="width: 624.00px" src="img/f040cdbf59ed2f32.gif"></p>
 <p>Then, add the required React and Visual SDK import to search.js</p>
-<pre>Import React from &#39;react&#39;
-Import { SearchEmbed } from &#39;@thoughtspot/visual-embed-sdk/react&#39;;</pre>
+<pre>import React from &#39;react&#39;;
+import { SearchEmbed } from &#39;@thoughtspot/visual-embed-sdk/react&#39;;</pre>
 <p>And, finally add a search function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed  our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the SearchEmbed component. You can view a complete example of search.js <a href="https://github.com/thoughtspot/quickstarts/blob/main/react-starter-app/src/components/search.js" target="_blank">here</a>.</p>
 <pre>export default function Search() {
  return (
@@ -337,11 +337,11 @@ Import { SearchEmbed } from &#39;@thoughtspot/visual-embed-sdk/react&#39;;</pre>
            You can also use the &lt;a href=&#34;https://try.thoughtspot.cloud/#/develop/playground/search&#34; target=&#34;_blank&#34;&gt;Developer Playground&lt;/a&gt; to configure additional parameters.
           &lt;/p&gt;
           &lt;p&gt;&amp;nbsp;&lt;/p&gt;
-          &lt;SearchEmbed frameParams=&#123;&#123;hideDataSources: &#34;true&#34;, height: &#34;80vw&#34;}} answerId={&#34;cd252e5c-b552-49a8-821d-3eadaa049cca&#34;}/&gt;
+          &lt;SearchEmbed frameParams=&#123;&#123;hideDataSources: &#34;true&#34;, height: &#34;80vw&#34;}} answerId={&#34;YOUR-ANSWER-ID-HERE&#34;}/&gt;
       &lt;/div&gt;
   )
 }</pre>
-<p>Looking at the search embed component, you will see parameters you are already familiar with from the Developer Playground task previously. Go ahead and add or remove parameters based on those <a href="https://developers.thoughtspot.com/docs/?pageid=search-embed" target="_blank">available</a>. The most important parameter, however, is the answerId. If you remember from working with the Developer Playground, selecting a saved search  in the down down list inserted a unique id. We need this id to tell the SDK which element to fetch. Open up the Developer Playground, choose Search as the feature to embed, then <strong>Sales Analysis Liveboard </strong>from the  Select saved search dropdown. Copy the inserted id into your code between the double quotes, then save your file. That&#39;s it. Your search embed is complete.</p>
+<p>Looking at the search embed component, you will see parameters you are already familiar with from the Developer Playground task previously. Go ahead and add or remove parameters based on those <a href="https://developers.thoughtspot.com/docs/?pageid=search-embed" target="_blank">available</a>. The most important parameter, however, is the answerId.  Open up the Developer Playground, choose Search as the feature to embed, then <strong>Top 15 Last Month </strong>from the  Select saved search dropdown. Copy the inserted id into your code between the double quotes, then save your file. That&#39;s it. Your search embed is complete.</p>
 <h2 is-upgraded><strong>Add Search Routes </strong></h2>
 <p>To add the new page to our navigation, we need to add the Search function to our Routes, then include the new route in the hamburger menu. Open <code>App.jsx</code> and add the following import. This tells our app where our search function resides</p>
 <pre>import Search from &#39;./components/search&#39;</pre>
