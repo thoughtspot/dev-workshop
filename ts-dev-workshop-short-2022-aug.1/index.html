@@ -50,13 +50,21 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ThoughtSpot Free Trial" duration="15">
+      <google-codelab-step label="ThoughtSpot Free Trial" duration="0">
         <p>To begin, <a href="https://www.thoughtspot.com/trial?tsref=ts-dev-workshop" target="_blank">sign up</a> for a free ThoughtSpot 30 day trial account. You will be prompted to enter a business email and a few other pieces of contact information. You will also be asked which cloud database you are using. Go ahead and select your preferred database. Don&#39;t worry if you don&#39;t have one; just pick the one you are most interested in. We are going to use a sample dataset for this tutorial. In a few minutes, check your email to complete the activation of your trial account. Once you have successfully logged in, you can continue.</p>
-<p>Part 1: Build Analytics with Low Code</p>
-<p>Part 1 of this workshop will leverage the low-code tools to create search, visualizations, and liveboards to analyze data. And, introduce you to the developer playground to generate javascript code to embed ThoughtSpot elements into a web app.</p>
-<p>You will create a couple of fresh ThoughtSpot Answers using the default <em>Sample Retail - Apparel</em> worksheet and Pin them in a new Liveboard. The new liveboard will then be used in the Developer Playground to generate much of the JavaScript code required to embed ThoughtSpot into webapps.</p>
-<p>Create Answers</p>
 
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Part 1: Build Analytics with Low Code" duration="5">
+        <p>Part 1 of this workshop will leverage the low-code tools to create search, visualizations, and liveboards to analyze data. And, introduce you to the developer playground to generate javascript code to embed ThoughtSpot elements into a web app.</p>
+<p>You will create a couple of fresh ThoughtSpot Answers using the default <em>Sample Retail - Apparel</em> worksheet and Pin them in a new Liveboard. The new liveboard will then be used in the Developer Playground to generate much of the JavaScript code required to embed ThoughtSpot into webapps.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create Answers" duration="15">
+        
 
       </google-codelab-step>
     
@@ -83,7 +91,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Top 15 stores" duration="20">
+      <google-codelab-step label="Top 15 stores" duration="0">
         <ol type="1">
 <li>Start a new Search by tapping <strong>Search Data</strong>. This time, you will search for the top 15 stores by their sales for last month.</li>
 <li>Enter in the search bar: Sales Store Top 15 Last month</li>
@@ -98,8 +106,12 @@
 </ol>
 <p class="image-container"><img alt="5-liveboards" src="img/cc606a9732a44b41.png"></p>
 <p>Congratulations. You now have a liveboard with 2 search answers and are ready to embed it in the ThoughtSpot Everywhere Developer Playground.</p>
-<p>Embed using the Developer Playground</p>
-<p>Now that you have your answers and liveboards created, it is time to take advantage of the Developer Playground. The Developer  Playground is a visual tool to help to build, test, and iterate on embedded components, prior to adding to your webapp. Unlike traditional approaches to development which require you to read documentation to piece together supported attributes, and configure local environments just to test your solution, the Developer Playground let&#39;s you quickly build your embed solution with confidence, greatly reducing time-to-market and avoid syntactical errors.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Embed using the Developer Playground" duration="20">
+        <p>Now that you have your answers and liveboards created, it is time to take advantage of the Developer Playground. The Developer  Playground is a visual tool to help to build, test, and iterate on embedded components, prior to adding to your webapp. Unlike traditional approaches to development which require you to read documentation to piece together supported attributes, and configure local environments just to test your solution, the Developer Playground let&#39;s you quickly build your embed solution with confidence, greatly reducing time-to-market and avoid syntactical errors.</p>
 <ol type="1">
 <li>Select <strong>DEVELOP</strong> on the ThoughtSpot top navbar to open the Developer playground.</li>
 </ol>
@@ -169,7 +181,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Embed a Search" duration="15">
+      <google-codelab-step label="Embed a Search" duration="0">
         <p>Let&#39;s go ahead and use the Developer Playground to embed and customize a search component.</p>
 <ol type="1">
 <li>The ‘Select feature to embed&#39; to <strong>Search</strong></li>
@@ -195,14 +207,26 @@
 <li>Enter &#34;<strong>Monthly</strong>&#34; in the search bar and press <strong>Go</strong> to run the search and voila, user self-service!</li>
 </ol>
 <p class="image-container"><img alt="13-searchactions" src="img/2e64b9c308590045.png"></p>
-<p>Part 1: Summary</p>
-<p>Congratulations for making it to the end of Part 1. So far, we have created everything <em>on-platform</em>, using the low-code developer tools. In Part 2, you will build a webapp with a simple hamburger navigation. This app will be written in ReactJS, a very popular JavaScript framework, and use the Visual Embed SDK and ThoughtSpot React components to embed Search, Liveboards, and the full ThoughtSpot app into a webapp.</p>
-<p>Part 2: Embed Analytics with the Visual Embed SDK</p>
-<p>In part 2, you will build a ReactJS webapp with a simple hamburger navigation, and use the ThoughtSpot Visual Embed SDK to embed live analytics.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Part 1: Summary" duration="3">
+        <p>Congratulations for making it to the end of Part 1. So far, we have created everything <em>on-platform</em>, using the low-code developer tools. In Part 2, you will build a webapp with a simple hamburger navigation. This app will be written in ReactJS, a very popular JavaScript framework, and use the Visual Embed SDK and ThoughtSpot React components to embed Search, Liveboards, and the full ThoughtSpot app into a webapp.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Part 2: Embed Analytics with the Visual Embed SDK" duration="5">
+        <p>In part 2, you will build a ReactJS webapp with a simple hamburger navigation, and use the ThoughtSpot Visual Embed SDK to embed live analytics.</p>
 <p>To make things easy, we will use CodeSandbox, a web based IDE and runtime environment for building web apps. Using CodeSandbox means we don&#39;t need to spend time configuring our local environment for React development. The good news is that ThoughtSpot Everywhere uses the languages and developer processes you already know and love. If you already have your local environment setup for React development, feel free to use that too.</p>
 <p><strong>Note</strong>: You can also follow along using the <a href="https://codesandbox.io/s/keen-einstein-1g9vrl" target="_blank">completed app running in CodeSandbox</a>. This sandbox app is fully functional, but uses the componentid from another ThoughtSpot instance. To make it work for you, you can substitue your ids, or better still, follow along in the workshop and build it all yourself.</p>
-<p>Configure your app</p>
-<p>In your browser, go to <a href="http://codesandbox.io" target="_blank">codesandbox.io</a> and tap the <strong>Create a Sandbox</strong> button on the top right of the page, then select the <strong>React</strong> template. This will create a very simple web app, with code on the left, and rendered page on the right. Next, we have to add a few dependencies to our project.  Be cafeful to add the correct library as there are a a few similarly named libraries to the ones we need.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configure your app" duration="10">
+        <p>In your browser, go to <a href="http://codesandbox.io" target="_blank">codesandbox.io</a> and tap the <strong>Create a Sandbox</strong> button on the top right of the page, then select the <strong>React</strong> template. This will create a very simple web app, with code on the left, and rendered page on the right. Next, we have to add a few dependencies to our project.  Be cafeful to add the correct library as there are a a few similarly named libraries to the ones we need.</p>
 <ol type="1">
 <li>ThoughtSpot Visual Embed SDK<ul>
 <li>Type <em>@thoughtspot</em> into the dependency pane, then select the <code>Visual Embed SDK</code> from the autocomplete dropdown.</li>
@@ -346,8 +370,12 @@ ReactDOM.render(
 <p>Once complete, your default app and project should look like this:</p>
 <p class="image-container"><img alt="14-default-app" src="img/b563fa086c221f43.png"></p>
 <p>You will notice that the code includes some logic to authenticate with ThoughtSpot. In this tutorial, we are using AuthType.None. This will prompt the user to log in when the page loads. This is fine for the tutorial, but not recommended for a production app. For a detailed overview of security options supported by the Visual Embed SDK, please check out the <a href="https://developers.thoughtspot.com/docs/?pageid=embed-auth" target="_blank">online documentation</a>.</p>
-<p>Create the search page</p>
-<p>With the app structure set up and running, the next task is to add a new page to embed a search component. Within your IDE, select the <code>components</code> folder and add a new file <code>search.js</code></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create the search page" duration="15">
+        <p>With the app structure set up and running, the next task is to add a new page to embed a search component. Within your IDE, select the <code>components</code> folder and add a new file <code>search.js</code></p>
 <p class="image-container"><img alt="15-search" src="img/6bb22cd4ec8a83af.gif"></p>
 <p>Then, add the required React and Visual SDK import to <code>search.js</code></p>
 <pre><code language="language-react" class="language-react">import React from &#39;react&#39;;
@@ -387,7 +415,7 @@ import { SearchEmbed } from &#39;@thoughtspot/visual-embed-sdk/react&#39;;
 
       </google-codelab-step>
     
-      <google-codelab-step label="A little extra magic" duration="10">
+      <google-codelab-step label="A little extra magic" duration="0">
         <p>One of the great things about developing with React is the wealth of third party libraries available. The <a href="https://www.npmjs.com/package/react-burger-menu" target="_blank">hamburger menu</a> we just used is a great example. This library saves a huge amount of effort in building typical app functionality. If you want to have fun with your app, try playing around with the <a href="https://negomi.github.io/react-burger-menu/" target="_blank">animations available in the hamburger menu</a> to give your menu a little extra bling. For example, my favorite is the Elastic animation. To use this animation to your app, open <code>burgermenu.js</code> and change the word <code>slide</code> for elastic in the <code>react-burger-menu</code> statement.</p>
 <pre><code language="language-react" class="language-react">import { elastic as Menu } from &#34;react-burger-menu&#34;
 </code></pre>
@@ -396,8 +424,12 @@ import { SearchEmbed } from &#39;@thoughtspot/visual-embed-sdk/react&#39;;
 <pre><code language="language-react" class="language-react">&lt;Menu right noOverlay onStateChange={toggleMenu}&gt;  
 </code></pre>
 <p>The react-burger-menu is a very useful react library. I highly recommend you check out all the features. It will save you a lot of time in your projects.</p>
-<p>Embed Liveboard Component</p>
-<p>Embedding a liveboard component is very similar to what you just completed with the Search component. You need to create a new page and add the Liveboard component, then add it to your routes and the hamburger menu. Let&#39;s jump right in.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Embed Liveboard Component" duration="10">
+        <p>Embedding a liveboard component is very similar to what you just completed with the Search component. You need to create a new page and add the Liveboard component, then add it to your routes and the hamburger menu. Let&#39;s jump right in.</p>
 
 
       </google-codelab-step>
@@ -432,13 +464,17 @@ export default function Liveboard() {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Add Liveboard to the hamburger menu" duration="10">
+      <google-codelab-step label="Add Liveboard to the hamburger menu" duration="0">
         <p>Open <code>components/burger/burgermenu.js</code> and add the link to the Liveboard route, after the Search navigation item:</p>
 <pre><code language="language-react" class="language-react">&lt;a className=&#34;bm-item&#34; href=&#34;/liveboard&#34;&gt;Liveboard&lt;/a&gt;
 </code></pre>
 <p class="image-container"><img alt="18-liveboard" src="img/8a85cd25c8c18e00.gif"></p>
-<p>Embed Full App Component</p>
-<p>By now, you should be getting familiar with using the React components and adding them to your projects. The last type of component we will use is the FullApp component. As the name implies, this component embeds the full ThoughtSpot experience. Let&#39;s jump right in.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Embed Full App Component" duration="10">
+        <p>By now, you should be getting familiar with using the React components and adding them to your projects. The last type of component we will use is the FullApp component. As the name implies, this component embeds the full ThoughtSpot experience. Let&#39;s jump right in.</p>
 
 
       </google-codelab-step>
@@ -507,7 +543,7 @@ export default App;
 
       </google-codelab-step>
     
-      <google-codelab-step label="Add Fullapp to the hamburger menu" duration="5">
+      <google-codelab-step label="Add Fullapp to the hamburger menu" duration="0">
         <p>Open ``components/burger/burgermenu.js` and add the link to the Liveboard route, after the Search navigation item:</p>
 <pre><code language="language-react" class="language-react">&lt;a className=&#34;bm-item&#34; href=&#34;/fullapp&#34;&gt;Full App&lt;/a&gt; 
 </code></pre>
@@ -546,13 +582,17 @@ export default BurgerMenu;
 </code></pre>
 <p>Save everything, select Full App from the hamburger menu, and you should see the entire ThoughtSpot instance embedded into your app. Not bad, huh?</p>
 <p class="image-container"><img alt="19-fullapp" src="img/216cb2b166b4a1c.png"></p>
-<p>Using Lifecycle Events</p>
-<p>ThoughtSpot Everywhere makes it easy to embed analytics into any webapp via the Visual Embed SDK. In addition to embedding components, the SDK also provides support for analytics lifecycle events such as when a search term has changed, new data is loaded, or a component is rendered on the page. In this tutorial, you will learn the different types of lifecycle events and how to utilize them to make more dynamic interactions. You will use the app you just created and extend it to support lifecycle events</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Event Types" duration="15">
+      <google-codelab-step label="Using Lifecycle Events" duration="5">
+        <p>ThoughtSpot Everywhere makes it easy to embed analytics into any webapp via the Visual Embed SDK. In addition to embedding components, the SDK also provides support for analytics lifecycle events such as when a search term has changed, new data is loaded, or a component is rendered on the page. In this tutorial, you will learn the different types of lifecycle events and how to utilize them to make more dynamic interactions. You will use the app you just created and extend it to support lifecycle events</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Event Types" duration="0">
         <p>Lifecycle events fall into two categories:</p>
 <ol type="1">
 <li>EmbedEvents <ol type="1">
@@ -564,8 +604,12 @@ export default BurgerMenu;
 </ol>
 </li>
 </ol>
-<p>Add Embed Event</p>
-<p>As mentioned in the previous section, EmbedEvents occur when the state of a component changes or is interacted with. To demonstrate, we will add a spinning animation to the existing liveboard page. This animation will display while the liveboard is fetching data and rendering. Once the liveboard has finished rendering, we will hide the animation by listening for an embed event, <code>onLiveboardRendered</code></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add Embed Event" duration="15">
+        <p>As mentioned in the previous section, EmbedEvents occur when the state of a component changes or is interacted with. To demonstrate, we will add a spinning animation to the existing liveboard page. This animation will display while the liveboard is fetching data and rendering. Once the liveboard has finished rendering, we will hide the animation by listening for an embed event, <code>onLiveboardRendered</code></p>
 
 
       </google-codelab-step>
@@ -620,7 +664,7 @@ import &#39;antd/es/spin/style/css&#39;;
 
       </google-codelab-step>
     
-      <google-codelab-step label="Show / Hide component" duration="10">
+      <google-codelab-step label="Show / Hide component" duration="0">
         <p>All that is left to do is to add some logic to show the spinner or the Liveboard component based on the value of isLoading. We can do this with a quick boolean check:</p>
 <pre><code language="language-react" class="language-react">                {isLoading ? (
                       &lt;div className=&#34;embedSpinner&#34;&gt;
@@ -684,8 +728,12 @@ export default function Liveboard() {
 </code></pre>
 <p>As soon as CodeSandbox can compile successfully, your changes will automatically be reflected on the embedded browser on the righthand side. Rendering happens very quickly. You may miss the spinner. If so, a good trick is to copy the URL into a new window to force the browser not to load from cache.</p>
 <p class="image-container"><img alt="20-embedevent2" src="img/2a1c90888b26fb9d.gif"></p>
-<p>Add a Host Event</p>
-<p>So far we have seen how to add hooks to lifecycle events of ThoughtSpot components. Now, we want to see how to interact with the components programmatically via Host Events. To quickly recap, Host Events are where you want to programmatically interact with a ThoughtSpot component. You can think of Host Events as you talking to the component vs. Embed Events as the component talking to you.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add a Host Event" duration="10">
+        <p>So far we have seen how to add hooks to lifecycle events of ThoughtSpot components. Now, we want to see how to interact with the components programmatically via Host Events. To quickly recap, Host Events are where you want to programmatically interact with a ThoughtSpot component. You can think of Host Events as you talking to the component vs. Embed Events as the component talking to you.</p>
 <p>We will update <code>search.js</code> to perform two operations: firstly change the search terms from code, and secondly enable and disable actions a user can perform.</p>
 <p>Within your IDE, open <code>/components/search.js</code> and add the following imports:</p>
 <pre><code language="language-react" class="language-react">import React from &#39;react&#39;
@@ -721,7 +769,7 @@ const { Header, Content } = Layout;
 
       </google-codelab-step>
     
-      <google-codelab-step label="Call changeSearch" duration="3">
+      <google-codelab-step label="Call changeSearch" duration="5">
         <p>All that is left to do is add some functionality for us to call the changeSearch function. For our example, let&#39;s connect it to a button. Go ahead and add a button into the </p>
 <p> tag and save your changes.</p>
 <pre><code language="language-react" class="language-react">&lt;Button type=&#34;primary&#34; onClick={changeSearch}&gt;Change query&lt;/Button&gt;

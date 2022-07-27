@@ -13,15 +13,12 @@ Feedback Link: https://developers.thoughtspot.com
 
 
 
-Objectives / Goal
-----------------------
-
+## Objectives / Goal
 Duration: 05:00
 
 This workshop is designed to introduce developers to ThoughtSpot Everywhere, how to embed analytics into JavaScript-based web applications, and integrate ThoughtSpot into typical devops toolchains. No prior experience, or paid software licenses, is required.
 
-What you will learn
-------------------------
+## What you will learn
 
 The workshop is broken into 2 parts, with the learning objectives as follows. Each part is intended to build upon the last. You must complete one before moving onto the next.
 
@@ -45,8 +42,7 @@ In a few minutes, check your email to complete the activation of your trial acco
 
 
 
-# Part 1: Build Analytics with Low Code
-
+## Part 1: Build Analytics with Low Code
 Duration: 0:05:00
 
 Part 1 of this workshop will leverage the low-code tools to create search, visualizations, and liveboards to analyze data. And, introduce you to the developer playground to generate javascript code to embed ThoughtSpot elements into a web app.
@@ -55,8 +51,7 @@ You will create a couple of fresh ThoughtSpot Answers using the default *Sample 
 
 
 
-# Create Answers 
-
+## Create Answers 
 Duration: 0:15:00
 
 
@@ -117,7 +112,7 @@ Congratulations. You now have a liveboard with 2 search answers and are ready to
 
 
 
-# Embed using the Developer Playground
+## Embed using the Developer Playground
 Duration: 0:20:00
 
 Now that you have your answers and liveboards created, it is time to take advantage of the Developer Playground. The Developer  Playground is a visual tool to help to build, test, and iterate on embedded components, prior to adding to your webapp. Unlike traditional approaches to development which require you to read documentation to piece together supported attributes, and configure local environments just to test your solution, the Developer Playground let's you quickly build your embed solution with confidence, greatly reducing time-to-market and avoid syntactical errors. 
@@ -261,14 +256,12 @@ There are three search related actions `\[Collapse data panel, Hide data panel, 
 
 
 
-# Part 1: Summary
-
+## Part 1: Summary
 Duration: 0:03:00
 
 Congratulations for making it to the end of Part 1. So far, we have created everything *on-platform*, using the low-code developer tools. In Part 2, you will build a webapp with a simple hamburger navigation. This app will be written in ReactJS, a very popular JavaScript framework, and use the Visual Embed SDK and ThoughtSpot React components to embed Search, Liveboards, and the full ThoughtSpot app into a webapp.
 
-# Part 2: Embed Analytics with the Visual Embed SDK
-
+## Part 2: Embed Analytics with the Visual Embed SDK
 Duration: 0:05:00
 
 In part 2, you will build a ReactJS webapp with a simple hamburger navigation, and use the ThoughtSpot Visual Embed SDK to embed live analytics. 
@@ -277,8 +270,7 @@ To make things easy, we will use CodeSandbox, a web based IDE and runtime enviro
 
 **Note**: You can also follow along using the [completed app running in CodeSandbox](https://codesandbox.io/s/keen-einstein-1g9vrl). This sandbox app is fully functional, but uses the componentid from another ThoughtSpot instance. To make it work for you, you can substitue your ids, or better still, follow along in the workshop and build it all yourself.
 
-# Configure your app
-
+## Configure your app
 Duration: 0:10:00
 
 In your browser, go to [codesandbox.io](http://codesandbox.io) and tap the **Create a Sandbox** button on the top right of the page, then select the **React** template. This will create a very simple web app, with code on the left, and rendered page on the right. Next, we have to add a few dependencies to our project.  Be cafeful to add the correct library as there are a a few similarly named libraries to the ones we need.
@@ -446,8 +438,7 @@ Once complete, your default app and project should look like this:
 
 You will notice that the code includes some logic to authenticate with ThoughtSpot. In this tutorial, we are using AuthType.None. This will prompt the user to log in when the page loads. This is fine for the tutorial, but not recommended for a production app. For a detailed overview of security options supported by the Visual Embed SDK, please check out the [online documentation](https://developers.thoughtspot.com/docs/?pageid=embed-auth). 
 
-# Create the search page
-
+## Create the search page
 Duration: 0:15:00
 
 With the app structure set up and running, the next task is to add a new page to embed a search component. Within your IDE, select the `components` folder and add a new file `search.js`
@@ -537,14 +528,12 @@ The react-burger-menu is a very useful react library. I highly recommend you che
 
 
 
-# Embed Liveboard Component
-
+## Embed Liveboard Component
 Duration: 0:10:00
 
 Embedding a liveboard component is very similar to what you just completed with the Search component. You need to create a new page and add the Liveboard component, then add it to your routes and the hamburger menu. Let's jump right in.
 
-**Create the Liveboard page**
------------------------------
+## Create the Liveboard page
 
 Add a new file, `liveboard.js` in the `components` directory, and use the Developer Playground to fetch the liveboardId for **Sales Analysis Liveboard**.
 
@@ -567,8 +556,7 @@ export default function Liveboard() {
 
 
 
-**Add Liveboard Route**
------------------------
+## Add Liveboard Route
 
 Open `App.js` and import the Liveboard function after the Search import:
 
@@ -586,8 +574,7 @@ Then, add the function to the `Routes` element after the Search route:
 
 
 
-**Add Liveboard to the hamburger menu**
----------------------------------------
+## Add Liveboard to the hamburger menu
 
 Open `components/burger/burgermenu.js` and add the link to the Liveboard route, after the Search navigation item:
 
@@ -599,14 +586,12 @@ Open `components/burger/burgermenu.js` and add the link to the Liveboard route, 
 
 
 
-# Embed Full App Component
-
+## Embed Full App Component
 Duration: 0:10:00
 
 By now, you should be getting familiar with using the React components and adding them to your projects. The last type of component we will use is the FullApp component. As the name implies, this component embeds the full ThoughtSpot experience. Let's jump right in.
 
-**Create the Fullapp page**
----------------------------
+## Create the Fullapp page
 
 Add a new file, `fullapp.js` in the `components` directory. You will notice in the AppEmbed component, we don't need to pass in a specific id, instead we can use `Page.*` attribute. This attribute refers to the pages or tabs within ThoughtSpot. For example, I could use `Page.Liveboards` to point directly to the Liveboards page. For our app, we are going to point to the ThoughtSpot home page, using `Page.Home`. For a complete list of values check out the [documentation](https://developers.thoughtspot.com/docs/?pageid=full-embed).
 
@@ -627,8 +612,8 @@ export default function FullApp() {
 
 
 
-**Add Fullapp route**
----------------------
+## Add Fullapp route
+
 
 Open `App.js` and import the Fullapp function after the Liveboard import:
 
@@ -685,8 +670,7 @@ export default App;
 
 
 
-**Add Fullapp to the hamburger menu**
--------------------------------------
+## Add Fullapp to the hamburger menu
 
 Open ``components/burger/burgermenu.js` and add the link to the Liveboard route, after the Search navigation item:
 
@@ -738,14 +722,12 @@ Save everything, select Full App from the hamburger menu, and you should see the
 
 
 
-# Using Lifecycle Events
-
+## Using Lifecycle Events
 Duration: 0:05:00
 
 ThoughtSpot Everywhere makes it easy to embed analytics into any webapp via the Visual Embed SDK. In addition to embedding components, the SDK also provides support for analytics lifecycle events such as when a search term has changed, new data is loaded, or a component is rendered on the page. In this tutorial, you will learn the different types of lifecycle events and how to utilize them to make more dynamic interactions. You will use the app you just created and extend it to support lifecycle events
 
-Event Types
----------------------------
+## Event Types
 
 Lifecycle events fall into two categories:
 
@@ -754,8 +736,7 @@ Lifecycle events fall into two categories:
 2. HostEvents 
    1. HostEvents are hooks to allow the developer to programmatically change or update an embedded component. For example, you may want to change the search term used, or enable/disable features
 
-# Add Embed Event
-
+## Add Embed Event
 Duration: 0:15:00
 
 As mentioned in the previous section, EmbedEvents occur when the state of a component changes or is interacted with. To demonstrate, we will add a spinning animation to the existing liveboard page. This animation will display while the liveboard is fetching data and rendering. Once the liveboard has finished rendering, we will hide the animation by listening for an embed event, `onLiveboardRendered`
@@ -901,8 +882,7 @@ As soon as CodeSandbox can compile successfully, your changes will automatically
 
 ![20-embedevent2](images/20-embedevent2.gif)
 
-# Add a Host Event
-
+## Add a Host Event
 Duration: 0:10:00
 
 So far we have seen how to add hooks to lifecycle events of ThoughtSpot components. Now, we want to see how to interact with the components programmatically via Host Events. To quickly recap, Host Events are where you want to programmatically interact with a ThoughtSpot component. You can think of Host Events as you talking to the component vs. Embed Events as the component talking to you.
@@ -1007,8 +987,7 @@ Tap on the hamburger menu and choose Search. You should now see the embedded sea
 
 
 
-# Enabling/Disabling actions with Host Events
-
+## Enabling/Disabling actions with Host Events
 Duration: 0:10:00
 
 Now that you have a good understanding of how to work with Host Events, another very common customer request is to dynamically enable or disable actions based on the user. This can be achieved by using the `disableActions` attribute of the ThoughtSpot components.
@@ -1163,15 +1142,13 @@ Now, tap the Disable actions button, and enter a search term. This time, you wil
 
 
 
-# Part 2: Summary
-
-Duration: 0:03:00
+## Part 2: Summary
+Duration: 0:05:00
 
 At this stage, you've completed your app and should have a great understanding of how you can use the Visual Embed SDK. Give yourself a pat on the back. Great job! If you run out of time, or are having trouble getting everything working, check out [the completed app](https://codesandbox.io/s/keen-einstein-1g9vrl) and compare your code.
 
-# Conclusion
-
-Duration: 0:03:00
+## Conclusion
+Duration: 0:05:00
 
 Congratulations. You have completed the ThoughtSpot Developer Workshop. Thoughout the workshop, you’ve created an instance of ThoughtSpot, complete with sample visualizations to find insight from business data, and built an entire web app to embed these components using the developer tools and SDKs provided by ThoughtSpot Everywhere. 
 
