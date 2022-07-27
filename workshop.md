@@ -118,7 +118,6 @@ Congratulations. You now have a liveboard with 2 search answers and are ready to
 
 
 # Embed using the Developer Playground
-
 Duration: 0:20:00
 
 Now that you have your answers and liveboards created, it is time to take advantage of the Developer Playground. The Developer  Playground is a visual tool to help to build, test, and iterate on embedded components, prior to adding to your webapp. Unlike traditional approaches to development which require you to read documentation to piece together supported attributes, and configure local environments just to test your solution, the Developer Playground let's you quickly build your embed solution with confidence, greatly reducing time-to-market and avoid syntactical errors. 
