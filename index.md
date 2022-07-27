@@ -4,7 +4,7 @@ title: ThoughtSpot Everywhere Developer Workshop
 ---
 
 ### Objectives / Goal:
-This workshop is designed to introduce developers to ThoughtSpot Everywhere, how to embed analytics into React-based webapps, and use the Visual Embed SDK to interact with platform events.
+This workshop is designed to introduce developers to ThoughtSpot Everywhere, how to embed analytics into React-based webapps, and use the Visual Embed SDK to interact with platform events. No local machine configuration is required.
 
 ### What you will learn:
 The workshop is broken into 2 parts. Total duration is approximately 2hrs, with each step building off the last. You don't need to complete everything in a single sitting, but you do need to complete steps in chronological order. 
