@@ -1,5 +1,5 @@
 ---
-description: Attendee workshop guide
+description: Last Updated: August-2022.1
 title: ThoughtSpot Everywhere Developer Workshop
 ---
 
