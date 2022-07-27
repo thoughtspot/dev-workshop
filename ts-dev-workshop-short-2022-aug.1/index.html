@@ -620,7 +620,7 @@ import &#39;antd/es/spin/style/css&#39;;
 
       </google-codelab-step>
     
-      <google-codelab-step label="Show / Hide component" duration="0">
+      <google-codelab-step label="Show / Hide component" duration="10">
         <p>All that is left to do is to add some logic to show the spinner or the Liveboard component based on the value of isLoading. We can do this with a quick boolean check:</p>
 <pre><code language="language-react" class="language-react">                {isLoading ? (
                       &lt;div className=&#34;embedSpinner&#34;&gt;
@@ -682,12 +682,7 @@ export default function Liveboard() {
 }
 
 </code></pre>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Try it out." duration="10">
-        <p>As soon as CodeSandbox can compile successfully, your changes will automatically be reflected on the embedded browser on the righthand side. Rendering happens very quickly. You may miss the spinner. If so, a good trick is to copy the URL into a new window to force the browser not to load from cache.</p>
+<p>As soon as CodeSandbox can compile successfully, your changes will automatically be reflected on the embedded browser on the righthand side. Rendering happens very quickly. You may miss the spinner. If so, a good trick is to copy the URL into a new window to force the browser not to load from cache.</p>
 <p class="image-container"><img alt="20-embedevent2" src="img/2a1c90888b26fb9d.gif"></p>
 <p>Add a Host Event</p>
 <p>So far we have seen how to add hooks to lifecycle events of ThoughtSpot components. Now, we want to see how to interact with the components programmatically via Host Events. To quickly recap, Host Events are where you want to programmatically interact with a ThoughtSpot component. You can think of Host Events as you talking to the component vs. Embed Events as the component talking to you.</p>
