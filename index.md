@@ -22,6 +22,6 @@ The workshop is broken into 2 parts, with the learning objectives as follows:
 - No local environment configuration is required. Everything can be completed via a browser on any computer or tablet
 - A general understanding of javascript and web development. The tutorial uses ReactJS for a web framework. You don't have to be an expert, but some knowledge helps.
 
-###
-[I'm ready to get started!](/ts-dev-workshop-short-2022-aug.1/index.html){: .btn }
+### Ready to get started?
+[Let's go!](/ts-dev-workshop-short-2022-aug.1/index.html){: .btn }
 
