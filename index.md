@@ -1,5 +1,5 @@
 ---
-description: Last updated on August-2022.1
+description: Last updated on August-2022.2
 title: ThoughtSpot Everywhere Developer Workshop
 ---
 
@@ -25,5 +25,5 @@ You will learn:
 - A general understanding of javascript and web development. The tutorial uses ReactJS for a web framework. You don't have to be an expert, but some knowledge helps.
 
 ### Ready to get started?
-[Let's go!](/ts-dev-workshop-short-2022-aug.1/index.html){: .btn }
+[Let's go!](/ts-dev-workshop-short-2022-aug.2/index.html){: .btn }
 

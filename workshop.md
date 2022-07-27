@@ -3,7 +3,7 @@
 
 
 summary: ThoughtSpot 2hr Developer Workshop
-id: ts-dev-workshop-short-2022-aug.1
+id: ts-dev-workshop-short-2022-aug.2
 categories: Meta
 tags: beginner, intermediate
 status: Published 
@@ -18,31 +18,31 @@ Duration: 05:00
 
 This workshop is designed to introduce developers to ThoughtSpot Everywhere, how to embed analytics into JavaScript-based web applications, and integrate ThoughtSpot into typical devops toolchains. No prior experience, or paid software licenses, is required.
 
-## What you will learn
+### What you will learn
 
 The workshop is broken into 2 parts, with the learning objectives as follows. Each part is intended to build upon the last. You must complete one before moving onto the next.
 
-### Part 1: Build with Low Code Developer Tools
+#### Part 1: Build with Low Code Developer Tools
 
 *   How to create search, visualizations, and liveboards to analyze data
 *   How to use the developer playground to generate javascript code to embed ThoughtSpot elements into a web app
 *   How to modify actions available to users and apply hidden runtime filters
 
-### Part 2: Embed Analytics with Visual Embed SDK
+#### Part 2: Embed Analytics with Visual Embed SDK
 
 *   How to use the Visual Embed SDK to embed ThoughtSpot components into a ReactJS web app
 *   Using the platform event framework to interact with embedded components
 
 
 
-## ThoughtSpot Free Trial
+### ThoughtSpot Free Trial
 
 To begin, [sign up](https://www.thoughtspot.com/trial?tsref=ts-dev-workshop) for a free ThoughtSpot 30 day trial account. You will be prompted to enter a business email and a few other pieces of contact information. You will also be asked which cloud database you are using. Go ahead and select your preferred database. Don’t worry if you don’t have one; just pick the one you are most interested in. We are going to use a sample dataset for this tutorial. 
 In a few minutes, check your email to complete the activation of your trial account. Once you have successfully logged in, you can continue.
 
 
 
-## Part 1: Build Analytics with Low Code
+## Part 1 Build Analytics with Low Code
 Duration: 0:05:00
 
 Part 1 of this workshop will leverage the low-code tools to create search, visualizations, and liveboards to analyze data. And, introduce you to the developer playground to generate javascript code to embed ThoughtSpot elements into a web app.
@@ -56,7 +56,7 @@ Duration: 0:15:00
 
 
 
-## Sales Trends
+### Sales Trends
 
 Start by selecting  **Search Data** from the Home page as shown below  
 
@@ -86,7 +86,7 @@ The Search Answers and Search Data buttons toggle and are sticky meaning the nex
 
 
 
-## Top 15 stores
+### Top 15 stores
 
 
 
@@ -137,7 +137,7 @@ The Develop area contains 4 sections: Home, Guide, Playground, Customizations.
 
 
 
-## Embed a Liveboard
+### Embed a Liveboard
 
 Begin the playground experience by embedding the liveboard you created into the sample data app sandbox provided within the Developer Playground .
 
@@ -155,7 +155,7 @@ If this is your first time doing this, a Start tour option is shown which will g
 
 
 
-## Modify available actions
+### Modify available actions
 
 There are many actions that can be disabled or hidden for example and all are documented in the [Visual Embed guide](https://developers.thoughtspot.com/docs/?pageid=action-config) accessible from the **Develop** page. 
 
@@ -183,15 +183,15 @@ You have successfully applied modified actions.
 
 
 
-## Set runtime filters
+### Set runtime filters
 
 Applying run time filters provides additional controls on who can see what data. You may opt for forcing a particular filter based upon the user's role for example, or perhaps you would like to present filter choices in your own data app nav bar and push the selected values that the user selects.  
 
 
 
-1.  The current liveboard, Sales Analysis Liveboards, includes the Total Sales by Store chart. This shows the top 15 stores for all regions. You will apply a run time filter to set the region to *Midwest* so the top 15 is now only for the stores in the Midwest region.
+1. The current liveboard, Sales Analysis Liveboards, includes the Total Sales by Store chart. This shows the top 15 stores for all regions. You will apply a run time filter to set the region to *Midwest* so the top 15 is now only for the stores in the Midwest region.
 
-1.  Select **Set runtime filters** under User experience customizations in the playground left pane. Notice the code window again, highlighting the code to be affected.
+2. Select **Set runtime filters** under User experience customizations in the playground left pane. Notice the code window again, highlighting the code to be affected.
 
 3. Change *columnName1* to **‘region'** and *value1* to **‘midwest'**
 
@@ -211,7 +211,7 @@ You can also add multiple runtime filters. Let's add one more filter to show onl
 
 
 
-## Embed a Search
+### Embed a Search
 
 Let's go ahead and use the Developer Playground to embed and customize a search component. 
 
@@ -256,12 +256,13 @@ There are three search related actions `\[Collapse data panel, Hide data panel, 
 
 
 
-## Part 1: Summary
+## Part 1 Summary
 Duration: 0:03:00
 
 Congratulations for making it to the end of Part 1. So far, we have created everything *on-platform*, using the low-code developer tools. In Part 2, you will build a webapp with a simple hamburger navigation. This app will be written in ReactJS, a very popular JavaScript framework, and use the Visual Embed SDK and ThoughtSpot React components to embed Search, Liveboards, and the full ThoughtSpot app into a webapp.
 
-## Part 2: Embed Analytics with the Visual Embed SDK
+
+## Part 2 Embed Analytics with the Visual Embed SDK
 Duration: 0:05:00
 
 In part 2, you will build a ReactJS webapp with a simple hamburger navigation, and use the ThoughtSpot Visual Embed SDK to embed live analytics. 
@@ -473,7 +474,7 @@ Looking at the search embed component, you will see parameters you are already f
 
 
 
-## Add routes and navigation
+### Add routes and navigation
 
 
 
@@ -508,7 +509,7 @@ Save everything, and your app will automatically reload on the lefthand side. If
 
 ![16-searchembed](images/16-searchembed.gif)
 
-## A little extra magic
+### A little extra magic
 
 One of the great things about developing with React is the wealth of third party libraries available. The [hamburger menu](https://www.npmjs.com/package/react-burger-menu) we just used is a great example. This library saves a huge amount of effort in building typical app functionality. If you want to have fun with your app, try playing around with the [animations available in the hamburger menu](https://negomi.github.io/react-burger-menu/) to give your menu a little extra bling. For example, my favorite is the Elastic animation. To use this animation to your app, open `burgermenu.js` and change the word `slide` for elastic in the `react-burger-menu` statement.
 
@@ -533,7 +534,7 @@ Duration: 0:10:00
 
 Embedding a liveboard component is very similar to what you just completed with the Search component. You need to create a new page and add the Liveboard component, then add it to your routes and the hamburger menu. Let's jump right in.
 
-## Create the Liveboard page
+### Create the Liveboard page
 
 Add a new file, `liveboard.js` in the `components` directory, and use the Developer Playground to fetch the liveboardId for **Sales Analysis Liveboard**.
 
@@ -556,7 +557,7 @@ export default function Liveboard() {
 
 
 
-## Add Liveboard Route
+### Add Liveboard Route
 
 Open `App.js` and import the Liveboard function after the Search import:
 
@@ -574,7 +575,7 @@ Then, add the function to the `Routes` element after the Search route:
 
 
 
-## Add Liveboard to the hamburger menu
+### Add Liveboard to the hamburger menu
 
 Open `components/burger/burgermenu.js` and add the link to the Liveboard route, after the Search navigation item:
 
@@ -591,7 +592,7 @@ Duration: 0:10:00
 
 By now, you should be getting familiar with using the React components and adding them to your projects. The last type of component we will use is the FullApp component. As the name implies, this component embeds the full ThoughtSpot experience. Let's jump right in.
 
-## Create the Fullapp page
+### Create the Fullapp page
 
 Add a new file, `fullapp.js` in the `components` directory. You will notice in the AppEmbed component, we don't need to pass in a specific id, instead we can use `Page.*` attribute. This attribute refers to the pages or tabs within ThoughtSpot. For example, I could use `Page.Liveboards` to point directly to the Liveboards page. For our app, we are going to point to the ThoughtSpot home page, using `Page.Home`. For a complete list of values check out the [documentation](https://developers.thoughtspot.com/docs/?pageid=full-embed).
 
@@ -612,7 +613,7 @@ export default function FullApp() {
 
 
 
-## Add Fullapp route
+### Add Fullapp route
 
 
 Open `App.js` and import the Fullapp function after the Liveboard import:
@@ -670,7 +671,7 @@ export default App;
 
 
 
-## Add Fullapp to the hamburger menu
+### Add Fullapp to the hamburger menu
 
 Open ``components/burger/burgermenu.js` and add the link to the Liveboard route, after the Search navigation item:
 
@@ -727,7 +728,7 @@ Duration: 0:05:00
 
 ThoughtSpot Everywhere makes it easy to embed analytics into any webapp via the Visual Embed SDK. In addition to embedding components, the SDK also provides support for analytics lifecycle events such as when a search term has changed, new data is loaded, or a component is rendered on the page. In this tutorial, you will learn the different types of lifecycle events and how to utilize them to make more dynamic interactions. You will use the app you just created and extend it to support lifecycle events
 
-## Event Types
+### Event Types
 
 Lifecycle events fall into two categories:
 
@@ -741,7 +742,7 @@ Duration: 0:15:00
 
 As mentioned in the previous section, EmbedEvents occur when the state of a component changes or is interacted with. To demonstrate, we will add a spinning animation to the existing liveboard page. This animation will display while the liveboard is fetching data and rendering. Once the liveboard has finished rendering, we will hide the animation by listening for an embed event, `onLiveboardRendered`
 
-## Add Antd library
+### Add Antd library
 
 To add the spinning animation, we will use a third-party library called antd. Antd has many great assets, styles, and components, one of these is a spinner, which is exactly what we need. Let's add antd as a dependency to your project
 
@@ -791,7 +792,7 @@ And change it to following. Remember to use your liveboardid. Don't replace it w
 
 There is a lot going on here. First, we added a hook to the embedReference via the ref attribute. Then, we’ve included two lifecycle events onLoad and onLiveboardRendered. We are going to use these events to show and hide our spinner. Since CodeSandbox dynamically reloads your changes, you will see a lot of errors in your project. Don't worry. We will fix these next.
 
-## Add Lifecycle constants to handle callbacks
+### Add Lifecycle constants to handle callbacks
 
 Currently, the lifecycle event attributes point to constants which do not exist. Let’s go ahead and create these now. You can add them directly after the useEmbedRef() call. Now, when the ThoughtSpot platform fires the `onLiveboardRendered` event we will setIsLoading to false.
 
@@ -806,7 +807,7 @@ const onLoad = (e) => {
    };
 ```
 
-## Show / Hide component
+### Show / Hide component
 
 All that is left to do is to add some logic to show the spinner or the Liveboard component based on the value of isLoading. We can do this with a quick boolean check:
 
@@ -917,7 +918,7 @@ And adding the ref attribute to the `SearchEmbed` element:
 
 
 
-## Add changeSearch function
+### Add changeSearch function
 
 Now that we have the handle, go ahead and add a `changeSearch` function after the embedRef definition. This function will use the embedRef to trigger a HostEvent. We are going to use `HostEvent.Search` to change search terms. HostEvent has [a number of useful event types](https://developers.thoughtspot.com/docs/typedoc/enums/HostEvent.html) in addition to Search, worth checking out.
 
@@ -931,7 +932,7 @@ const changeSearch = () => {
 
 As you can see in the function above, `HostEvent.Search`  takes a `searchQuery` parameter. This is extremely useful when you want to pass in dynamic search terms. For example, you could pass in a sales reps region dynamically when the page loads, or set a default term based on the time of day.
 
-## Call changeSearch
+### Call changeSearch
 
 All that is left to do is add some functionality for us to call the changeSearch function. For our example, let’s connect it to a button. Go ahead and add a button into the <header> tag and save your changes.
 
@@ -977,7 +978,7 @@ export default function Search() {
 
 
 
-## Try it out.
+### Try it out
 
 Tap on the hamburger menu and choose Search. You should now see the embedded search component, plus a new button, Change query, at the top of the page. Go ahead and tap the button to see your search terms added to the embedded search box. 
 
@@ -987,14 +988,18 @@ Tap on the hamburger menu and choose Search. You should now see the embedded sea
 
 
 
-## Enabling/Disabling actions with Host Events
-Duration: 0:10:00
+
+
+## Enabling and disable actions with Host Events
+
+Duration: 10:00
+
 
 Now that you have a good understanding of how to work with Host Events, another very common customer request is to dynamically enable or disable actions based on the user. This can be achieved by using the `disableActions` attribute of the ThoughtSpot components.
 
 
 
-## Create ActionSets
+### Create ActionSets
 
 Let’s start by creating two sets of action constants: one set for default, and another that we will use to enable/disable. Go ahead and add these at the top of your `components/search.js` file, directly below the imports, but outside of the search function.
 
@@ -1018,7 +1023,7 @@ export const defaultActionSet = [
 
 Taking a look at the code, you can see we are taking advantage of the [Action enumeration](https://developers.thoughtspot.com/docs/typedoc/enums/Action.html). This enumeration contains all of the actions a user can perform on ThoughtSpot elements such as search and Liveboards. For our example, we’ve included the common ones for search.
 
-## Set Disabled Actions
+### Set Disabled Actions
 
 Next, we need to store the state of whether actions are enabled or disabled and provide accessor functions to change it. Add the following inside the `search` function, directly after the `useEmbedRef()` call. 
 
@@ -1046,7 +1051,7 @@ We also need to update the Search component to accept an enumeration as well as 
 />
 ```
 
-## Set Disabled Actions
+### Set Disabled Actions
 
 All that is left is to add a toggle to our sample app to enable and disable actions. Since we already installed `antd` in the Embed Event section, we can take advantage of the Switch component. Go ahead and add the following to the header section of your page, directly after the button for setting search terms:
 
@@ -1130,7 +1135,7 @@ export default function Search() {
 
 
 
-## Try it out.
+### Try it out.
 
 Save your changes, and check out all of your hard work. Now when you go to the Search page, you will see your answer results
 
@@ -1142,13 +1147,21 @@ Now, tap the Disable actions button, and enter a search term. This time, you wil
 
 
 
-## Part 2: Summary
-Duration: 0:03:00
+
+
+## Part 2 Summary
+
+Duration: 02:00
+
 
 At this stage, you've completed your app and should have a great understanding of how you can use the Visual Embed SDK. Give yourself a pat on the back. Great job! If you run out of time, or are having trouble getting everything working, check out [the completed app](https://codesandbox.io/s/keen-einstein-1g9vrl) and compare your code.
 
+
+
 ## Conclusion
-Duration: 0:03:00
+
+Duration: 03:00
+
 
 Congratulations. You have completed the ThoughtSpot Developer Workshop. Thoughout the workshop, you’ve created an instance of ThoughtSpot, complete with sample visualizations to find insight from business data, and built an entire web app to embed these components using the developer tools and SDKs provided by ThoughtSpot Everywhere. 
 
