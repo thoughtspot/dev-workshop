@@ -898,9 +898,6 @@ export default function Liveboard() {
 ```
 
 
-
-## Try it out.
-
 As soon as CodeSandbox can compile successfully, your changes will automatically be reflected on the embedded browser on the righthand side. Rendering happens very quickly. You may miss the spinner. If so, a good trick is to copy the URL into a new window to force the browser not to load from cache. 
 
 ![20-embedevent2](images/20-embedevent2.gif)
