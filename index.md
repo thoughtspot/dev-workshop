@@ -18,7 +18,7 @@ You will learn:
 
 #### Part 2: Embed Analytics with the Visual Embed SDK
 - How to use the Visual Embed SDK to embed ThoughtSpot components into a ReactJS web app
-- How to utilize platform events to dyanmically interact with embeded components
+- How to utilize platform events to interact with embedded components via code
 
 ### What you need:
 - No local environment configuration is required. Everything can be completed via a browser on any computer or tablet
