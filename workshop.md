@@ -36,7 +36,7 @@ The workshop is broken into 2 parts, with the learning objectives as follows. Ea
 #### Bonus: Using Platform APIs and TML
 
 * How to use ThoughtSpot Everywhere APIs and ThoughtSpot Modeling Language to perform typical devops tasks
-* Using Postman to manage API collections with Thought
+* Using Postman to manage API collections with ThoughtSpot
 
 
 
