@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-08-12T07:09:45-07:00",
+  "id": "ts-dev-workshop-short-2022-aug.2-bonus",
+  "duration": 28,
+  "title": "Using ThoughtSpot Everywhere APIs \u0026 Postman",
+  "authors": "Quinton Wall",
+  "summary": "ThoughtSpot 2hr Developer Workshop - extra exercise",
+  "source": "bonus-exercise.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "meta"
+  ],
+  "tags": [
+    "intermediate"
+  ],
+  "feedback": "https://developers.thoughtspot.com",
+  "url": "ts-dev-workshop-short-2022-aug.2-bonus"
+}

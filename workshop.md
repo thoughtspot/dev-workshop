@@ -33,6 +33,11 @@ The workshop is broken into 2 parts, with the learning objectives as follows. Ea
 *   How to use the Visual Embed SDK to embed ThoughtSpot components into a ReactJS web app
 *   Using the platform event framework to interact with embedded components
 
+#### Bonus: Using Platform APIs and TML
+
+* How to use ThoughtSpot Everywhere APIs and ThoughtSpot Modeling Language to perform typical devops tasks
+* Using Postman to manage API collections with Thought
+
 
 
 ### ThoughtSpot Free Trial
@@ -1171,3 +1176,8 @@ We’ve only scratched the surface of the features available to developers with 
 - An overview of [authentication and security](https://developers.thoughtspot.com/docs/?pageid=auth-overview) settings.
 - Using [custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro)
 - Working with the [REST API](https://developers.thoughtspot.com/docs/?pageid=rest-apis)
+
+
+
+**Still want more?** Try the [bonus exercises](../ts-dev-workshop-short-2022-aug.2-bonus/index.html) to learn how to use the ThoughtSpot Everywhere platform APIs and TML.
+
