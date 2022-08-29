@@ -209,7 +209,7 @@ Applying run time filters provides additional controls on who can see what data.
 You can also add multiple runtime filters. Let's add one more filter to show only the data for bags. .
 
 1. Copy the runtime filter code and paste it below the existing entry. Make sure you add an additional comma directly after ['midwest']
-2. Modify ‘region' in the 2nd run time filter to **product type** and change ‘midwest' to ‘**bags**'.
+2. Modify ‘region' in the 2nd run time filter to **item type** and change ‘midwest' to ‘**bags**'.
 3. Select ‘ **Run** to render the changes. Now data is filtered by the bags sold in the Midwest region.
 
 ![11-allruntimefilters](images/11-allruntimefilters.png)
@@ -392,7 +392,7 @@ export default BurgerMenu;
 
 
 
-Now, replace the contents of `App.js` to configure your app to authenticate with ThoughtSpot. Save your changes
+Now, replace the contents of `App.js` to configure your app to authenticate with ThoughtSpot. Your ThoughtSpot trial URL may begin with "my1.thoughtspot.cloud" or "my2.thoughtspot.cloud" instead of "try.thoughtspot.cloud", so match it accordingly. Save your changes
 
 ```React
 import "./styles.css";
@@ -541,7 +541,7 @@ Embedding a liveboard component is very similar to what you just completed with 
 
 ### Create the Liveboard page
 
-Add a new file, `liveboard.js` in the `components` directory, and use the Developer Playground to fetch the liveboardId for **Sales Analysis Liveboard**.
+Add a new file, `liveboard.js` in the `components` directory, and use the Developer Playground to fetch the `liveboardId` for **Sales Analysis Liveboard**.
 
 
 
