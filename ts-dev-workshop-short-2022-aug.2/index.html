@@ -150,7 +150,7 @@
 <p>You can also add multiple runtime filters. Let&#39;s add one more filter to show only the data for bags. .</p>
 <ol type="1">
 <li>Copy the runtime filter code and paste it below the existing entry. Make sure you add an additional comma directly after [‘midwest&#39;]</li>
-<li>Modify ‘region&#39; in the 2nd run time filter to <strong>product type</strong> and change ‘midwest&#39; to ‘<strong>bags</strong>&#39;.</li>
+<li>Modify ‘region&#39; in the 2nd run time filter to <strong>item type</strong> and change ‘midwest&#39; to ‘<strong>bags</strong>&#39;.</li>
 <li>Select ‘ <strong>Run</strong> to render the changes. Now data is filtered by the bags sold in the Midwest region.</li>
 </ol>
 <p class="image-container"><img alt="11-allruntimefilters" src="img/f0b85d74569e83a6.png"></p>
@@ -302,7 +302,7 @@ const BurgerMenu = () =&gt; {
 };
 export default BurgerMenu;
 </code></pre>
-<p>Now, replace the contents of <code>App.js</code> to configure your app to authenticate with ThoughtSpot. Save your changes</p>
+<p>Now, replace the contents of <code>App.js</code> to configure your app to authenticate with ThoughtSpot. Your ThoughtSpot trial URL may begin with &#34;my1.thoughtspot.cloud&#34; or &#34;my2.thoughtspot.cloud&#34; instead of &#34;try.thoughtspot.cloud&#34;, so match it accordingly. Save your changes</p>
 <pre><code language="language-React" class="language-React">import &#34;./styles.css&#34;;
 import { init, AuthType } from &#34;@thoughtspot/visual-embed-sdk&#34;;
 import { Route, Routes } from &#34;react-router-dom&#34;;
@@ -396,7 +396,7 @@ import { SearchEmbed } from &#39;@thoughtspot/visual-embed-sdk/react&#39;;
       <google-codelab-step label="Embed Liveboard Component" duration="10">
         <p>Embedding a liveboard component is very similar to what you just completed with the Search component. You need to create a new page and add the Liveboard component, then add it to your routes and the hamburger menu. Let&#39;s jump right in.</p>
 <h2 is-upgraded>Create the Liveboard page</h2>
-<p>Add a new file, <code>liveboard.js</code> in the <code>components</code> directory, and use the Developer Playground to fetch the liveboardId for <strong>Sales Analysis Liveboard</strong>.</p>
+<p>Add a new file, <code>liveboard.js</code> in the <code>components</code> directory, and use the Developer Playground to fetch the <code>liveboardId</code> for <strong>Sales Analysis Liveboard</strong>.</p>
 <pre><code language="language-react" class="language-react">import React from &#39;react&#39;
 import { LiveboardEmbed } from &#34;@thoughtspot/visual-embed-sdk/react&#34;;
 
@@ -848,13 +848,9 @@ export default function Search() {
 <p>Once the results are rendered, hover over the pin button, or the icons to the left of the pin button. You will notice they are enabled, with context sensitive tooltips.</p>
 <p>Now, tap the Disable actions button, and enter a search term. This time, you will see the actions are disabled with our disabled message replacing the previous contextual tooltips.</p>
 <p class="image-container"><img alt="22-hosteventsfinal" src="img/7584d5ddf9040892.gif"></p>
-      </google-codelab-step>
-
-      <google-codelab-step label="Part 2 Summary" duration="3">
+<p>Part 2 Summary</p>
 <p>At this stage, you&#39;ve completed your app and should have a great understanding of how you can use the Visual Embed SDK. Give yourself a pat on the back. Great job! If you run out of time, or are having trouble getting everything working, check out <a href="https://codesandbox.io/s/keen-einstein-1g9vrl" target="_blank">the completed app</a> and compare your code.</p>
-
-      </google-codelab-step>
-      <google-codelab-step label="Conclusion" duration="3">
+<p>Conclusion</p>
 <p>Congratulations. You have completed the ThoughtSpot Developer Workshop. Thoughout the workshop, you&#39;ve created an instance of ThoughtSpot, complete with sample visualizations to find insight from business data, and built an entire web app to embed these components using the developer tools and SDKs provided by ThoughtSpot Everywhere.</p>
 <p>We&#39;ve only scratched the surface of the features available to developers with ThoughtSpot Everywhere. To keep learning more, the following guides are a great starting point:</p>
 <ul>
