@@ -1157,18 +1157,14 @@ Now, tap the Disable actions button, and enter a search term. This time, you wil
 
 
 ## Part 2 Summary
-
-Duration: 03:00
-
+Duration: 05:00
 
 At this stage, you've completed your app and should have a great understanding of how you can use the Visual Embed SDK. Give yourself a pat on the back. Great job! If you run out of time, or are having trouble getting everything working, check out [the completed app](https://codesandbox.io/s/keen-einstein-1g9vrl) and compare your code.
 
 
 
 ## Conclusion
-
-Duration: 03:00
-
+Duration: 05:00
 
 Congratulations. You have completed the ThoughtSpot Developer Workshop. Thoughout the workshop, you’ve created an instance of ThoughtSpot, complete with sample visualizations to find insight from business data, and built an entire web app to embed these components using the developer tools and SDKs provided by ThoughtSpot Everywhere. 
 
