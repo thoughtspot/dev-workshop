@@ -25,7 +25,7 @@ You will learn:
 - Using Postman to manage API collections with ThoughtSpot
 
 ### What you need:
-- No local environment configuration is required. Everything can be completed via a browser on any computer or tablet
+- No local environment configuration is required. Everything can be completed via a browser on any computer or tablet. Google Chrome is recommended.
 - A general understanding of javascript and web development. The tutorial uses ReactJS for a web framework. You don't have to be an expert, but some knowledge helps.
 
 ### Ready to get started?
