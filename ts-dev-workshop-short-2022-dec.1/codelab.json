@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-12-06T11:14:23-08:00",
+  "id": "ts-dev-workshop-short-2022-dec.1",
+  "duration": 148,
+  "title": "ThoughtSpot Developer Workshop",
+  "authors": "Quinton Wall",
+  "summary": "ThoughtSpot 2hr Developer Workshop",
+  "source": "workshop.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "meta"
+  ],
+  "tags": [
+    "beginner",
+    "intermediate"
+  ],
+  "feedback": "https://developers.thoughtspot.com",
+  "url": "ts-dev-workshop-short-2022-dec.1"
+}
