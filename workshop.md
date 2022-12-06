@@ -762,7 +762,6 @@ import React from 'react'
 import { LiveboardEmbed, useEmbedRef } from "@thoughtspot/visual-embed-sdk/react";
 import { EmbedEvent, Action  } from "@thoughtspot/visual-embed-sdk";
 import { Spin } from "antd";
-import 'antd/es/spin/style/css';
 ```
 
 To make everything work, we will take advantage of the React framework’s state mechanism via useState to keep track of when we should show or hide the spinner. Within the Liveboard function, add the following line near the top:
