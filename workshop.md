@@ -39,88 +39,16 @@ The workshop is broken into 2 parts, with the learning objectives as follows. Ea
 * Using Postman to manage API collections with ThoughtSpot
 
 
+### Access ThoughtSpot Cloud Environment
 
-### ThoughtSpot Free Trial
-
-To begin, [sign up](https://www.thoughtspot.com/trial?tsref=ts-dev-workshop) for a free ThoughtSpot 30 day trial account. You will be prompted to enter a business email and a few other pieces of contact information. You will also be asked which cloud database you are using. Go ahead and select your preferred database. Don’t worry if you don’t have one; just pick the one you are most interested in. We are going to use a sample dataset for this tutorial. 
-In a few minutes, check your email to complete the activation of your trial account. Once you have successfully logged in, you can continue.
-
-
-
-## Part 1 Build Analytics with Low Code
-Duration: 0:05:00
-
-Part 1 of this workshop will leverage the low-code tools to create search, visualizations, and liveboards to analyze data. And, introduce you to the developer playground to generate javascript code to embed ThoughtSpot elements into a web app.
-
-You will create a couple of fresh ThoughtSpot Answers using the default *Sample Retail - Apparel* worksheet and Pin them in a new Liveboard. The new liveboard will then be used in the Developer Playground to generate much of the JavaScript code required to embed ThoughtSpot into webapps.
-
-
-
-## Create Answers 
-Duration: 0:15:00
-
-
-
-### Sales Trends
-
-Start by selecting  **Search Data** from the Home page as shown below  
-
-![1-searchdata](images/1-searchdata.png)
-
-* Confirm that Sample Retail - Apparel is the selected data source.
-
-The Search Answers and Search Data buttons toggle and are sticky meaning the next time you visit the home page and select the search bar it will bring you right to the Search Data search bar.
-
-
-
-1. Let's create the first search result for your liveboard that shows the Show the monthly trend of sales over the last 2 years  
-
-2. Enter in the search bar: *Sales Monthly Last 2 years*
-
-3. Press **Enter**, Select **Go**, or **click** below the search bar to launch the query.
-
-![2-searchsales](images/2-searchsales.png)
-
-4. Now Pin that answer to a new liveboard
-
-5. Select the  **Pin** button on the top right of the visualization window.
-
-6. If  prompted,  select **Create liveboard** and enter "**Sales Analysis Liveboard**" _(the word liveboard is not necessary. Only using for this illustration) and then select  **Pin** (or the checkmark which is only shown the first time the liveboard is to be created)._
-
-![3-pinliveboard](images/3-pinliveboard.png)
-
-
-
-### Top 15 stores
-
-
-
-1. Start a new Search by tapping **Search Data**. This time, you will search for the top 15 stores by their sales for last month.
-
-3. Enter in the search bar: Sales Store Top 15 Last month
-
-4. Then press **Enter**, Select **Go**, or **click** below the search bar to launch the query. While you can change the chart time, keep this one for now.  
-
-_Note the top 15 include stores from all over the USA. You will see how run time filters will be applied later to focus on the top 15 in a particular region as an example._
-
-![4-searchtopstores](images/4-searchtopstores.png)
-
-5. Pin the answer to the liveboard you created previously.
-
-6. Save the search by tapping the ... and calling it **Top 15 last month**, then select the  **Pin** action, select the **Sales Analysis Liveboard** and finally select **Pin** (at the bottom of the **_Pin to Liveboard_** window) to add it.
-
-7. View your liveboard. Select **LIVEBOARDS** on the ThoughtSpot top navbar, select **Sales Analysis Liveboard** to open it.
-
-![5-liveboards](images/5-liveboards.png)
-
-Congratulations. You now have a liveboard with 2 search answers and are ready to embed it in the ThoughtSpot Everywhere Developer Playground.
-
+To begin, [log in](https://cap1slingshot.thoughtspot.cloud/) to the ThoughtSpot environment. In the previous portion of the workshop you have created a set of liveboards and answers. For this portion of the workshop we will leverage that work to begin embedding visualizations into a custom application
 
 
 ## Embed using the Developer Playground
 Duration: 0:20:00
 
-Now that you have your answers and liveboards created, it is time to take advantage of the Developer Playground. The Developer  Playground is a visual tool to help to build, test, and iterate on embedded components, prior to adding to your webapp. Unlike traditional approaches to development which require you to read documentation to piece together supported attributes, and configure local environments just to test your solution, the Developer Playground let's you quickly build your embed solution with confidence, greatly reducing time-to-market and avoid syntactical errors. 
+
+In the previous portion of the workshop you have learned how to use the ThoughtSpot interface to create answers and liveboards. Now, it is time to take advantage of the Developer Playground. The Developer  Playground is a visual tool to help to build, test, and iterate on embedded components, prior to adding to your webapp. Unlike traditional approaches to development which require you to read documentation to piece together supported attributes, and configure local environments just to test your solution, the Developer Playground let's you quickly build your embed solution with confidence, greatly reducing time-to-market and avoid syntactical errors. 
 
 
 
@@ -152,7 +80,7 @@ If this is your first time doing this, a Start tour option is shown which will g
 
 2. The ‘Select feature to embed' is already set to Liveboard, select your pinboard and run to view it in the sample app
 
-3. Select your Liveboard "**Sales Analysis Liveboard**" from the drop-down selection menu and notice that upon choosing the liveboard, the code window on the bottom left automatically highlights the code that you would copy/paste directly into your data app.  
+3. Select your Liveboard "**Retail Banking Analysis**" from the drop-down selection menu and notice that upon choosing the liveboard, the code window on the bottom left automatically highlights the code that you would copy/paste directly into your data app.  
 
 4. Select ‘ **Run** to render it in the sample SpotShop data app window.  
 
@@ -168,7 +96,7 @@ There are many actions that can be disabled or hidden for example and all are do
 
    ![8-liveboard-allactions](images/8-liveboard-allactions.png)
 
-2. Whilst still in the developer playground, make sure you have the  **Sales Analysis Liveboard**, then select the **Modify available actions** checkbox. This will add a code snippet into the editor section. 
+2. Whilst still in the developer playground, make sure you have the  **Retail Banking Analysis**, then select the **Modify available actions** checkbox. This will add a code snippet into the editor section. 
 
 3. Enter "**Action.Save**" inside the "[]" for the `disabledActions` setting.
 
@@ -194,11 +122,11 @@ Applying run time filters provides additional controls on who can see what data.
 
 
 
-1. The current liveboard, Sales Analysis Liveboards, includes the Total Sales by Store chart. This shows the top 15 stores for all regions. You will apply a run time filter to set the region to *Midwest* so the top 15 is now only for the stores in the Midwest region.
+1. The current liveboard, Retail Banking Analysis, includes the Total Revenue by Monthly Date chart. This shows a trend of revenue across all product categories. You will apply a run time filter to set the Product Category to *Loans* so chart only shows the trend for the Loans products.
 
 2. Select **Set runtime filters** under User experience customizations in the playground left pane. Notice the code window again, highlighting the code to be affected.
 
-3. Change *columnName1* to **‘region'** and *value1* to **‘midwest'**
+3. Change *columnName1* to **‘Product Category'** and *value1* to **‘Loans'**
 
 4. Select **Run** to render the changes.  
 
@@ -208,9 +136,9 @@ Applying run time filters provides additional controls on who can see what data.
 
 You can also add multiple runtime filters. Let's add one more filter to show only the data for bags. .
 
-1. Copy the runtime filter code and paste it below the existing entry. Make sure you add an additional comma directly after ['midwest']
-2. Modify ‘region' in the 2nd run time filter to **item type** and change ‘midwest' to ‘**bags**'.
-3. Select ‘ **Run** to render the changes. Now data is filtered by the bags sold in the Midwest region.
+1. Copy the runtime filter code and paste it below the existing entry. Make sure you add an additional comma directly after ['Product Category']
+2. Modify ‘Product Category' in the 2nd run time filter to **Gender** and change ‘Loans' to ‘**Male**'.
+3. Select ‘ **Run** to render the changes. Now data is filtered by Loans issued specifically to Males.
 
 ![11-allruntimefilters](images/11-allruntimefilters.png)
 
@@ -222,14 +150,14 @@ Let's go ahead and use the Developer Playground to embed and customize a search 
 
 1. The ‘Select feature to embed' to **Search**
 
-2.  Select your datasource "**Sample Retail - Apparel**" from the drop-down selection menu and notice that upon choosing the datasource, the code window on the bottom left automatically highlights the code that you would copy/paste directly into your data app.  
+2.  Select your datasource "**Retail Banking**" from the drop-down selection menu and notice that upon choosing the datasource, the code window on the bottom left automatically highlights the code that you would copy/paste directly into your data app.  
 
 3.  Select ‘ **Run** to render it in the sample SpotShop data app window.  
 
 
 _Note: Search suggestions will automatically appear in the search bar based upon what you did previously._
 
-3. Enter in the search bar: Sales Region Monthly
+3. Enter in the search bar: Revenue Weekly Product Category
 
 4. Then press **Enter**, Select **Go**, or **click** below the search bar to launch the query. While you can change the chart time, keep this one for now.
 
@@ -401,7 +329,7 @@ import { Route, Routes } from "react-router-dom";
 import BurgerMenu from "./components/burger/burgermenu";
 
 init({
-  thoughtSpotHost: "https://try.thoughtspot.cloud",
+  thoughtSpotHost: "https://cap1slingshot.thoughtspot.cloud/a",
   authType: AuthType.None
 });
 
