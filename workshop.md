@@ -526,7 +526,7 @@ Set the `data_format` to **Compact**
 
 Click **Try it Out** in the bottom right hand corner and explore the resulting dataset. 
 
-![C20-rest-playground](C20-rest-playground.png)
+![C20-rest-playground](images/C20-rest-playground.png)
 
 
 ### Create an AnswerSelect component
@@ -567,7 +567,7 @@ export default function AnswerSelect(props){
                 setAnswers(data.headers)
             }
         })
-    },[])
+    },[selectedAnswer])
 
     return (
         <FormControl>
@@ -695,6 +695,8 @@ export default function Search() {
 }
 ```
 
+![C21-answer-select](images/C21-answer-select.png)
+
 ## Using Lifecycle Events
 Duration: 0:05:00
 
@@ -710,15 +712,179 @@ Lifecycle events fall into two categories:
    1. HostEvents are hooks to allow the developer to programmatically change or update an embedded component. For example, you may want to change the search term used, or enable/disable features
 
 
+## Add an Embed Event
+Duration: 0:05:00
+
+Currently our list of answers shows us everything available to the user as of the time it was loaded. But what happens when a user wants to save one of their existing searches? Give it a shot:
+
+1. Type **Revenue Product Category** into the search
+2. Click the three dots icon and select `Save`
+3. Give it a good name and finish saving.
+
+Notice that the list has not updated. If you refresh the page, you will see that the changes are finally picked up. This is because of the way that state works in React, our search bar had no idea that the user clicked save. We can smoothen this workflow by listening for the **Save** EmbedEvent.
+First import the EmbedEvent enum from the ThoughtSpot SDK:
+
+```react
+import { EmbedEvent } from "@thoughtspot/visual-embed-sdk";
+```
+
+Add a new function called onSearchLoad. Because we are using React, we need to use the embedRef to add listeners and trigger events. In this case we are listening for the `EmbedEvent.Save`, which will fire when the user finishes saving the searcg.  To make this even more convenient for us, ThoughtSpot includes the newly saved `answerId` in the event data, which we can use to update the `selectedAnswerId`.
+
+```react
+function onSearchLoad(){
+  embedRef.current.on(EmbedEvent.Save, (event)=>{
+    setSelectedAnswerId(event.data.answerId)
+  })
+}
+```
+
+Add new parameter to the SearchEmbed to call this function:
+
+```react
+<SearchEmbed
+  onLoad={onSearchLoad}
+  collapseDataSources={true}
+  frameParams={{ height: "600px" }}
+  answerId={selectedAnswerId}
+  ref={embedRef}
+/>
+```
+
+Your final code should look like this:
+
+```react
+import React, { useState } from "react";
+import { SearchEmbed, useEmbedRef } from "@thoughtspot/visual-embed-sdk/react";
+import { Stack } from "@mui/system";
+import AnswerSelect from "./answer_select";
+import { Button } from "@mui/material";
+import { EmbedEvent } from "@thoughtspot/visual-embed-sdk";
+
+
+export default function Search() {
+  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined)
+
+  const embedRef = useEmbedRef();
+  function onSearchLoad(){
+    embedRef.current.on(EmbedEvent.Save, (event)=>{
+      setSelectedAnswerId(event.data.answerId)
+    })
+  }
+  function toggleAnswerSelect(answerUUID){
+      setSelectedAnswerId(answerUUID)
+  }
+  return (
+    <Stack spacing={2}>
+      <Stack direction={"row"}>
+        <AnswerSelect
+            selectedAnswer={selectedAnswerId}
+            selectAnswer={toggleAnswerSelect}
+        ></AnswerSelect>
+        <Button onClick={()=>setSelectedAnswerId(undefined)}>
+            New Search
+        </Button>
+      </Stack>
+      <SearchEmbed
+        onLoad={onSearchLoad}
+        collapseDataSources={true}
+        frameParams={{ height: "600px" }}
+        answerId={selectedAnswerId}
+        ref={embedRef}
+      />
+    </Stack>
+  );
+}
+```
+
 ## Add a Host Event
-Duration: 0:10:00
+Duration: 0:05:00
 
+We now know when a save has been triggered, let's do the opposite. Let's create a button that kicks off the save process.
 
+### Trigger Save Event
 
-![C19-search](images/C19-search.png)
+First, in **search.js** update the import to include the HostEvent enum.
 
+```react
+import { EmbedEvent, HostEvent } from "@thoughtspot/visual-embed-sdk";
+```
+Next, add a function that triggers the `HostEvent.Save`:
 
+```react
+function saveSearch(){
+    embedRef.current.trigger(HostEvent.Save)
+}
+```
 
+Instead of simply adding the Button, let's take this a step further and conditionally render Buttons based on whether the user is creating a new search or is looking at an existing Answer. Currently we know this by the `selectedAnswerId`. If this is undefined, then the only action that makes sense is to **Save**. If this has a value, then the user is looking at an existing answer **New Search** will be more relevant.
+
+Replace the New Search button with the following code:
+
+```react
+<Button onClick={saveSearch}>
+  Save Search
+</Button>
+{selectedAnswerId ? (
+  <Button onClick={() => setSelectedAnswerId(undefined)}>
+    New Search
+  </Button>
+) : null}
+```
+
+Give it a shot! When you are viewing an existing Answer, the Save button will update the answer. When you click "New Search" and start fresh, the save button will create a brand new Answer.
+
+Your final code should look like this:
+
+```react
+import React, { useState } from "react";
+import { SearchEmbed, useEmbedRef } from "@thoughtspot/visual-embed-sdk/react";
+import { Stack } from "@mui/system";
+import AnswerSelect from "./answer_select";
+import { Button } from "@mui/material";
+import { EmbedEvent, HostEvent } from "@thoughtspot/visual-embed-sdk";
+
+export default function Search() {
+  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
+
+  const embedRef = useEmbedRef();
+  function onSearchLoad() {
+    embedRef.current.on(EmbedEvent.Save, (event) => {
+      setSelectedAnswerId(event.data.answerId);
+    });
+  }
+  function toggleAnswerSelect(answerUUID) {
+    setSelectedAnswerId(answerUUID);
+  }
+  function saveSearch() {
+    embedRef.current.trigger(HostEvent.Save);
+  }
+  return (
+    <Stack spacing={2}>
+      <Stack direction={"row"}>
+        <AnswerSelect
+          selectedAnswer={selectedAnswerId}
+          selectAnswer={toggleAnswerSelect}
+        ></AnswerSelect>
+        <Button onClick={saveSearch}>Save Search</Button>
+        {selectedAnswerId ? (
+          <Button onClick={() => setSelectedAnswerId(undefined)}>
+            New Search
+          </Button>
+        ) : null}
+      </Stack>
+      <SearchEmbed
+        onLoad={onSearchLoad}
+        collapseDataSources={true}
+        frameParams={{ height: "600px" }}
+        answerId={selectedAnswerId}
+        ref={embedRef}
+      />
+    </Stack>
+  );
+}
+```
+
+![C22-save-new-buttons](images/C22-save-new-buttons.png)
 
 ## Part 2 Summary
 Duration: 05:00
