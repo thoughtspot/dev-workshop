@@ -179,7 +179,7 @@ There are three search related actions `\[Collapse data panel, Hide data panel, 
 
 4.  Make the following changes to add search tokens, turn off automatic search and test it.
 
-5.  Enter "**\[sales\] \[region\]**" inside the ‘' (single quotes for the searchTokenString setting.
+5.  Enter "**\[Revenue\] \[Product Category\]**" inside the ‘' (single quotes for the searchTokenString setting.
 6.  Change the "true" to "**false.**" for the executeSearch setting.
 7.  Select ‘ **Run** to render the changes.
 
@@ -213,132 +213,33 @@ In your browser, go to [codesandbox.io](http://codesandbox.io) and tap the **Cre
    - Type *@thoughtspot* into the dependency pane, then select the `Visual Embed SDK` from the autocomplete dropdown.
 
 
-2. React Burger Menu
-   - Type *react-burger* into the depency pane, then select `react-burger-menu` from the autocomplete dropdown.
-
-
-3. React Router
-   - Type *react-router-dom* into the depency pane, then select `react-router-dom` from the autocomplete dropdown	
-
+2. Material UI
+   - Type *@mui/material* into the dependecy page and select the corresponding package.
+   - Type *@emotion/react* into the dependecy page and select the corresponding package.
+   - Type *@emotion/styled* into the dependecy page and select the corresponding package.
 
 ![14-codesandbox](images/14-codesandbox.gif)
 
-With your dependencies added, let's add the burger menu support. In the src directory, create  two folders:
+With your dependencies added, let's start by configuring the authentication to ThoughtSpot.
 
-- components
-
-- components/burger
-
-Within components/burger, create the following files and paste the contents from below. We won't go into the code of the hammer menu too much in this tutorial. All we need to do is add subpages to the menu as needed. Feel free to play with the CSS if you want to customize the look and feel. 
-
-`components/burger/burger.css`
-
-```css
-/* Position and sizing of burger button */
-.bm-burger-button {
-    position: fixed;
-    width: 36px;
-    height: 30px;
-    left: 36px;
-    top: 36px;
-  }
-   /* Color/shape of burger icon bars */
-  .bm-burger-bars {
-    background: #373a47;
-  }
-   /* Color/shape of burger icon bars on hover*/
-  .bm-burger-bars-hover {
-    background: #a90000;
-  }
-   /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    height: 24px;
-    width: 24px;
-  }
-   /* Color/shape of close button cross */
-  .bm-cross {
-    background: #bdc3c7;
-  }
-   /*
-  Sidebar wrapper styles
-  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-  */
-  .bm-menu-wrap {
-    position: fixed;
-    height: 100%;
-  }
-   /* General sidebar styles */
-  .bm-menu {
-    background: #373a47;
-    padding: 2.5em 1.5em 0;
-    font-size: 1.15em;
-  }
-   /* Morph shape necessary with bubble or elastic */
-  .bm-morph-shape {
-    fill: #373a47;
-  }
-   /* Wrapper for item list */
-  .bm-item-list {
-    color: #b8b7ad;
-    padding: 0.8em;
-  }
-   /* Individual item */
-  .bm-item {
-    display: inline-block;
-    color: #b8b7ad;
-  }
-   /* Styling of overlay */
-  .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-  }
-```
-
- `components/burger/burgermenu.js`
-
-```react
-import React from "react";
-import { slide as Menu } from "react-burger-menu"
-import "./burger.css";
-
-const toggleMenu = ({ isOpen }) => {
- const menuWrap = document.querySelector(".bm-menu-wrap");
- isOpen
-   ? menuWrap.setAttribute("aria-hidden", false)
-   : menuWrap.setAttribute("aria-hidden", true);
-};
-
-const BurgerMenu = () => {
- return (
-   <Menu noOverlay onStateChange={toggleMenu}>     
-       <a className="bm-item" href="/">Home</a>
-       <a className="bm-item" href="/about">About</a>     
-   </Menu>
- );
-};
-export default BurgerMenu;
-```
-
-
-
-Now, replace the contents of `App.js` to configure your app to authenticate with ThoughtSpot. Your ThoughtSpot trial URL may begin with "my1.thoughtspot.cloud" or "my2.thoughtspot.cloud" instead of "try.thoughtspot.cloud", so match it accordingly. Save your changes
+Replace the contents of your App.js file with:
 
 ```React
-import "./styles.css";
-import { init, AuthType } from "@thoughtspot/visual-embed-sdk";
-import { Route, Routes } from "react-router-dom";
-import BurgerMenu from "./components/burger/burgermenu";
+import React, { useState } from "react";
+import { AuthType, init } from "@thoughtspot/visual-embed-sdk";
+
+var baseURL = "https://cap1slingshot.thoughtspot.cloud/";
 
 init({
-  thoughtSpotHost: "https://cap1slingshot.thoughtspot.cloud/a",
+  thoughtSpotHost: baseURL,
   authType: AuthType.None
 });
 
 function App() {
+  const [selectedExperience, setSelectedExperience] = useState("");
+
   return (
     <div className="App">
-      <header>
-        <BurgerMenu />
-      </header>
       Hello ThoughtSpot!
     </div>
   );
@@ -347,24 +248,6 @@ function App() {
 export default App;
 ```
 
-Finally, replace the contents of `index.js` with the following code, which tell React to use` react-router-dom` for navigation.
-
-```react
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './App';
-
-ReactDOM.render(
- <Router>
-   <App />
- </Router> 
- ,
- document.getElementById('root')
-);
-```
-
-
 
 Once complete, your default app and project should look like this:
 
@@ -372,51 +255,48 @@ Once complete, your default app and project should look like this:
 
 You will notice that the code includes some logic to authenticate with ThoughtSpot. In this tutorial, we are using AuthType.None. This will prompt the user to log in when the page loads. This is fine for the tutorial, but not recommended for a production app. For a detailed overview of security options supported by the Visual Embed SDK, please check out the [online documentation](https://developers.thoughtspot.com/docs/?pageid=embed-auth). 
 
-## Create the search page
+## Create the liveboard page
 Duration: 0:15:00
 
-With the app structure set up and running, the next task is to add a new page to embed a search component. Within your IDE, select the `components` folder and add a new file `search.js`
+With the app structure set up and running, the next task is to add a new page to embed a search component. Within your IDE, select the `components` folder and add a new file `liveboard.js`
 
 ![15-search](images/15-search.gif)
 
-Then, add the required React and Visual SDK import to `search.js`
+Then, add the required React and Visual SDK import to `liveboard.js`
 
 ```react
 import React from 'react';
-import { SearchEmbed } from '@thoughtspot/visual-embed-sdk/react';
+import { LiveboardEmbed } from '@thoughtspot/visual-embed-sdk/react';
 ```
 
 
 
-And, finally add a search function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the SearchEmbed component. You can view a complete example of search.js [here](https://github.com/thoughtspot/quickstarts/blob/main/react-starter-app/src/components/search.js).
+And, finally add a liveboard function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the SearchEmbed component. You can view a complete example of search.js [here](https://github.com/thoughtspot/quickstarts/blob/main/react-starter-app/src/components/search.js).
 
 ```react
-export default function Search() {
+export default function Liveboard() {
  return (
-      <div>
-          <h1>Search</h1>
-          <SearchEmbed frameParams={{hideDataSources: "true", height: "80vw"}} answerId={"YOUR-ANSWER-ID-HERE"}/>
-      </div>
+      <LiveboardEmbed
+        fullHeight={true}
+        liveboardId={"ef2b8ff9-fabe-4a93-87b5-89896af760c6"}
+      />
   )
 }
 ```
 
 
 
-Looking at the search embed component, you will see parameters you are already familiar with from the Developer Playground task previously.  The most important parameter, however, is the `answerId`. Open up the **Developer Playground**, choose Search as the feature to embed, then **Top 15 Last Month** from the Select saved search dropdown. Copy the inserted id into your code between the double quotes, then save your file. That's it. Your search embed is complete.
+Looking at the liveboard embed component, you will see parameters you are already familiar with from the Developer Playground task previously.  The most important parameter, however, is the `answerId`. Open up the **Developer Playground**, choose Liveboard as the feature to embed, then **Retail Banking Analysis** from the Select saved liveboard dropdown. Copy the inserted id into your code between the double quotes, then save your file. That's it. Your search embed is complete.
 
 
 
-### Add routes and navigation
+### Add the component to your application
 
-
-
-To add the new page to our navigation, we need to add the Search function to our Routes, then include the new route in the hamburger menu. Open `App.js` and add the following import. This tells our app where our search function resides. You can add this directly after the import for the BurgerMenu.
+Since we will be creating several objects we will eventually want navigation. For now however, lets test out our embed by itself. Open `App.js` and add the following import. This tells our app where our search function resides. You can add this directly after the import for ThoughtSpot.
 
 ```react
 import Search from './components/search'
 ```
-
 
 
 Next, we need to add routes to support navigation. Add the following code, directly after the `</header>` element. Routes tells our app that when we enter a URI, in this instance, `/search` where we should route that request. We are also adding a home route to take us back to the route of our app.
