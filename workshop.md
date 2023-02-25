@@ -364,14 +364,14 @@ export default function Liveboard() {
 ```
 
 
-
 Looking at the liveboard embed component, you will see parameters you are already familiar with from the Developer Playground task previously. 
 
-Notice that the LiveboardEmbed requires a `liveboardId`. In this case we have provided a default id. But there are two other ways you can obtain the UUID
+Notice that the LiveboardEmbed requires a `liveboardId`. In this case we have provided a default id. But there are two other ways you can obtain the UUID.
 
 - Search for the livebaord in the Developer Playground and copy the ID from the generated code.
 - Navigate to the liveboard in the ThoughtSpot UI and observe the URL. The first UUID is that of the liveboard itself.
 
+We have also specified `fullHeight` to be true. This means that the liveboard container will automatically expand to the height of the liveboard itself.
 
 ### Add the component to your application
 
@@ -445,13 +445,16 @@ export default function Search() {
             <SearchEmbed
               collapseDataSources={true}
               frameParams={{ height: "600px" }}
-              ref={embedRef}
             />
         </Stack>
 
     );
 }
 ```
+
+The syntax for this looks very similar to the liveboard component, but in this case we are using the SearchEmbed, with a few new parameters.
+
+We have hardcoded the search `height` to be 600px, and we have specified `collapseDataSources` to be true. This means that the typical left-hand Data panel where you can select columns via clicking, is collapsed by default. This is one of the many options we can pass to control the look and behavior of the embedded object. 
 
 ### Add Search Route
 
@@ -488,11 +491,209 @@ export default function Navigation() {
   );
 }
 ```
-Click on the new navigation link to test the search embed. 
+Click on the new navigation link to test the search embed, and give a simple search a shot. 
+
+**Revenue monthly Product Category**
+
  ![C19-search](images/C19-search.png)
 
 
+## Create an Answer Select Menu.
+Duration: 0:15:00
 
+Searching by itself is great, but you will also want to save and re-visit your searches later. A saved search is called an **Answer** and we can load answers using the same search component we just created by specifying an `answerId`. As we did with the liveboard, we could find a hardcoded ID through the developer playground. But in this case we want to make it more dynamic, so let's create a new select component that will allow a user to choose from a list of all of the answers that they have saved.
+
+### Using REST API Calls
+
+In order to retrieve a list of all answers availabile to a user we can leverage the ThoughtSpot REST API.  This is one of the many tasks that the APIs can be used for, including:
+
+- Controlling users and permissions
+- Retrieving login tokens
+- Querying data
+- Querying content
+- Version control
+
+Let's take a few minutes to explore the other REST APIs available to us in the ThoughtSpot UI. Navigate to the Rest API V2 playground in the ThoughtSpot UI Develop page.
+[https://cap1slingshot.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0](https://cap1slingshot.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0)
+
+Take a second to explore the various calls availbe to us.
+
+Now click on the API call called `Search Data` under the `Data` section. This endpoint can be used to retrieve the result of a search query in JSON format. This requires three variables. 
+
+Set the `query_string` equal to **[Revenue]** **[Product Category]** 
+Set the `logical_table_identifier` to **4598e2bf-5d86-4892-84dc-a9686eb5a8ac**. This is the ID of our Retail Banking worksheet.
+Set the `data_format` to **Compact**
+
+Click **Try it Out** in the bottom right hand corner and explore the resulting dataset. 
+
+![C20-rest-playground](C20-rest-playground.png)
+
+
+### Create an AnswerSelect component
+
+Coming back to our original goal of creating a select menu that contains a list of all answers the user created. To do this we will need to query the metadata within ThoughtSpot.
+
+In this example we will leverage the V1 API's `metadata/list`:
+[https://developers.thoughtspot.com/docs/?pageid=metadata-api#metadata-list](https://developers.thoughtspot.com/docs/?pageid=metadata-api#metadata-list)
+
+The equivialant call in V2 can be found here:
+[https://developers.thoughtspot.com/docs/?pageid=rest-apiv2-reference#_metadata](https://developers.thoughtspot.com/docs/?pageid=rest-apiv2-reference#_metadata)
+
+
+First, create a new file in the `components` folder called **answer_select.js**, and add the following code:
+
+```react
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
+import { useEffect,useState } from "react"
+
+export default function AnswerSelect(props){
+    const {
+        selectedAnswer,
+        selectAnswer
+    } = props
+
+    const [answers,setAnswers] = useState([])
+
+    useEffect(()=>{
+        var baseURL = "https://cap1slingshot.thoughtspot.cloud/"
+
+        fetch(baseURL+"callosum/v1/tspublic/v1/metadata/list?type=QUESTION_ANSWER_BOOK&category=MY",
+        {
+          credentials: 'include',
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.headers){
+                setAnswers(data.headers)
+            }
+        })
+    },[])
+
+    return (
+        <FormControl>
+            <InputLabel id="demo-simple-select-label">My Answers</InputLabel>
+            <Select 
+                style={{width:'200px'}}
+                label="Select Answer"
+                value={selectedAnswer ? selectedAnswer : ''}
+                onChange={(e)=>selectAnswer(e.target.value)}
+            >
+                {answers.map((answer)=>{
+                    return <MenuItem value={answer.id}>{answer.name}</MenuItem>
+                })}
+            </Select>
+        </FormControl>
+    )
+}
+```
+Let's take a look at what this does. First, this component is based on the [Material UI Select](https://mui.com/material-ui/react-select/) component, which simply requires a list of `MenuItem` objects, much like a standard select input. To obtain this list we are are making a `fetch` call in the components `useEffect` function. 
+
+The key to note here is the use of ```credentials: 'include'```. Since we have already logged into ThoughtSpot, the session is able to be maintained in the browser. When we send the REST API call to ThoughtSpot we simply need to ensure that the Browser authentication comes along with, and ThoughtSpot will be able to use this authenticate oure user automatically. 
+
+Because **category** is set to `MY`, ThoughtSpot will look at the authenticated sesison and only return the list of Answer objects available to the user.
+
+To store the list of available answers, we are using a state object of the array type called `answers`: ```const [answers,setAnswers] = useState([])```
+
+Finally we map a list of `Menu Items` into the Select component, setting the value equal to the answer's Id and the display equal to the answer's Name.
+
+### Add AnswerSelect to the Search Page
+
+Navigate to the **components/search.js** file.
+
+Add the import for the AnswerSelect component.
+
+```react
+import AnswerSelect from "./answer_select";
+import { Stack } from "@mui/system";
+```
+
+Add a new state object called `selectedAnswerId`. You can add this right above `const embedRef`.
+
+```react
+  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined)
+```
+
+Create a function to update the selected answer given an answer Id. This will be used by the answer select we just created, and can be placed below the `const embedRef`
+
+```react
+  function toggleAnswerSelect(answerUUID){
+      setSelectedAnswerId(answerUUID)
+  }
+```
+
+Insert the AnswerSelect component. In this case we will create a horizontal menu of buttons using a Material UI Stack. Place this on top of the `SearchEmbed`
+
+```react
+<Stack direction={"row"}>
+  <AnswerSelect
+      selectAnswer={toggleAnswerSelect}
+      selectedAnswer={selectedAnswerId}
+  ></AnswerSelect>
+</Stack>
+```
+Update the `SearchEmbed` to refer to the currently selected answerId.
+
+```react
+<SearchEmbed
+  collapseDataSources={true}
+  frameParams={{ height: "600px" }}
+  answerId={selectedAnswerId}
+  ref={embedRef}
+/>
+```
+
+Finally, let's add a button to reset the `answerId` for a brand new search. Add an import for Material UI Button.
+
+```react
+import { Button } from "@mui/material";
+```
+
+Below the `AnswerSelect` component, add a new Button that when clicked sets the `selectedAnswerId` to **undefined**. 
+
+```react
+<Button onClick={()=>setSelectedAnswerId(undefined)}>
+    New Search
+</Button>
+```
+
+Your final code should look like the following:
+
+```
+import React, { useState } from "react";
+import { SearchEmbed, useEmbedRef } from "@thoughtspot/visual-embed-sdk/react";
+import { Stack } from "@mui/system";
+import AnswerSelect from "./answer_select";
+import { Button } from "@mui/material";
+
+export default function Search() {
+  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined)
+
+  const embedRef = useEmbedRef();
+
+  function toggleAnswerSelect(answerUUID){
+      setSelectedAnswerId(answerUUID)
+  }
+  return (
+    <Stack spacing={2}>
+      <Stack direction={"row"}>
+        <AnswerSelect
+            selectAnswer={toggleAnswerSelect}
+            selectedAnswer={selectedAnswerId}
+        ></AnswerSelect>
+        <Button onClick={()=>setSelectedAnswerId(undefined)}>
+            New Search
+        </Button>
+      </Stack>
+      <SearchEmbed
+        collapseDataSources={true}
+        frameParams={{ height: "600px" }}
+        answerId={selectedAnswerId}
+        ref={embedRef}
+      />
+    </Stack>
+  );
+}
+```
 
 ## Using Lifecycle Events
 Duration: 0:05:00
@@ -508,415 +709,13 @@ Lifecycle events fall into two categories:
 2. HostEvents 
    1. HostEvents are hooks to allow the developer to programmatically change or update an embedded component. For example, you may want to change the search term used, or enable/disable features
 
-## Add Embed Event
-Duration: 0:15:00
-
-As mentioned in the previous section, EmbedEvents occur when the state of a component changes or is interacted with. To demonstrate, we will add a spinning animation to the existing liveboard page. This animation will display while the liveboard is fetching data and rendering. Once the liveboard has finished rendering, we will hide the animation by listening for an embed event, `onLiveboardRendered`
-
-### Add Antd library
-
-To add the spinning animation, we will use a third-party library called antd. Antd has many great assets, styles, and components, one of these is a spinner, which is exactly what we need. Let's add antd as a dependency to your project
-
-- Type *antd* into the depency pane, then select `antd` from the autocomplete dropdown.
-
-
-
-From within your CodeSandbox project, open `src/components/liveboard.js.` This file is where we embed the Liveboard component. Currently, the page does very little beyond embedding the component. Let’s start by adding the required imports for both `antd` and to start listening for ThoughtSpot events. At the top of your file, update your imports to match the  following:
-
-```react
-import React from 'react'
-import { LiveboardEmbed, useEmbedRef } from "@thoughtspot/visual-embed-sdk/react";
-import { EmbedEvent, Action  } from "@thoughtspot/visual-embed-sdk";
-import { Spin } from "antd";
-```
-
-To make everything work, we will take advantage of the React framework’s state mechanism via useState to keep track of when we should show or hide the spinner. Within the Liveboard function, add the following line near the top:
-
-```react
-const [isLoading, setIsLoading] = React.useState(true);
-```
-
-We will also add a handle to the Liveboard component using the embedRef handle. embedRef is more useful for working with Hosted Events, which we will cover shortly, but it is a good practice to get used to always setting the reference in your components. To get started, add the following code directly before the useState call:
-
-```react
-const embedRef = useEmbedRef();
-```
-
-Next, we will update the current `LiveboardEmbed` component with event handler functions. Scroll down until you see the ThoughtSpot component.
-
-```react
-<LiveboardEmbed frameParams={{height: "80vw"}}
-                             liveboardId={"YOUR-ID-HERE"}/>
-```
-
-And change it to following. Remember to use your liveboardid. Don't replace it with YOUR-ID-HERE ;)
-
-```react
-<LiveboardEmbed frameParams={{height: "80vw"}}
-                   liveboardId={"YOUR-ID-HERE"}
-                   ref={embedRef}
-                   onLoad={onLoad}
-                   onLiveboardRendered={onRendered}
-                   />
-```
-
-There is a lot going on here. First, we added a hook to the embedReference via the ref attribute. Then, we’ve included two lifecycle events onLoad and onLiveboardRendered. We are going to use these events to show and hide our spinner. Since CodeSandbox dynamically reloads your changes, you will see a lot of errors in your project. Don't worry. We will fix these next.
-
-### Add Lifecycle constants to handle callbacks
-
-Currently, the lifecycle event attributes point to constants which do not exist. Let’s go ahead and create these now. You can add them directly after the useEmbedRef() call. Now, when the ThoughtSpot platform fires the `onLiveboardRendered` event we will setIsLoading to false.
-
-```react
-const onLoad = (e) => {
-       console.log("Loading liveboard");
-   };
-
-   const onRendered = (e) => {
-       console.log("Loading now rendered")
-       setIsLoading(false)
-   };
-```
-
-### Show / Hide component
-
-All that is left to do is to add some logic to show the spinner or the Liveboard component based on the value of isLoading. We can do this with a quick boolean check:
-
-```react
-                {isLoading ? (
-                      <div className="embedSpinner">
-                        <Spin size="large" />
-                      </div>
-                  	) : (
-                    	""
-                   )}
-                   <LiveboardEmbed frameParams={{height: "200vw"}}
-                   liveboardId={"YOUR-LIVEBOARDID-HERE"}
-                   ref={embedRef}
-                   onLoad={onLoad}
-                   onLiveboardRendered={onRendered}
-                   />
-```
-
-
-
-Your full liveboard.js should now look something like this:
-
-```React
-import React from "react";
-import {
-  LiveboardEmbed,
-  useEmbedRef
-} from "@thoughtspot/visual-embed-sdk/react";
-import { EmbedEvent, Action } from "@thoughtspot/visual-embed-sdk";
-import { Spin } from "antd";
-import "antd/es/spin/style/css";
-
-export default function Liveboard() {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const embedRef = useEmbedRef();
-
-  const onLoad = (e) => {
-    console.log("Loading liveboard");
-  };
-
-  const onRendered = (e) => {
-    console.log("Loading now rendered");
-    setIsLoading(false);
-  };
-
-  return (
-    <div>
-      <h1>Liveboard</h1>
-      {isLoading ? (
-        <div className="embedSpinner">
-          <Spin size="large" />
-        </div>
-      ) : (
-        ""
-      )}
-
-      <LiveboardEmbed
-        frameParams={{ height: "200vw" }}
-        liveboardId={"YOUR-LIVEBOARDID-HERE"}
-        ref={embedRef}
-        onLoad={onLoad}
-        onLiveboardRendered={onRendered}
-      />
-    </div>
-  );
-}
-
-```
-
-
-As soon as CodeSandbox can compile successfully, your changes will automatically be reflected on the embedded browser on the righthand side. Rendering happens very quickly. You may miss the spinner. If so, a good trick is to copy the URL into a new window to force the browser not to load from cache. 
-
-![20-embedevent2](images/20-embedevent2.gif)
 
 ## Add a Host Event
 Duration: 0:10:00
 
-So far we have seen how to add hooks to lifecycle events of ThoughtSpot components. Now, we want to see how to interact with the components programmatically via Host Events. To quickly recap, Host Events are where you want to programmatically interact with a ThoughtSpot component. You can think of Host Events as you talking to the component vs. Embed Events as the component talking to you.
 
-We will update `search.js` to perform two operations: firstly change the search terms from code, and secondly enable and disable actions a user can perform.
 
-Within your IDE, open `/components/search.js` and add the following imports:
-
-```react
-import React from 'react'
-import { SearchEmbed, useEmbedRef } from '@thoughtspot/visual-embed-sdk/react';
-import { EmbedEvent, Action, HostEvent } from "@thoughtspot/visual-embed-sdk";
-import { Layout, Button, Switch } from "antd";
-const { Header, Content } = Layout;
-```
-
-Then, define a handle to the embedded component, by adding the following line to the top of the search function:
-
-```react
-const embedRef = useEmbedRef();
-```
-
-And adding the ref attribute to the `SearchEmbed` element:
-
-```react
-<SearchEmbed
-    ref={embedRef}
-    frameParams={{ hideDataSources: "true", height: "80vw" }}
-    answerId={"YOUR-ANSWERID-HERE"}
-   />
-```
-
-
-
-### Add changeSearch function
-
-Now that we have the handle, go ahead and add a `changeSearch` function after the embedRef definition. This function will use the embedRef to trigger a HostEvent. We are going to use `HostEvent.Search` to change search terms. HostEvent has [a number of useful event types](https://developers.thoughtspot.com/docs/typedoc/enums/HostEvent.html) in addition to Search, worth checking out.
-
-```react
-const changeSearch = () => {
-       embedRef.current.trigger(HostEvent.Search, {
-         searchQuery: "[sales] by [item type]",
-       });
-     };
-```
-
-As you can see in the function above, `HostEvent.Search`  takes a `searchQuery` parameter. This is extremely useful when you want to pass in dynamic search terms. For example, you could pass in a sales reps region dynamically when the page loads, or set a default term based on the time of day.
-
-### Call changeSearch
-
-All that is left to do is add some functionality for us to call the changeSearch function. For our example, let’s connect it to a button. Go ahead and add a button into the <header> tag and save your changes.
-
-```react
-<Button type="primary" onClick={changeSearch}>Change query</Button>
-```
-
-
-
-Your final search.js should look like this:
-
-```react
-import React from "react";
-import { SearchEmbed, useEmbedRef } from "@thoughtspot/visual-embed-sdk/react";
-import { EmbedEvent, Action, HostEvent } from "@thoughtspot/visual-embed-sdk";
-import { Layout, Button, Switch } from "antd";
-const { Header, Content } = Layout;
-
-export default function Search() {
-  const embedRef = useEmbedRef();
-
-  const changeSearch = () => {
-    embedRef.current.trigger(HostEvent.Search, {
-      searchQuery: "[sales] by [item type]"
-    });
-  };
-
-  return (
-    <div>
-      <h1>Search</h1>
-      <Button type="primary" onClick={changeSearch}>
-        Change query
-      </Button>
-      <SearchEmbed
-        ref={embedRef}
-        frameParams={{ hideDataSources: "true", height: "80vw" }}
-        answerId={"YOUR-ANSWERID-HERE"}
-      />
-    </div>
-  );
-}
-```
-
-
-
-### Try it out
-
-Tap on the hamburger menu and choose Search. You should now see the embedded search component, plus a new button, Change query, at the top of the page. Go ahead and tap the button to see your search terms added to the embedded search box. 
-
-**Note:** If you happen to receive an error message stating Something went wrong, simply tap the search line to allow the app to correctly split the search term. This appears to be a conflict in CodeSandbox and Chrome's rendering. 
-
-![21-searchbug](images/21-searchbug.png)  
-
-
-
-
-
-## Enabling and disable actions with Host Events
-
-Duration: 10:00
-
-
-Now that you have a good understanding of how to work with Host Events, another very common customer request is to dynamically enable or disable actions based on the user. This can be achieved by using the `disableActions` attribute of the ThoughtSpot components.
-
-
-
-### Create ActionSets
-
-Let’s start by creating two sets of action constants: one set for default, and another that we will use to enable/disable. Go ahead and add these at the top of your `components/search.js` file, directly below the imports, but outside of the search function.
-
-```react
-export const actionSet = [
- Action.Subscription,
- Action.Share,
- Action.Save,
- Action.Edit,
- Action.EditTitle,
- Action.Explore,
- Action.Pin,
- Action.SpotIQAnalyze,
- Action.DrillDown
-];
-
-export const defaultActionSet = [
- Action.Subscription,
-];
-```
-
-Taking a look at the code, you can see we are taking advantage of the [Action enumeration](https://developers.thoughtspot.com/docs/typedoc/enums/Action.html). This enumeration contains all of the actions a user can perform on ThoughtSpot elements such as search and Liveboards. For our example, we’ve included the common ones for search.
-
-### Set Disabled Actions
-
-Next, we need to store the state of whether actions are enabled or disabled and provide accessor functions to change it. Add the following inside the `search` function, directly after the `useEmbedRef()` call. 
-
-```react
-const [disabledActions, setDisabledActions] = React.useState([]);
-
-     const onToggleDisabledActions = (checked: boolean) => {
-         if (checked) {
-           setDisabledActions([]);
-         } else {
-           setDisabledActions(actionSet);
-         }
-       };
-```
-
-We also need to update the Search component to accept an enumeration as well as provide a reason why elements are disabled. The disabled reason will appear in a tooltip when a user hovers over a disabled element. Update your search component so it looks something like this. You will notice that we are using the `disabledActions` enumeration we previously put into session state. Remember, your datasource-id will be different from the example below.
-
-```react
-<SearchEmbed
-    frameParams={{hideDataSources: "true", height: "80vw"}}
-    ref={embedRef}           
-  	answerId={"YOUR-ANSWERID-HERE"}
-    disabledActions={disabledActions}
-    disabledActionReason="Your account is restricted."
-/>
-```
-
-### Set Disabled Actions
-
-All that is left is to add a toggle to our sample app to enable and disable actions. Since we already installed `antd` in the Embed Event section, we can take advantage of the Switch component. Go ahead and add the following to the header section of your page, directly after the button for setting search terms:
-
-```react
-<Switch type="primary"
-  	checkedChildren="Disable actions"
- 		 unCheckedChildren="Enable actions"
-  	defaultChecked
-  	onChange={onToggleDisabledActions}
-  />
-```
-
-Your final search.js should look like this:
-
-```react
-import React from "react";
-import { SearchEmbed, useEmbedRef } from "@thoughtspot/visual-embed-sdk/react";
-import { EmbedEvent, Action, HostEvent } from "@thoughtspot/visual-embed-sdk";
-import { Layout, Button, Switch } from "antd";
-const { Header, Content } = Layout;
-
-export const actionSet = [
-  Action.Subscription,
-  Action.Share,
-  Action.Save,
-  Action.Edit,
-  Action.EditTitle,
-  Action.Explore,
-  Action.Pin,
-  Action.SpotIQAnalyze,
-  Action.DrillDown
-];
-
-export const defaultActionSet = [Action.Subscription];
-
-export default function Search() {
-  const embedRef = useEmbedRef();
-
-  const [disabledActions, setDisabledActions] = React.useState([]);
-
-  const onToggleDisabledActions = (checked: boolean) => {
-    if (checked) {
-      setDisabledActions([]);
-    } else {
-      setDisabledActions(actionSet);
-    }
-  };
-
-  const changeSearch = () => {
-    embedRef.current.trigger(HostEvent.Search, {
-      searchQuery: "[sales] by [item type]"
-    });
-  };
-
-  return (
-    <div>
-      <h1>Search</h1>
-      <Button type="primary" onClick={changeSearch}>
-        Change query
-      </Button>
-      <Switch
-        type="primary"
-        checkedChildren="Disable actions"
-        unCheckedChildren="Enable actions"
-        defaultChecked
-        onChange={onToggleDisabledActions}
-      />
-
-      <SearchEmbed
-        ref={embedRef}
-        frameParams={{ hideDataSources: "true", height: "80vw" }}
-        answerId={"YOUR-ANSWERID-HERE"}
-        disabledActions={disabledActions}
-        disabledActionReason="Your account is restricted."
-      />
-    </div>
-  );
-}
-
-```
-
-
-
-### Try it out.
-
-Save your changes, and check out all of your hard work. Now when you go to the Search page, you will see your answer results
-
-Once the results are rendered, hover over the pin button, or the icons to the left of the pin button. You will notice they are enabled, with context sensitive tooltips.
-
-Now, tap the Disable actions button, and enter a search term. This time, you will see the actions are disabled with our disabled message replacing the previous contextual tooltips.
-
-![22-hosteventsfinal](images/22-hosteventsfinal.gif)
-
-
-
+![C19-search](images/C19-search.png)
 
 
 
