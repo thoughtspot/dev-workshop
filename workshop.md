@@ -218,6 +218,9 @@ In your browser, go to [codesandbox.io](http://codesandbox.io) and tap the **Cre
    - Type *@emotion/react* into the dependecy page and select the corresponding package.
    - Type *@emotion/styled* into the dependecy page and select the corresponding package.
 
+3. React Router Dom
+   - Type *react
+
 ![14-codesandbox](images/14-codesandbox.gif)
 
 With your dependencies added, let's start by configuring the authentication to ThoughtSpot.
@@ -225,7 +228,7 @@ With your dependencies added, let's start by configuring the authentication to T
 Replace the contents of your App.js file with:
 
 ```React
-import React, { useState } from "react";
+import React from "react";
 import { AuthType, init } from "@thoughtspot/visual-embed-sdk";
 
 var baseURL = "https://cap1slingshot.thoughtspot.cloud/";
@@ -236,8 +239,6 @@ init({
 });
 
 function App() {
-  const [selectedExperience, setSelectedExperience] = useState("");
-
   return (
     <div className="App">
       Hello ThoughtSpot!
@@ -248,30 +249,108 @@ function App() {
 export default App;
 ```
 
+![14-default-app](images/C14-default-app.png)
+
+
+## Configure Simple Navigation
+
+
+### Create Navigation Component
+
+To navigate around our application, lets create a simple navigation bar. In this example, we are using components from [Material UI](https://mui.com/) to help us build something nice looking quickly. First lets create a simple horizontal container, with a button that links refers to the base url `/`.
+
+Create a new file in the `components` folder called **navigation.js**. and add the following code:
+
+```React
+import { Stack, Button } from "@mui/material";
+
+export default function Navigation(){
+    return (
+        <Stack direction={"row"} spacing={2} style={{padding:'10px',borderBottom:'1px solid #cccccc'}}>
+            <Button  href="/">
+            Home
+            </Button>
+        </Stack>  
+    )
+}
+
+```
+
+Next, let's go back to the **App.js** file and import our `Navigation` component. At the top of the file, add a new import:
+
+```React
+import Navigation from './components/navigation';
+```
+
+Then, above `Hello ThoughtSpot!` add the component itself:
+
+```React
+function App() {
+  return (
+    <div className="App">
+        <Navigation></Navigation>
+        Hello ThoughtSpot!
+    </div>
+  )
+}
+```
+
+![14-default-app](images/C15-nav-bar.png)
+
+
+### Setup React Router.
+
+In the end, we will create components for several different embed types including liveboards and searches. To handle the navigation between these components we will use react router.
+
+First, in **App.js**, add an import for react-router-dom, and Material UI's `Typography` and `Container`. This can go below the Navigation import we just added.
+
+```React 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Typography, Container } from '@mui/material';
+
+```
+
+Next, lets replace `Hello ThoughtSpot!` with a Material UI container, and Routes to each URL we wish to create. In this case we only have the Home page, so we will simply render the word `Home`. 
+
+```React
+function App() {
+  return (
+    <div className="App">
+        <Navigation></Navigation>
+        <Container style={{height:'calc(100vh - 60px)',overflow:'auto', paddingTop:'25px'}}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Typography>Home</Typography>} />
+          </Routes>
+        </BrowserRouter>
+      </Container>
+    </div>
+  )
+}
+```
+
 
 Once complete, your default app and project should look like this:
 
-![14-default-app](images/14-default-app.png)
+![C16-nav-bar-router](images/C16-nav-bar-router.png)
 
 You will notice that the code includes some logic to authenticate with ThoughtSpot. In this tutorial, we are using AuthType.None. This will prompt the user to log in when the page loads. This is fine for the tutorial, but not recommended for a production app. For a detailed overview of security options supported by the Visual Embed SDK, please check out the [online documentation](https://developers.thoughtspot.com/docs/?pageid=embed-auth). 
 
 ## Create the liveboard page
 Duration: 0:15:00
 
-With the app structure set up and running, the next task is to add a new page to embed a search component. Within your IDE, select the `components` folder and add a new file `liveboard.js`
+With the app structure set up and running, the next task is to add a new page to embed a search component. Within your IDE, select the `components` folder and add a new file **liveboard.js**.
 
-![15-search](images/15-search.gif)
+![C17-liveboard-file](images/C17-liveboard-file.png)
 
-Then, add the required React and Visual SDK import to `liveboard.js`
+Then, add the required React and Visual SDK import to `liveboard.js`. 
 
 ```react
 import React from 'react';
 import { LiveboardEmbed } from '@thoughtspot/visual-embed-sdk/react';
 ```
 
-
-
-And, finally add a liveboard function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the SearchEmbed component. You can view a complete example of search.js [here](https://github.com/thoughtspot/quickstarts/blob/main/react-starter-app/src/components/search.js).
+And, finally add a liveboard function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the LiveboardEmbed component.
 
 ```react
 export default function Liveboard() {
@@ -286,253 +365,132 @@ export default function Liveboard() {
 
 
 
-Looking at the liveboard embed component, you will see parameters you are already familiar with from the Developer Playground task previously.  The most important parameter, however, is the `answerId`. Open up the **Developer Playground**, choose Liveboard as the feature to embed, then **Retail Banking Analysis** from the Select saved liveboard dropdown. Copy the inserted id into your code between the double quotes, then save your file. That's it. Your search embed is complete.
+Looking at the liveboard embed component, you will see parameters you are already familiar with from the Developer Playground task previously. 
 
+Notice that the LiveboardEmbed requires a `liveboardId`. In this case we have provided a default id. But there are two other ways you can obtain the UUID
+
+- Search for the livebaord in the Developer Playground and copy the ID from the generated code.
+- Navigate to the liveboard in the ThoughtSpot UI and observe the URL. The first UUID is that of the liveboard itself.
 
 
 ### Add the component to your application
 
-Since we will be creating several objects we will eventually want navigation. For now however, lets test out our embed by itself. Open `App.js` and add the following import. This tells our app where our search function resides. You can add this directly after the import for ThoughtSpot.
+Open **App.js** and add an import for the liveboard component:
 
-```react
-import Search from './components/search'
+```React
+import Liveboard from './components/liveboard';
 ```
 
-
-Next, we need to add routes to support navigation. Add the following code, directly after the `</header>` element. Routes tells our app that when we enter a URI, in this instance, `/search` where we should route that request. We are also adding a home route to take us back to the route of our app.
-
-```react
-<Routes>
-  <Route path="/" element={<h1>Home</h1>} />
-  <Route path="/search" element={<Search />} />
-</Routes>
-```
-
-
-
-Finally, let's add the new route to the hamburger menu. Open `components/burger/burgermenu.js` and replace the /about a href with the following. 
+Next we can add a new Route after `Home`, that renders the liveboard on the URL `/liveboard`:
 
 ```react
-<a className="bm-item" href="/search">Search</a>  
+function App() {
+  return (
+    <div className="App">
+        <Navigation></Navigation>
+        <Container style={{height:'calc(100vh - 60px)',overflow:'auto', paddingTop:'25px'}}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Typography>Home</Typography>} />
+            <Route path="/liveboard" element={<Liveboard/>} />
+          </Routes>
+        </BrowserRouter>
+      </Container>
+    </div>
+  )
+}
+
 ```
 
-
-
-Save everything, and your app will automatically reload on the lefthand side. If everything is completed correctly, you will be presented with the home page as before, but now, when you expand the hamburger menu you will have an additional link, Search, included. Tap that link to open the new page. Since this is your first time accessing the page you will be prompted to log into ThoughSpot. Use your free trial credential and login. You should now see your embedded search component. Great job!
-
-![16-searchembed](images/16-searchembed.gif)
-
-### A little extra magic
-
-One of the great things about developing with React is the wealth of third party libraries available. The [hamburger menu](https://www.npmjs.com/package/react-burger-menu) we just used is a great example. This library saves a huge amount of effort in building typical app functionality. If you want to have fun with your app, try playing around with the [animations available in the hamburger menu](https://negomi.github.io/react-burger-menu/) to give your menu a little extra bling. For example, my favorite is the Elastic animation. To use this animation to your app, open `burgermenu.js` and change the word `slide` for elastic in the `react-burger-menu` statement.
+Finally, let's add the new route to the navigation bar. Open **componets/navigation.js** and add a new button that links to the URL `liveboard`:
 
 ```react
-import { elastic as Menu } from "react-burger-menu"
+export default function Navigation() {
+  return (
+    <Stack direction={"row"} spacing={2} style={{ padding: "10px", borderBottom: "1px solid #cccccc" }}>
+      <Button href="/">Home</Button>
+      <Button  href="/liveboard">
+        Liveboard
+      </Button>
+    </Stack>
+  );
+}
+
 ```
 
-![17-elasticmenu](images/17-elasticmenu.gif)
+Save everything, and your app will automatically reload on the lefthand side. If everything is completed correctly, you will be presented with the home page as before, but now in the navigation bar you will have an additional link to `Liveboard`. Tap that link to open the new page. Since this is your first time accessing the page you may be prompted to log into ThoughSpot, do this with the credentials provided. You should now see an embedded liveboard, Good job!
 
-You can also easily change the menu location from the left hand side, the default, to right:
-
-```react
-<Menu right noOverlay onStateChange={toggleMenu}>  
-```
-
-The react-burger-menu is a very useful react library. I highly recommend you check out all the features. It will save you a lot of time in your projects.
+![C18-liveboard](images/C18-liveboard.png)
 
 
 
-## Embed Liveboard Component
+## Embed Search Component
 Duration: 0:10:00
 
-Embedding a liveboard component is very similar to what you just completed with the Search component. You need to create a new page and add the Liveboard component, then add it to your routes and the hamburger menu. Let's jump right in.
+Embedding a Search component is very similar to what you just completed with the Liveboard component. You need to create a new page and add the Search component, then add it to your routes and the navigation menu. Let's jump right in.
 
-### Create the Liveboard page
+### Create the Search page
 
-Add a new file, `liveboard.js` in the `components` directory, and use the Developer Playground to fetch the `liveboardId` for **Sales Analysis Liveboard**.
-
-
+Add a new file, **search.js** in the `components` directory, and add the following code:
 
 ```react
-import React from 'react'
-import { LiveboardEmbed } from "@thoughtspot/visual-embed-sdk/react";
+import React, { useState } from "react";
+import {SearchEmbed, useEmbedRef} from "@thoughtspot/visual-embed-sdk/react";
+import { Stack } from "@mui/system";
 
-export default function Liveboard() {
-   return (
-       <div>
-           <h1>Liveboard</h1>
-           <LiveboardEmbed frameParams={{height: "200vw"}}
-                       liveboardId={"YOUR-LIVEBOARD-ID"}/>
-       </div>
-   )
+export default function Search() {
+  
+    return (
+        <Stack spacing={2}>
+            <SearchEmbed
+              collapseDataSources={true}
+              frameParams={{ height: "600px" }}
+              ref={embedRef}
+            />
+        </Stack>
+
+    );
 }
 ```
 
+### Add Search Route
 
-
-### Add Liveboard Route
-
-Open `App.js` and import the Liveboard function after the Search import:
+Open **App.js** and import the Search component after the Liveboard import:
 
 ```react
-import Liveboard from './components/liveboard'
+import Search from './components/search';
 ```
-
 
 
 Then, add the function to the `Routes` element after the Search route:
 
 ```react
-<Route path="/liveboard" element={<Liveboard />} />
+<Route path="/search" element={<Search />} />
 ```
 
 
+### Add Search to the navigation menu
 
-### Add Liveboard to the hamburger menu
-
-Open `components/burger/burgermenu.js` and add the link to the Liveboard route, after the Search navigation item:
+Open **components/navigation.js** and add a button to the search route, after the liveboard navigation item:
 
 ``` react
-<a className="bm-item" href="/liveboard">Liveboard</a>
-```
-
- ![18-liveboard](images/18-liveboard.gif)
-
-
-
-## Embed Full App Component
-Duration: 0:10:00
-
-By now, you should be getting familiar with using the React components and adding them to your projects. The last type of component we will use is the FullApp component. As the name implies, this component embeds the full ThoughtSpot experience. Let's jump right in.
-
-### Create the Fullapp page
-
-Add a new file, `fullapp.js` in the `components` directory. You will notice in the AppEmbed component, we don't need to pass in a specific id, instead we can use `Page.*` attribute. This attribute refers to the pages or tabs within ThoughtSpot. For example, I could use `Page.Liveboards` to point directly to the Liveboards page. For our app, we are going to point to the ThoughtSpot home page, using `Page.Home`. For a complete list of values check out the [documentation](https://developers.thoughtspot.com/docs/?pageid=full-embed).
-
-```react
-import React from 'react'
-import { AppEmbed } from "@thoughtspot/visual-embed-sdk/react"
-
-export default function FullApp() {
-   return (
-       <div>
-           <h1>Full App</h1>
-           <AppEmbed frameParams={{height: "80vw"}} fullHeight="true"
-                     pageId="Page.Home" />
-       </div>
-   )
-}
-```
-
-
-
-### Add Fullapp route
-
-
-Open `App.js` and import the Fullapp function after the Liveboard import:
-
-```react
-import FullApp from './components/fullapp'
-```
-
-
-
-Then, add the function to the `Routes` element after the Liveboard route:
-
-```react
-<Route path="/fullapp" element={<FullApp />} />
-```
-
-
-
-Your App.js code should now look like this
-
-```react
-import "./styles.css";
-import { init, AuthType } from "@thoughtspot/visual-embed-sdk";
-import { Route, Routes } from "react-router-dom";
-import BurgerMenu from "./components/burger/burgermenu";
-import Search from "./components/search";
-import Liveboard from "./components/liveboard";
-import FullApp from "./components/fullapp";
-
-init({
-  thoughtSpotHost: "https://try.thoughtspot.cloud",
-  authType: AuthType.None
-});
-
-function App() {
+export default function Navigation() {
   return (
-    <div className="App">
-      <header>
-        <BurgerMenu />
-      </header>
-      <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/liveboard" element={<Liveboard />} />
-        <Route path="/fullapp" element={<FullApp />} />
-      </Routes>
-      Hello ThoughtSpot!
-    </div>
-  );
-}
-
-export default App;
-
-```
-
-
-
-### Add Fullapp to the hamburger menu
-
-Open ``components/burger/burgermenu.js` and add the link to the Liveboard route, after the Search navigation item:
-
-```react
-<a className="bm-item" href="/fullapp">Full App</a> 
-```
-
-Your `burgermenu.js` should now look like this:
-
-```React
-import React from "react";
-import { elastic as Menu } from "react-burger-menu";
-import "./burger.css";
-
-const toggleMenu = ({ isOpen }) => {
-  const menuWrap = document.querySelector(".bm-menu-wrap");
-  isOpen
-    ? menuWrap.setAttribute("aria-hidden", false)
-    : menuWrap.setAttribute("aria-hidden", true);
-};
-
-const BurgerMenu = () => {
-  return (
-    <Menu noOverlay onStateChange={toggleMenu}>
-      <a className="bm-item" href="/">
-        Home
-      </a>
-      <a className="bm-item" href="/search">
-        Search
-      </a>
-      <a className="bm-item" href="/liveboard">
+    <Stack direction={"row"} spacing={2} style={{ padding: "10px", borderBottom: "1px solid #cccccc" }}>
+      <Button href="/">Home</Button>
+      <Button  href="/liveboard">
         Liveboard
-      </a>
-      <a className="bm-item" href="/fullapp">
-        Full App
-      </a>
-    </Menu>
+      </Button>
+      <Button  href="/search">
+        Search
+      </Button>
+    </Stack>
   );
-};
-export default BurgerMenu;
-
+}
 ```
+Click on the new navigation link to test the search embed. 
+ ![C19-search](images/C19-search.png)
 
-
-
-Save everything, select Full App from the hamburger menu, and you should see the entire ThoughtSpot instance embedded into your app. Not bad, huh?
-
-![19-fullapp](images/19-fullapp.png)
 
 
 
