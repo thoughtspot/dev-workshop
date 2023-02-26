@@ -909,7 +909,7 @@ Right click and save the image below to your local computer.
 ![Capital One Logo](Capital One Logo.png)
 
 Drag and Drop this into the `/public` directory of the IDE file explorer
-![C23-logo-public](C23-logo-public.png)
+![C23-logo-public](images/C23-logo-public.png)
 
 Open the **components/navigation.js** file and add it as an image before the other links.
 
