@@ -206,16 +206,16 @@ Duration: 0:10:00
 In your browser, go to [codesandbox.io](http://codesandbox.io) and tap the **Create a Sandbox** button on the top right of the page, then select the **React** template. This will create a very simple web app, with code on the left, and rendered page on the right. Next, we have to add a few dependencies to our project.  Be cafeful to add the correct library as there are a a few similarly named libraries to the ones we need.
 
 1. ThoughtSpot Visual Embed SDK
-   - Type *@thoughtspot* into the dependency pane, then select the `Visual Embed SDK` from the autocomplete dropdown.
+   - Type `@thoughtspot` into the dependency pane, then select the `Visual Embed SDK` from the autocomplete dropdown.
 
 
 2. Material UI
-   - Type *@mui/material* into the dependecy page and select the corresponding package.
-   - Type *@emotion/react* and select
-   - Type *@emotion/styled* and select
+   - Type `@mui/material` into the dependecy page and select the corresponding package.
+   - Type `@emotion/react` and select the corresponding package.
+   - Type `@emotion/styled` and select the corresponding package.
 
 3. React Router Dom
-   - Type *react-router-dom* and select
+   - Type `react-router-dom` and select the corresponding package.
 
 ![14-codesandbox](images/14-codesandbox.gif)
 
