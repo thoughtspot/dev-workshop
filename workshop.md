@@ -1,9 +1,9 @@
-# ThoughtSpot Developer Workshop
+# ThoughtSpot Developer Workshop - Capital One
 
 
 
 summary: ThoughtSpot 2hr Developer Workshop
-id: ts-dev-workshop-feb-2023.3
+id: ts-dev-workshop-feb-2023.1
 categories: Meta
 tags: beginner, intermediate
 status: Published 
@@ -12,39 +12,27 @@ authors: Quinton Wall, Nathan Schroeder
 Feedback Link: https://developers.thoughtspot.com
 
 
-
 ## Objectives / Goal
 Duration: 05:00
 
-This workshop is designed to introduce developers to ThoughtSpot Everywhere, how to embed analytics into JavaScript-based web applications, and integrate ThoughtSpot into typical devops toolchains. No prior experience, or paid software licenses, is required.
+### Capital One Developer Day - Feb 2023
 
-### What you will learn
+This workshop is designed to introduce you to ThoughSpot Everywhere. Together we will build a simple web application leveraging a small portion of ThoughtSpot's Visual Embed SDK and REST APIs.
 
-The workshop is broken into 2 parts, with the learning objectives as follows. Each part is intended to build upon the last. You must complete one before moving onto the next.
+Through this workshop you will learn the mechanisms by which ThoughtSpot can:
 
-#### Part 1: Build with Low Code Developer Tools
-
-*   How to create search, visualizations, and liveboards to analyze data
-*   How to use the developer playground to generate javascript code to embed ThoughtSpot elements into a web app
-*   How to modify actions available to users and apply hidden runtime filters
-
-#### Part 2: Embed Analytics with Visual Embed SDK
-
-*   How to use the Visual Embed SDK to embed ThoughtSpot components into a ReactJS web app
-*   Using the platform event framework to interact with embedded components
-
-#### Bonus: Using Platform APIs and TML
-
-* How to use ThoughtSpot Everywhere APIs and ThoughtSpot Modeling Language to perform typical devops tasks
-* Using Postman to manage API collections with ThoughtSpot
+- Enable Slingshot users with the freedom of exploration in an embedded application
+- Provide dynamic insights and alerts
+- Drive next-step actions and enhance/optimize user workflows
 
 
-### Access ThoughtSpot Cloud Environment
+### Next Steps
 
-To begin, [log in](https://cap1slingshot.thoughtspot.cloud/) to the ThoughtSpot environment. In the previous portion of the workshop you have created a set of liveboards and answers. For this portion of the workshop we will leverage that work to begin embedding visualizations into a custom application
+Login to the ThoughtSpot environment:
+[https://cap1slingshot.thoughtspot.cloud/](https://cap1slingshot.thoughtspot.cloud/)
 
 
-## Embed using the Developer Playground
+## Using the Developer Playground
 Duration: 0:20:00
 
 
@@ -94,7 +82,8 @@ There are many actions that can be disabled or hidden for example and all are do
 
 1. First, look at the default actions available for a particular embedded component such as a Search or Liveboard item.
 
-   ![C3-available-actions](images/C3-available-actions.png)
+
+<img src="images/C3-available-actions.png" width="400" height="400">
 
 2. Whilst still in the developer playground, make sure you have the  **Retail Banking Analysis**, then select the **Modify available actions** checkbox. This will add a code snippet into the editor section. 
 
@@ -110,7 +99,7 @@ There are many actions that can be disabled or hidden for example and all are do
 
 9. Hover over **Save** to see the reason. Notice the other actions specified above are hidden.
 
-![C4-disabled-actions](images/C4-disabled-actions.png)
+<img src="images/C4-disabled-actions.png" width="400" height="500">
 
 You have successfully applied modified actions.
 
@@ -130,8 +119,7 @@ Applying run time filters provides additional controls on who can see what data.
 
 4. Select **Run** to render the changes.  
 
-![C5-runtime-filters](images/C5-runtime-filters.png)
-
+<img src="images/C5-runtime-filters.png" width="400" height="500">
 
 
 You can also add multiple runtime filters. Let's add one more filter to show only the data for bags. .
@@ -185,32 +173,19 @@ There are three search related actions `\[Collapse data panel, Hide data panel, 
 
 
 
-## Part 1 Summary
-Duration: 0:03:00
-
-Congratulations for making it to the end of Part 1. So far, we have created everything *on-platform*, using the low-code developer tools. In Part 2, you will build a webapp with a simple hamburger navigation. This app will be written in ReactJS, a very popular JavaScript framework, and use the Visual Embed SDK and ThoughtSpot React components to embed Search, Liveboards, and the full ThoughtSpot app into a webapp.
-
-
-## Part 2 Embed Analytics with the Visual Embed SDK
-Duration: 0:05:00
-
-In part 2, you will build a ReactJS webapp with a simple hamburger navigation, and use the ThoughtSpot Visual Embed SDK to embed live analytics. 
-
-To make things easy, we will use CodeSandbox, a web based IDE and runtime environment for building web apps. Using CodeSandbox means we don’t need to spend time configuring our local environment for React development. The good news is that ThoughtSpot Everywhere uses the languages and developer processes you already know and love. If you already have your local environment setup for React development, feel free to use that too. 
-
-**Note**: You can also follow along using the [completed app running in CodeSandbox](https://codesandbox.io/s/keen-einstein-1g9vrl). This sandbox app is fully functional, but uses the componentid from another ThoughtSpot instance. To make it work for you, you can substitue your ids, or better still, follow along in the workshop and build it all yourself.
-
-## Configure your app
+## Configure your App
 Duration: 0:10:00
 
 In your browser, go to [codesandbox.io](http://codesandbox.io) and tap the **Create a Sandbox** button on the top right of the page, then select the **React** template. This will create a very simple web app, with code on the left, and rendered page on the right. Next, we have to add a few dependencies to our project.  Be cafeful to add the correct library as there are a a few similarly named libraries to the ones we need.
 
+### Install Dependencies
+
 1. ThoughtSpot Visual Embed SDK
    - Type `@thoughtspot` into the dependency pane, then select the `Visual Embed SDK` from the autocomplete dropdown.
-
+   - In the Dependancy console click on the version 18.0, and switch it to 17.5
 
 2. Material UI
-   - Type `@mui/material` into the dependecy page and select the corresponding package.
+   - Type `@mui/material` and select the corresponding package.
    - Type `@emotion/react` and select the corresponding package.
    - Type `@emotion/styled` and select the corresponding package.
 
@@ -218,6 +193,8 @@ In your browser, go to [codesandbox.io](http://codesandbox.io) and tap the **Cre
    - Type `react-router-dom` and select the corresponding package.
 
 ![14-codesandbox](images/14-codesandbox.gif)
+
+### Configure Authentication to ThoughtSpot
 
 With your dependencies added, let's start by configuring the authentication to ThoughtSpot.
 
@@ -245,15 +222,32 @@ function App() {
 export default App;
 ```
 
+There are two important things happening in the ThoughtSpot `init` function.
+
+- Setting the ThoughtSpot URL - Defining where the ThoughtSpot instance can be reached 
+
+- Setting the AuthType to None - Disabling the typical authentication (Trusted or Embedded SSO) for demonstration purposes. In this case, the user needs to log in manually through a login screen on the embed.
+
+Long term, you will want to use a more formal authentication method here such as:
+
+ - [Trusted Authentication](https://developers.thoughtspot.com/docs/?pageid=embed-auth#trusted-auth-embed)
+ 
+ - [Embedded SSO](https://developers.thoughtspot.com/docs/?pageid=embed-auth#embedSSO)
+
+*Note: there are security pre-requisites to enabling the connection see the following documention for more information:
+
+[https://developers.thoughtspot.com/docs/?pageid=security-settings](https://developers.thoughtspot.com/docs/?pageid=security-settings)
+
+
 You should now see something like the image below:
 
 ![14-default-app](images/C14-default-app.png)
 
 
-## Configure Simple Navigation
+## Configure Navigation
 
 
-### Create Navigation Component
+### Create a Navigation Component
 
 To navigate around our application, lets create a simple navigation bar. In this example, we are using components from [Material UI](https://mui.com/) to help us build something nice looking quickly. First lets create a simple horizontal container, with a button that links refers to the base url `/`.
 
@@ -264,7 +258,7 @@ import { Stack, Button } from "@mui/material";
 
 export default function Navigation(){
     return (
-        <Stack direction={"row"} spacing={2} style={{padding:'10px',borderBottom:'1px solid #cccccc'}}>
+        <Stack direction={"row"} spacing={2} style={{padding: "10px", boxShadow: "0 2px 2px #f2f2f2"}}>
             <Button  href="/">
             Home
             </Button>
@@ -298,7 +292,7 @@ You should now see the link "Home" and the words "Hello ThoughtSpot!":
 ![14-default-app](images/C15-nav-bar.png)
 
 
-### Setup React Router.
+### Setup React Router
 
 In the end, we will create components for several different embed types including liveboards and searches. To handle the navigation between these components we will use react router.
 
@@ -307,7 +301,6 @@ In the end, we will create components for several different embed types includin
 ```React 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Typography, Container } from '@mui/material';
-
 ```
 
 5. Let's replace `Hello ThoughtSpot!` with a Material UI container, and Routes to each URL we wish to create. In this case we only have the Home page, so we will simply render the word `Home`. 
@@ -318,12 +311,12 @@ function App() {
     <div className="App">
         <Navigation></Navigation>
         <Container style={{height:'calc(100vh - 60px)',overflow:'auto', paddingTop:'25px'}}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Typography>Home</Typography>} />
-          </Routes>
-        </BrowserRouter>
-      </Container>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Typography>Home</Typography>} />
+            </Routes>
+          </BrowserRouter>
+        </Container>
     </div>
   )
 }
@@ -341,7 +334,7 @@ Duration: 0:15:00
 
 ### Create a Liveboard Page
 
-With the app structure set up and running, the next task is to add a new page to embed a search component. 
+With the app structure set up and running, the next task is to add a new page to embed a liveboard component. 
 
 1. Within your IDE, select the `components` folder and add a new file **liveboard.js**.
 
@@ -415,7 +408,7 @@ Finally, let's add the new route to the navigation bar.
 ```react
 export default function Navigation() {
   return (
-    <Stack direction={"row"} spacing={2} style={{ padding: "10px", borderBottom: "1px solid #cccccc" }}>
+    <Stack direction={"row"} spacing={2} style={{ padding: "10px", boxShadow: "0 2px 2px #f2f2f2" }}>
     
       <Button href="/">Home</Button>
       
@@ -492,7 +485,7 @@ import Search from './components/search';
 ``` react
 export default function Navigation() {
   return (
-    <Stack direction={"row"} spacing={2} style={{ padding: "10px", borderBottom: "1px solid #cccccc" }}>
+    <Stack direction={"row"} spacing={2} style={{ padding: "10px", boxShadow: "0 2px 2px #f2f2f2" }}>
       
       <Button href="/">Home</Button>
       
@@ -738,11 +731,11 @@ ThoughtSpot Everywhere makes it easy to embed analytics into any webapp via the 
 
 Lifecycle events fall into two categories:
 
-##### EmbedEvents
+#### EmbedEvents
 
 EmbedEvents occur when the state of a component changes or is interacted with. This may be something like the component is rendered, new data is loaded, or a user clicks on a visualization
 
-##### HostEvents 
+#### HostEvents 
 
 HostEvents are hooks to allow the developer to programmatically change or update an embedded component. For example, you may want to change the search term used, or enable/disable features
 
@@ -1037,7 +1030,7 @@ This is done by providing a `customizations` object, that contains CSS variable 
 
 Going into a bit more detail on each of the override mechanisms:
 
-##### CSS Variables
+#### CSS Variables
 
 To override large portions of the application quickly and easily, ThoughtSpot provides 70+ CSS variables that can be overriden. In this example we are overriding the primary button background color:
 
@@ -1046,13 +1039,13 @@ To override large portions of the application quickly and easily, ThoughtSpot pr
 [Full List of CSS Variables](https://developers.thoughtspot.com/docs/?pageid=custom-css#supported-variables)
 
 
-##### Custom CSS File
+#### Custom CSS File
 
 It is also possible to reference a hosted CSS file that will be loaded with the ThoughtSpot emnbed and can similarily override variables and other rules. Typically this would reside on the application server. Note that this URL will need to be whitelisted by the ThoughtSpot server. 
 
 `customCSSUrl: "cdn.jsdelivr.net/gh/thoughtspot/custom-css-demo/css-variables.css",`
 
-##### CSS Rules
+#### CSS Rules
 
 For anything beyond what is currently possible with variables, you can provide specific rules. It is recommend that you use this sparingly, as individual classes are more subject to change than the well maintained variables. In this example we are adjusting the padding around the search component:
 
@@ -1097,20 +1090,14 @@ init({
 
 ![C24-styled](images/C24-styled.png)
 
-## Part 2 Summary
+## Summary
 Duration: 05:00
 
-At this stage, you've completed your app and should have a great understanding of how you can use the Visual Embed SDK. Great job! 
-
+Congratulations you have completed the workshop! At this stage, you've completed your application and should have a great understanding of how you can use the capabilities of ThoughtSpot Everywhere to enhance the Slingshot application.
 
 Check out [the completed app](https://codesandbox.io/s/dazzling-wave-86pb82) and compare your code.
 
-
-
-## Conclusion
-Duration: 05:00
-
-Congratulations. You have completed the ThoughtSpot Developer Workshop. Thoughout the workshop, you’ve created an instance of ThoughtSpot, complete with sample visualizations to find insight from business data, and built an entire web app to embed these components using the developer tools and SDKs provided by ThoughtSpot Everywhere. 
+### Additional Resources
 
 We’ve only scratched the surface of the features available to developers with ThoughtSpot Everywhere. To keep learning more, the following guides are a great starting point:
 
