@@ -387,15 +387,17 @@ Next we can add a new Route after `Home`, that renders the liveboard on the URL 
 function App() {
   return (
     <div className="App">
+    
         <Navigation></Navigation>
+        
         <Container style={{height:'calc(100vh - 60px)',overflow:'auto', paddingTop:'25px'}}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Typography>Home</Typography>} />
-            <Route path="/liveboard" element={<Liveboard/>} />
-          </Routes>
-        </BrowserRouter>
-      </Container>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Typography>Home</Typography>} />
+              <Route path="/liveboard" element={<Liveboard/>} />
+            </Routes>
+          </BrowserRouter>
+        </Container>
     </div>
   )
 }
@@ -408,10 +410,13 @@ Finally, let's add the new route to the navigation bar. Open **componets/navigat
 export default function Navigation() {
   return (
     <Stack direction={"row"} spacing={2} style={{ padding: "10px", borderBottom: "1px solid #cccccc" }}>
+    
       <Button href="/">Home</Button>
+      
       <Button  href="/liveboard">
         Liveboard
       </Button>
+      
     </Stack>
   );
 }
@@ -442,10 +447,12 @@ export default function Search() {
   
     return (
         <Stack spacing={2}>
+        
             <SearchEmbed
               collapseDataSources={true}
               frameParams={{ height: "600px" }}
             />
+            
         </Stack>
 
     );
@@ -480,13 +487,17 @@ Open **components/navigation.js** and add a button to the search route, after th
 export default function Navigation() {
   return (
     <Stack direction={"row"} spacing={2} style={{ padding: "10px", borderBottom: "1px solid #cccccc" }}>
+      
       <Button href="/">Home</Button>
+      
       <Button  href="/liveboard">
         Liveboard
       </Button>
+      
       <Button  href="/search">
         Search
       </Button>
+      
     </Stack>
   );
 }
@@ -803,7 +814,7 @@ We now know when a save has been triggered, let's do the opposite. Let's create 
 
 ### Trigger Save Event
 
-First, in **search.js** update the import to include the HostEvent enum.
+First, in **components/search.js** update the import to include the HostEvent enum.
 
 ```react
 import { EmbedEvent, HostEvent } from "@thoughtspot/visual-embed-sdk";
@@ -886,10 +897,106 @@ export default function Search() {
 
 ![C22-save-new-buttons](images/C22-save-new-buttons.png)
 
+## Adjust the Styles
+Duration: 0:10:00
+
+
+Our application works as we expect, but it doesnt quite match the look and feel we want. 
+
+### Add a logo
+
+Right click and save the image below to your local computer.
+![Capital One Logo](Capital One Logo.png)
+
+Drag and Drop this into the `/public` directory of the IDE file explorer
+![C23-logo-public](C23-logo-public.png)
+
+Open the **components/navigation.js** file and add it as an image before the other links.
+
+```react
+<img height="50px" alt="Logo" src="/Capital-One-Logo.png"></img>
+```
+
+## Using CSS in ThoughtSpot
+
+Let's make the ThoughtSpot embeds match the rest of our page a bit better. We can do this by adjusting CSS. CSS can be provided both at a global level, through the `init` function, or provided within the Embed objects themselves such as SearchEmbed and LiveboardEmbed for more specific individual styling. 
+
+This is done by providing a customizations object, that contains CSS variable overrides as well as individual CSS rules. 
+
+#### CSS Variables
+
+To override large portions of the application easily, ThoughtSpot provides CSS variables that can be overriden. 
+
+#### CSS Rules
+
+For anything beyond what is currently possible with variables. It is recommend that you use this sparingly, as individual classes are more subject to change than the well maintained variables.
+
+## Add CSS to ThoughtSpot Embed
+
+In the **App.js** file, find the ThoughtSpot `init` function, and add the following code after the `authType`:
+
+```react
+
+```
+
+
+## Adjust the Material UI Theme
+
+Material UI allows us to control things like button color through a Theme object. 
+
+In your **App.js** file copy the following code after the last import.:
+
+```react
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#396d92',
+      main: '#084977',
+      dark: '#053353',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#da5853',
+      main: '#d12f28',
+      dark: '#92201c',
+      contrastText: '#fff',
+    },
+  },
+});
+```
+In the `App` function, wrap everything we have done in a theme provider, using the theme we just created:
+function App() {
+  return (
+    <div className="App">
+      <ThemeProvider theme={theme}>
+        <Navigation></Navigation>
+        <Container
+          style={{
+            height: "calc(100vh - 60px)",
+            overflow: "auto",
+            paddingTop: "25px"
+          }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Typography>Home</Typography>} />
+              <Route path="/liveboard" element={<Liveboard />} />
+              <Route path="/search" element={<Search />} />
+            </Routes>
+          </BrowserRouter>
+        </Container>
+      </ThemeProvider>
+    </div>
+  );
+}
+
+
 ## Part 2 Summary
 Duration: 05:00
 
-At this stage, you've completed your app and should have a great understanding of how you can use the Visual Embed SDK. Give yourself a pat on the back. Great job! If you run out of time, or are having trouble getting everything working, check out [the completed app](https://codesandbox.io/s/keen-einstein-1g9vrl) and compare your code.
+At this stage, you've completed your app and should have a great understanding of how you can use the Visual Embed SDK. Great job! If you run out of time, or are having trouble getting everything working, check out [the completed app](https://codesandbox.io/s/keen-einstein-1g9vrl) and compare your code.
 
 
 
