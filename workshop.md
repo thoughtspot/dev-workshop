@@ -215,17 +215,17 @@ In your browser, go to [codesandbox.io](http://codesandbox.io) and tap the **Cre
 
 2. Material UI
    - Type *@mui/material* into the dependecy page and select the corresponding package.
-   - Type *@emotion/react* into the dependecy page and select the corresponding package.
-   - Type *@emotion/styled* into the dependecy page and select the corresponding package.
+   - Type *@emotion/react* and select
+   - Type *@emotion/styled* and select
 
 3. React Router Dom
-   - Type *react
+   - Type *react-router-dom* and select
 
 ![14-codesandbox](images/14-codesandbox.gif)
 
 With your dependencies added, let's start by configuring the authentication to ThoughtSpot.
 
-Replace the contents of your App.js file with:
+4. Replace the contents of your App.js file with:
 
 ```React
 import React from "react";
@@ -249,6 +249,8 @@ function App() {
 export default App;
 ```
 
+You should now see something like the image below:
+
 ![14-default-app](images/C14-default-app.png)
 
 
@@ -259,7 +261,7 @@ export default App;
 
 To navigate around our application, lets create a simple navigation bar. In this example, we are using components from [Material UI](https://mui.com/) to help us build something nice looking quickly. First lets create a simple horizontal container, with a button that links refers to the base url `/`.
 
-Create a new file in the `components` folder called **navigation.js**. and add the following code:
+1. Create a new file in the `components` folder called **navigation.js**. and add the following code:
 
 ```React
 import { Stack, Button } from "@mui/material";
@@ -276,13 +278,13 @@ export default function Navigation(){
 
 ```
 
-Next, let's go back to the **App.js** file and import our `Navigation` component. At the top of the file, add a new import:
+2. Let's go back to the **App.js** file and import our `Navigation` component. At the top of the file, add a new import:
 
 ```React
 import Navigation from './components/navigation';
 ```
 
-Then, above `Hello ThoughtSpot!` add the component itself:
+3. Then, above `Hello ThoughtSpot!` add the Navigation component itself:
 
 ```React
 function App() {
@@ -295,6 +297,8 @@ function App() {
 }
 ```
 
+You should now see the link "Home" and the words "Hello ThoughtSpot!":
+
 ![14-default-app](images/C15-nav-bar.png)
 
 
@@ -302,7 +306,7 @@ function App() {
 
 In the end, we will create components for several different embed types including liveboards and searches. To handle the navigation between these components we will use react router.
 
-First, in **App.js**, add an import for react-router-dom, and Material UI's `Typography` and `Container`. This can go below the Navigation import we just added.
+4. In **App.js**, add an import for react-router-dom, and Material UI's `Typography` and `Container`. This can go below the Navigation import we just added.
 
 ```React 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -310,7 +314,7 @@ import { Typography, Container } from '@mui/material';
 
 ```
 
-Next, lets replace `Hello ThoughtSpot!` with a Material UI container, and Routes to each URL we wish to create. In this case we only have the Home page, so we will simply render the word `Home`. 
+5. Let's replace `Hello ThoughtSpot!` with a Material UI container, and Routes to each URL we wish to create. In this case we only have the Home page, so we will simply render the word `Home`. 
 
 ```React
 function App() {
@@ -336,21 +340,25 @@ Once complete, your default app and project should look like this:
 
 You will notice that the code includes some logic to authenticate with ThoughtSpot. In this tutorial, we are using AuthType.None. This will prompt the user to log in when the page loads. This is fine for the tutorial, but not recommended for a production app. For a detailed overview of security options supported by the Visual Embed SDK, please check out the [online documentation](https://developers.thoughtspot.com/docs/?pageid=embed-auth). 
 
-## Create the liveboard page
+## Embed Liveboard Component
 Duration: 0:15:00
 
-With the app structure set up and running, the next task is to add a new page to embed a search component. Within your IDE, select the `components` folder and add a new file **liveboard.js**.
+### Create a Liveboard Page
+
+With the app structure set up and running, the next task is to add a new page to embed a search component. 
+
+1. Within your IDE, select the `components` folder and add a new file **liveboard.js**.
 
 ![C17-liveboard-file](images/C17-liveboard-file.png)
 
-Then, add the required React and Visual SDK import to `liveboard.js`. 
+2. Add the required React and Visual SDK import to `liveboard.js`. 
 
 ```react
 import React from 'react';
 import { LiveboardEmbed } from '@thoughtspot/visual-embed-sdk/react';
 ```
 
-And, finally add a liveboard function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the LiveboardEmbed component.
+3. Finally add a liveboard function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the LiveboardEmbed component.
 
 ```react
 export default function Liveboard() {
@@ -375,13 +383,13 @@ We have also specified `fullHeight` to be true. This means that the liveboard co
 
 ### Add the component to your application
 
-Open **App.js** and add an import for the liveboard component:
+4. Open **App.js** and add an import for the liveboard component:
 
 ```React
 import Liveboard from './components/liveboard';
 ```
 
-Next we can add a new Route after `Home`, that renders the liveboard on the URL `/liveboard`:
+5. Next we can add a new Route after `Home`, that renders the liveboard on the URL `/liveboard`:
 
 ```react
 function App() {
@@ -404,7 +412,9 @@ function App() {
 
 ```
 
-Finally, let's add the new route to the navigation bar. Open **componets/navigation.js** and add a new button that links to the URL `liveboard`:
+Finally, let's add the new route to the navigation bar. 
+
+5. Open **componets/navigation.js** and add a new button that links to the URL `liveboard`:
 
 ```react
 export default function Navigation() {
@@ -436,7 +446,7 @@ Embedding a Search component is very similar to what you just completed with the
 
 ### Create the Search page
 
-Add a new file, **search.js** in the `components` directory, and add the following code:
+1. Add a new file, **search.js** in the `components` directory, and add the following code:
 
 ```react
 import React, { useState } from "react";
@@ -465,14 +475,14 @@ We have hardcoded the search `height` to be 600px, and we have specified `collap
 
 ### Add Search Route
 
-Open **App.js** and import the Search component after the Liveboard import:
+2. Open **App.js** and import the Search component after the Liveboard import:
 
 ```react
 import Search from './components/search';
 ```
 
 
-Then, add the function to the `Routes` element after the Search route:
+3. Add the function to the `Routes` element after the Search route:
 
 ```react
 <Route path="/search" element={<Search />} />
@@ -481,7 +491,7 @@ Then, add the function to the `Routes` element after the Search route:
 
 ### Add Search to the navigation menu
 
-Open **components/navigation.js** and add a button to the search route, after the liveboard navigation item:
+4. Open **components/navigation.js** and add a button to the search route, after the liveboard navigation item:
 
 ``` react
 export default function Navigation() {
@@ -502,21 +512,22 @@ export default function Navigation() {
   );
 }
 ```
-Click on the new navigation link to test the search embed, and give a simple search a shot. 
+5. Click on the new navigation link to test the search embed, and give a simple search a shot: 
+  - *"Revenue monthly Product Category"*
 
-**Revenue monthly Product Category**
+Your result should look like the screenshot below:
 
  ![C19-search](images/C19-search.png)
 
 
-## Create an Answer Select Menu.
-Duration: 0:15:00
 
-Searching by itself is great, but you will also want to save and re-visit your searches later. A saved search is called an **Answer** and we can load answers using the same search component we just created by specifying an `answerId`. As we did with the liveboard, we could find a hardcoded ID through the developer playground. But in this case we want to make it more dynamic, so let's create a new select component that will allow a user to choose from a list of all of the answers that they have saved.
 
-### Using REST API Calls
+## Using REST API Calls
+Duration: 0:05:00
 
-In order to retrieve a list of all answers availabile to a user we can leverage the ThoughtSpot REST API.  This is one of the many tasks that the APIs can be used for, including:
+The next thing we will try to do is to create a list of all Answers available to the user. Up until this point we have been leveraging the Visual Embed SDK. This next step will require that we use the ThoughtSpot REST API. 
+
+Before we implement the call we need, let's take a second to explore the REST API, as this task is just one of the many tasks that the APIs can be used for, including:
 
 - Controlling users and permissions
 - Retrieving login tokens
@@ -524,21 +535,31 @@ In order to retrieve a list of all answers availabile to a user we can leverage 
 - Querying content
 - Version control
 
-Let's take a few minutes to explore the other REST APIs available to us in the ThoughtSpot UI. Navigate to the Rest API V2 playground in the ThoughtSpot UI Develop page.
+The best place to quickly explore the other REST APIs available to us, is in the ThoughtSpot UI. 
+
+1. Navigate to the Rest API V2 playground in the ThoughtSpot UI's Develop page.
 [https://cap1slingshot.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0](https://cap1slingshot.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0)
 
-Take a second to explore the various calls availbe to us.
+2. Take a second to explore the various calls availbe to us.
 
-Now click on the API call called `Search Data` under the `Data` section. This endpoint can be used to retrieve the result of a search query in JSON format. This requires three variables. 
+3. Click on the API call called `Search Data` under the `Data` section. This endpoint can be used to retrieve the result of a search query in JSON format. This requires three variables. 
 
-Set the `query_string` equal to **[Revenue]** **[Product Category]** 
-Set the `logical_table_identifier` to **4598e2bf-5d86-4892-84dc-a9686eb5a8ac**. This is the ID of our Retail Banking worksheet.
-Set the `data_format` to **Compact**
+4. 
+ - Set the `query_string` equal to **[Revenue]** **[Product Category]** 
+ - Set the `logical_table_identifier` to **4598e2bf-5d86-4892-84dc-a9686eb5a8ac**. This is the ID of our Retail Banking worksheet.
+ - Set the `data_format` to **Compact**
 
-Click **Try it Out** in the bottom right hand corner and explore the resulting dataset. 
+5. Click **Try it Out** in the bottom right hand corner and explore the resulting dataset.
+
+You should see something like this:
 
 ![C20-rest-playground](images/C20-rest-playground.png)
 
+
+## Create an Answer Select Menu.
+Duration: 0:10:00
+
+Searching by itself is great, but you will also want to save and re-visit your searches later. A saved search is called an **Answer** and we can load answers using the same search component we just created by specifying an `answerId`. As we did with the liveboard, we could find a hardcoded ID through the developer playground. But in this case we want to make it more dynamic, so let's create a new select component that will allow a user to choose from a list of all of the answers that they have saved.
 
 ### Create an AnswerSelect component
 
@@ -551,7 +572,7 @@ The equivialant call in V2 can be found here:
 [https://developers.thoughtspot.com/docs/?pageid=rest-apiv2-reference#_metadata](https://developers.thoughtspot.com/docs/?pageid=rest-apiv2-reference#_metadata)
 
 
-First, create a new file in the `components` folder called **answer_select.js**, and add the following code:
+1. First, create a new file in the `components` folder called **answer_select.js**, and add the following code:
 
 ```react
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
@@ -609,22 +630,22 @@ Finally we map a list of `Menu Items` into the Select component, setting the val
 
 ### Add AnswerSelect to the Search Page
 
-Navigate to the **components/search.js** file.
+2. Navigate to the **components/search.js** file.
 
-Add the import for the AnswerSelect component.
+3. Add the import for the AnswerSelect component.
 
 ```react
 import AnswerSelect from "./answer_select";
 import { Stack } from "@mui/system";
 ```
 
-Add a new state object called `selectedAnswerId`. You can add this right above `const embedRef`.
+4. Add a new state object called `selectedAnswerId`. You can add this right above `const embedRef`.
 
 ```react
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined)
 ```
 
-Create a function to update the selected answer given an answer Id. This will be used by the answer select we just created, and can be placed below the `const embedRef`
+5. Create a function to update the selected answer given an answer Id. This will be used by the answer select we just created, and can be placed below the `const embedRef`
 
 ```react
   function toggleAnswerSelect(answerUUID){
@@ -632,7 +653,7 @@ Create a function to update the selected answer given an answer Id. This will be
   }
 ```
 
-Insert the AnswerSelect component. In this case we will create a horizontal menu of buttons using a Material UI Stack. Place this on top of the `SearchEmbed`
+6. Insert the AnswerSelect component. In this case we will create a horizontal menu of buttons using a Material UI Stack. Place this on top of the `SearchEmbed`
 
 ```react
 <Stack direction={"row"}>
@@ -642,7 +663,7 @@ Insert the AnswerSelect component. In this case we will create a horizontal menu
   ></AnswerSelect>
 </Stack>
 ```
-Update the `SearchEmbed` to refer to the currently selected answerId.
+7. Update the `SearchEmbed` to refer to the currently selected answerId.
 
 ```react
 <SearchEmbed
@@ -653,13 +674,15 @@ Update the `SearchEmbed` to refer to the currently selected answerId.
 />
 ```
 
-Finally, let's add a button to reset the `answerId` for a brand new search. Add an import for Material UI Button.
+Finally, let's add a button to reset the `answerId` for a brand new search.
+
+8. Add an import for Material UI Button.
 
 ```react
 import { Button } from "@mui/material";
 ```
 
-Below the `AnswerSelect` component, add a new Button that when clicked sets the `selectedAnswerId` to **undefined**. 
+9. Below the `AnswerSelect` component, add a new Button that when clicked sets the `selectedAnswerId` to **undefined**. 
 
 ```react
 <Button onClick={()=>setSelectedAnswerId(undefined)}>
@@ -706,6 +729,8 @@ export default function Search() {
 }
 ```
 
+The resulting application should now look something like this:
+
 ![C21-answer-select](images/C21-answer-select.png)
 
 ## Using Lifecycle Events
@@ -717,29 +742,35 @@ ThoughtSpot Everywhere makes it easy to embed analytics into any webapp via the 
 
 Lifecycle events fall into two categories:
 
-1. EmbedEvents
-   1. EmbedEvents occur when the state of a component changes or is interacted with. This may be something like the component is rendered, new data is loaded, or a user clicks on a visualization
-2. HostEvents 
-   1. HostEvents are hooks to allow the developer to programmatically change or update an embedded component. For example, you may want to change the search term used, or enable/disable features
+##### EmbedEvents
+
+EmbedEvents occur when the state of a component changes or is interacted with. This may be something like the component is rendered, new data is loaded, or a user clicks on a visualization
+
+##### HostEvents 
+
+HostEvents are hooks to allow the developer to programmatically change or update an embedded component. For example, you may want to change the search term used, or enable/disable features
 
 
 ## Add an Embed Event
 Duration: 0:05:00
 
-Currently our list of answers shows us everything available to the user as of the time it was loaded. But what happens when a user wants to save one of their existing searches? Give it a shot:
+Currently our list of answers shows us everything available to the user as of the time it was loaded. But what happens when a user wants to save one of their new searches? 
 
-1. Type **Revenue Product Category** into the search
-2. Click the three dots icon and select `Save`
-3. Give it a good name and finish saving.
+Give it a shot:
+  1. Click "New Search"
+  2. Type **Revenue Product Category** into the search
+  3. Click the three dots icon and select `Save`
+  4. Give it a good name and finish saving.
 
-Notice that the list has not updated. If you refresh the page, you will see that the changes are finally picked up. This is because of the way that state works in React, our search bar had no idea that the user clicked save. We can smoothen this workflow by listening for the **Save** EmbedEvent.
-First import the EmbedEvent enum from the ThoughtSpot SDK:
+Notice that the list has not updated. If you refresh the page, you will see that the changes are finally picked up. This is because of the way that state works in React. To make this work as we expect, we can listen for the **Save** event to occur inside of the embed, using `EmbedEvent.Save`
+
+1. First import the EmbedEvent enum from the ThoughtSpot SDK:
 
 ```react
 import { EmbedEvent } from "@thoughtspot/visual-embed-sdk";
 ```
 
-Add a new function called onSearchLoad. Because we are using React, we need to use the embedRef to add listeners and trigger events. In this case we are listening for the `EmbedEvent.Save`, which will fire when the user finishes saving the searcg.  To make this even more convenient for us, ThoughtSpot includes the newly saved `answerId` in the event data, which we can use to update the `selectedAnswerId`.
+2. Add a new function called `onSearchLoad`. Because we are using React, we need to use the embedRef to add listeners and trigger events. In this case we are listening for the `EmbedEvent.Save`, which will fire when the user finishes saving the search.  To make this even more convenient for us, ThoughtSpot includes the newly saved `answerId` in the event data, which we can use to update the `selectedAnswerId`.
 
 ```react
 function onSearchLoad(){
@@ -749,7 +780,7 @@ function onSearchLoad(){
 }
 ```
 
-Add new parameter to the SearchEmbed to call this function:
+3. Add new parameter to the SearchEmbed to call this function:
 
 ```react
 <SearchEmbed
@@ -806,20 +837,25 @@ export default function Search() {
   );
 }
 ```
+4. Give it a shot! Try to create a new search and save. Your menu should update instantly to the newly saved report name.
+
 
 ## Add a Host Event
 Duration: 0:05:00
 
-We now know when a save has been triggered, let's do the opposite. Let's create a button that kicks off the save process.
+We now know when a save has been triggered, so let's do the opposite. 
 
-### Trigger Save Event
+Let's create a button that kicks off the save process.
 
-First, in **components/search.js** update the import to include the HostEvent enum.
+### Triggering the Save Event
+
+1. First, in **components/search.js** update the import to include the HostEvent enum.
 
 ```react
 import { EmbedEvent, HostEvent } from "@thoughtspot/visual-embed-sdk";
 ```
-Next, add a function that triggers the `HostEvent.Save`:
+
+2. Next, add a function that triggers the `HostEvent.Save`:
 
 ```react
 function saveSearch(){
@@ -829,7 +865,7 @@ function saveSearch(){
 
 Instead of simply adding the Button, let's take this a step further and conditionally render Buttons based on whether the user is creating a new search or is looking at an existing Answer. Currently we know this by the `selectedAnswerId`. If this is undefined, then the only action that makes sense is to **Save**. If this has a value, then the user is looking at an existing answer **New Search** will be more relevant.
 
-Replace the New Search button with the following code:
+3. Replace the New Search button with the following code:
 
 ```react
 <Button onClick={saveSearch}>
@@ -842,7 +878,7 @@ Replace the New Search button with the following code:
 ) : null}
 ```
 
-Give it a shot! When you are viewing an existing Answer, the Save button will update the answer. When you click "New Search" and start fresh, the save button will create a brand new Answer.
+4. Give it a shot! When you are viewing an existing Answer, the Save button will update the answer. When you click "New Search" and start fresh, the save button will create a brand new Answer.
 
 Your final code should look like this:
 
@@ -894,100 +930,43 @@ export default function Search() {
   );
 }
 ```
+Your application should now look like this (if you are viewing an existing Answer):
 
 ![C22-save-new-buttons](images/C22-save-new-buttons.png)
 
-## Adjust the Styles
+## Adjust the Application Styles
 Duration: 0:10:00
 
 
 Our application works as we expect, but it doesnt quite match the look and feel we want. 
 
+To get this looking a bit better we will adjust the sytling both of the application we just created, as well as the ThoughtSpot Embeds. 
+
+Let's start with the application.
+
 ### Add a logo
 
-Right click and save the image below to your local computer.
-![Capital One Logo](Capital One Logo.png)
+A website doesn't feel quite right without a Logo.
 
-Drag and Drop this into the `/public` directory of the IDE file explorer
+1. Right click and save the image below to your local computer.
+
+![Capital-One-Logo](images/Capital-One-Logo.png)
+
+2. Drag and Drop this into the `/public` directory of the IDE file explorer
+
 ![C23-logo-public](images/C23-logo-public.png)
 
-Open the **components/navigation.js** file and add it as an image before the other links.
+3. Open the **components/navigation.js** file and add it as an image before the other links.
 
 ```react
 <img height="50px" alt="Logo" src="/Capital-One-Logo.png"></img>
 ```
 
+### Adjust the Material UI Theme
 
-## Using CSS in ThoughtSpot
+Material UI allows us to control things like button color through a **Theme** object. 
 
-Let's make the ThoughtSpot embeds match the rest of our page a bit better. We can do this by adjusting CSS. CSS can be provided both at a global level, through the `init` function, or provided within the Embed objects themselves such as SearchEmbed and LiveboardEmbed for more specific individual styling. 
-
-This is done by providing a `customizations` object, that contains CSS variable overrides as well as individual CSS rules. 
-
-  ```
-  customizations: {
-    style: {
-      customCSS: {
-        variables: {
-          "--ts-var-button--primary-background": "#016faa",
-        },
-        rules_UNSTABLE: {
-          ".answer-module__answer": { padding: "2px" },
-        }
-      }
-    }
-  }
-```
-
-
-#### CSS Variables
-
-To override large portions of the application quickly and easily, ThoughtSpot provides 70+ CSS variables that can be overriden. In this example we are overriding the primary button background color:
-
-`"--ts-var-button--primary-background": "#016faa"`
-
-
-#### CSS Rules
-
-For anything beyond what is currently possible with variables, you can provide specific rules. It is recommend that you use this sparingly, as individual classes are more subject to change than the well maintained variables. In this example we are adjusting the padding around the search component:
-
-`".answer-module__answer": { padding: "2px" }`
-
-## Add CSS to ThoughtSpot Embed
-
-In the **App.js** file, find the ThoughtSpot `init` function, and replace it with the following code. 
-
-```react
-init({
-  thoughtSpotHost: baseURL,
-  authType: AuthType.None,
-  customizations: {
-    style: {
-      customCSS: {
-        variables: {
-          "--ts-var-button--primary-background": "#016faa",
-          "--ts-var-button--secondary-color": "#454545",
-          "--ts-var-root-background": "#ffffff",
-          "--ts-var-viz-border-radius": "2px",
-          "--ts-var-vis-box-shadow": "0px 0px 4px #f2f2f2",
-          "--ts-var-button-border-radius": "5px"
-        },
-        rules_UNSTABLE: {
-          ".answer-module__answer": { padding: "2px" },
-          ".answer-module__searchCurtain": { "background-color": "transparent" }
-        }
-      }
-    }
-  }
-});
-```
-
-
-## Adjust the Material UI Theme
-
-Material UI allows us to control things like button color through a Theme object. 
-
-In your **App.js** file copy the following code after the last import.:
+5. In your **App.js** file copy the following code after the last import:
 
 ```react
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -1008,7 +987,9 @@ const theme = createTheme({
     }
   }
 });
-In the `App` function, wrap everything we have done in a theme provider, using the theme we just created:
+```
+
+6. In the `App` function, wrap everything we have done in a theme provider, using the theme we just created:
 
 ```react
 function App() {
@@ -1037,12 +1018,96 @@ function App() {
 }
 ```
 
+## Using CSS in ThoughtSpot
+
+Let's make the ThoughtSpot embeds match the rest of our page a bit better. We can do this by adjusting CSS. 
+
+CSS can be provided both at a global level, through the `init` function, or provided within the Embed objects themselves such as SearchEmbed and LiveboardEmbed for more specific individual styling. 
+
+This is done by providing a `customizations` object, that contains CSS variable overrides or a link to a CSS file.
+
+```
+  customizations: {
+    style: {
+      customCSSUrl: "cdn.jsdelivr.net/gh/thoughtspot/custom-css-demo/css-variables.css",
+      customCSS: {
+        variables: {
+          "--ts-var-button--primary-background": "#016faa",
+        },
+      }
+    }
+  }
+```
+
+Going into a bit more detail on each of the override mechanisms:
+
+##### CSS Variables
+
+To override large portions of the application quickly and easily, ThoughtSpot provides 70+ CSS variables that can be overriden. In this example we are overriding the primary button background color:
+
+`"--ts-var-button--primary-background": "#016faa"`
+
+[Full List of CSS Variables](https://developers.thoughtspot.com/docs/?pageid=custom-css#supported-variables)
+
+
+##### Custom CSS File
+
+It is also possible to reference a hosted CSS file that will be loaded with the ThoughtSpot emnbed and can similarily override variables and other rules. Typically this would reside on the application server. Note that this URL will need to be whitelisted by the ThoughtSpot server. 
+
+`customCSSUrl: "cdn.jsdelivr.net/gh/thoughtspot/custom-css-demo/css-variables.css",`
+
+##### CSS Rules
+
+For anything beyond what is currently possible with variables, you can provide specific rules. It is recommend that you use this sparingly, as individual classes are more subject to change than the well maintained variables. In this example we are adjusting the padding around the search component:
+
+`".answer-module__answer": { padding: "2px" }`
+
+
+#### Documentation 
+
+Feel free to explore the documentation on CSS:
+[CSS Documentation](https://developers.thoughtspot.com/docs/?pageid=custom-css)
+
+## Add CSS to ThoughtSpot Embed
+
+As a simple starting example of what is possible, we have overriden a few specific variables in ThoughtSpot to make the embeds look more like the rest of our styled site. 
+
+1. In the **App.js** file, find the ThoughtSpot `init` function, and replace it with the following code. 
+
+```react
+init({
+  thoughtSpotHost: baseURL,
+  authType: AuthType.None,
+  customizations: {
+    style: {
+      customCSS: {
+        variables: {
+          "--ts-var-button--primary-background": "#016faa",
+          "--ts-var-button--secondary-color": "#454545",
+          "--ts-var-root-background": "#ffffff",
+          "--ts-var-viz-border-radius": "2px",
+          "--ts-var-vis-box-shadow": "0px 0px 4px #f2f2f2",
+          "--ts-var-button-border-radius": "5px"
+        },
+        rules_UNSTABLE: {
+          ".answer-module__answer": { padding: "2px" },
+          ".answer-module__searchCurtain": { "background-color": "transparent" }
+        }
+      }
+    }
+  }
+});
+```
+
 ![C24-styled](images/C24-styled.png)
 
 ## Part 2 Summary
 Duration: 05:00
 
-At this stage, you've completed your app and should have a great understanding of how you can use the Visual Embed SDK. Great job! If you run out of time, or are having trouble getting everything working, check out [the completed app](https://codesandbox.io/s/keen-einstein-1g9vrl) and compare your code.
+At this stage, you've completed your app and should have a great understanding of how you can use the Visual Embed SDK. Great job! 
+
+
+Check out [the completed app](https://codesandbox.io/s/dazzling-wave-86pb82) and compare your code.
 
 
 
@@ -1059,6 +1124,4 @@ We’ve only scratched the surface of the features available to developers with 
 - Working with the [REST API](https://developers.thoughtspot.com/docs/?pageid=rest-apis)
 
 
-
-**Still want more?** Try the [bonus exercises](../ts-dev-workshop-short-2022-aug.2-bonus/index.html) to learn how to use the ThoughtSpot Everywhere platform APIs and TML.
 
