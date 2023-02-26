@@ -917,26 +917,69 @@ Open the **components/navigation.js** file and add it as an image before the oth
 <img height="50px" alt="Logo" src="/Capital-One-Logo.png"></img>
 ```
 
+
 ## Using CSS in ThoughtSpot
 
 Let's make the ThoughtSpot embeds match the rest of our page a bit better. We can do this by adjusting CSS. CSS can be provided both at a global level, through the `init` function, or provided within the Embed objects themselves such as SearchEmbed and LiveboardEmbed for more specific individual styling. 
 
-This is done by providing a customizations object, that contains CSS variable overrides as well as individual CSS rules. 
+This is done by providing a `customizations` object, that contains CSS variable overrides as well as individual CSS rules. 
+
+  ```
+  customizations: {
+    style: {
+      customCSS: {
+        variables: {
+          "--ts-var-button--primary-background": "#016faa",
+        },
+        rules_UNSTABLE: {
+          ".answer-module__answer": { padding: "2px" },
+        }
+      }
+    }
+  }
+```
+
 
 #### CSS Variables
 
-To override large portions of the application easily, ThoughtSpot provides CSS variables that can be overriden. 
+To override large portions of the application quickly and easily, ThoughtSpot provides 70+ CSS variables that can be overriden. In this example we are overriding the primary button background color:
+
+`"--ts-var-button--primary-background": "#016faa"`
+
 
 #### CSS Rules
 
-For anything beyond what is currently possible with variables. It is recommend that you use this sparingly, as individual classes are more subject to change than the well maintained variables.
+For anything beyond what is currently possible with variables, you can provide specific rules. It is recommend that you use this sparingly, as individual classes are more subject to change than the well maintained variables. In this example we are adjusting the padding around the search component:
+
+`".answer-module__answer": { padding: "2px" }`
 
 ## Add CSS to ThoughtSpot Embed
 
-In the **App.js** file, find the ThoughtSpot `init` function, and add the following code after the `authType`:
+In the **App.js** file, find the ThoughtSpot `init` function, and replace it with the following code. 
 
 ```react
-
+init({
+  thoughtSpotHost: baseURL,
+  authType: AuthType.None,
+  customizations: {
+    style: {
+      customCSS: {
+        variables: {
+          "--ts-var-button--primary-background": "#016faa",
+          "--ts-var-button--secondary-color": "#454545",
+          "--ts-var-root-background": "#ffffff",
+          "--ts-var-viz-border-radius": "2px",
+          "--ts-var-vis-box-shadow": "0px 0px 4px #f2f2f2",
+          "--ts-var-button-border-radius": "5px"
+        },
+        rules_UNSTABLE: {
+          ".answer-module__answer": { padding: "2px" },
+          ".answer-module__searchCurtain": { "background-color": "transparent" }
+        }
+      }
+    }
+  }
+});
 ```
 
 
@@ -952,21 +995,22 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#396d92',
-      main: '#084977',
-      dark: '#053353',
-      contrastText: '#fff',
+      light: "#396d92",
+      main: "#016faa",
+      dark: "#396d92",
+      contrastText: "#fff"
     },
     secondary: {
-      light: '#da5853',
-      main: '#d12f28',
-      dark: '#92201c',
-      contrastText: '#fff',
-    },
-  },
+      light: "#da5853",
+      main: "#016faa",
+      dark: "#92201c",
+      contrastText: "#fff"
+    }
+  }
 });
-```
 In the `App` function, wrap everything we have done in a theme provider, using the theme we just created:
+
+```react
 function App() {
   return (
     <div className="App">
@@ -991,7 +1035,9 @@ function App() {
     </div>
   );
 }
+```
 
+![C24-styled](images/C24-styled.png)
 
 ## Part 2 Summary
 Duration: 05:00
