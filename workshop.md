@@ -3,12 +3,12 @@
 
 
 summary: ThoughtSpot 2hr Developer Workshop
-id: ts-dev-workshop-feb-2023.1
+id: ts-dev-workshop-feb-2023.3
 categories: Meta
 tags: beginner, intermediate
 status: Published 
 last updated: 2023/02/26
-authors: Quinton Wall
+authors: Quinton Wall, Nathan Schroeder
 Feedback Link: https://developers.thoughtspot.com
 
 
