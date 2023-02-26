@@ -54,7 +54,7 @@ In the previous portion of the workshop you have learned how to use the ThoughtS
 
 1. Select **DEVELOP** on the ThoughtSpot top navbar to open the Developer playground.  
 
-![6-developerhome](images/6-developerhome.png)
+![C1-dev-tab](images/C1-dev-tab.png)
 
 The Develop area contains 4 sections: Home, Guide, Playground, Customizations.
 
@@ -84,7 +84,7 @@ If this is your first time doing this, a Start tour option is shown which will g
 
 4. Select ‘ **Run** to render it in the sample SpotShop data app window.  
 
-![7-embedliveboard](images/7-embedliveboard.gif)
+![C2-playground-liveboard](images/C2-playground-liveboard.png)
 
 
 
@@ -94,7 +94,7 @@ There are many actions that can be disabled or hidden for example and all are do
 
 1. First, look at the default actions available for a particular embedded component such as a Search or Liveboard item.
 
-   ![8-liveboard-allactions](images/8-liveboard-allactions.png)
+   ![C3-available-actions](images/C3-available-actions.png)
 
 2. Whilst still in the developer playground, make sure you have the  **Retail Banking Analysis**, then select the **Modify available actions** checkbox. This will add a code snippet into the editor section. 
 
@@ -110,7 +110,7 @@ There are many actions that can be disabled or hidden for example and all are do
 
 9. Hover over **Save** to see the reason. Notice the other actions specified above are hidden.
 
-![9-disabledactions](images/9-disabledactions.png)
+![C4-disabled-actions](images/C4-disabled-actions.png)
 
 You have successfully applied modified actions.
 
@@ -130,17 +130,15 @@ Applying run time filters provides additional controls on who can see what data.
 
 4. Select **Run** to render the changes.  
 
-![10-runtimefilters](images/10-runtimefilters.png)
+![C5-runtime-filters](images/C5-runtime-filters.png)
 
 
 
 You can also add multiple runtime filters. Let's add one more filter to show only the data for bags. .
 
-1. Copy the runtime filter code and paste it below the existing entry. Make sure you add an additional comma directly after ['Product Category']
-2. Modify ‘Product Category' in the 2nd run time filter to **Gender** and change ‘Loans' to ‘**Male**'.
-3. Select ‘ **Run** to render the changes. Now data is filtered by Loans issued specifically to Males.
-
-![11-allruntimefilters](images/11-allruntimefilters.png)
+5. Copy the runtime filter code and paste it below the existing entry. Make sure you add an additional comma directly after `['Product Category']`
+6. Modify `Product Category` in the 2nd run time filter to **Gender** and change ‘Loans' to ‘**Male**'.
+7. Select ‘ **Run** to render the changes. Now data is filtered by Loans issued specifically to Males.
 
 
 
@@ -157,17 +155,16 @@ Let's go ahead and use the Developer Playground to embed and customize a search 
 
 _Note: Search suggestions will automatically appear in the search bar based upon what you did previously._
 
-3. Enter in the search bar: Revenue Weekly Product Category
+4. Enter in the search bar: **Revenue Weekly Product Category**
 
-4. Then press **Enter**, Select **Go**, or **click** below the search bar to launch the query. While you can change the chart time, keep this one for now.
+5. Then press **Enter**, Select **Go**, or **click** below the search bar to launch the query. While you can change the chart time, keep this one for now.
+
+   
+   ![C6-search-embed](images/C6-search-embed.png)
 
    
 
-   ![12-embedsearch](images/12-embedsearch.gif)
-
-   
-
-***Note**: As an option you may want to enter some starting search tokens like Sales Region and let the user add more before sending the live query to the cloud data warehouse. Do that in the next task.*  
+_Note: As an option you may want to enter some starting search tokens like Product Category and let the user add more before sending the live query to the cloud data warehouse. Do that in the next task.*  
 
 
 There are three search related actions `\[Collapse data panel, Hide data panel, Add search tokens\]` shown below. You will apply all for this task to create a starting point search and allow the user add more and then initiate the search.
@@ -179,13 +176,12 @@ There are three search related actions `\[Collapse data panel, Hide data panel, 
 
 4.  Make the following changes to add search tokens, turn off automatic search and test it.
 
-5.  Enter "**\[Revenue\] \[Product Category\]**" inside the ‘' (single quotes for the searchTokenString setting.
-6.  Change the "true" to "**false.**" for the executeSearch setting.
-7.  Select ‘ **Run** to render the changes.
+5.  Enter "**\[Revenue\] \[Product Category\]**" inside the single quotes of the `searchTokenString`
+6.  Select ‘ **Run** to render the changes.
 
-8. Enter "**Monthly**" in the search bar and press **Go** to run the search and voila, user self-service!
+7. Enter "**Monthly**" in the search bar and press **Go** to run the search and voila, user self-service!
 
-![13-searchactions](images/13-searchactions.png)
+![C7-search-token](images/C7-search-token.png)
 
 
 
