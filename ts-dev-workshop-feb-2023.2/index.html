@@ -1,0 +1,1056 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>ThoughtSpot Developer Workshop - Capital One</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="ts-dev-workshop-feb-2023.2"
+                  title="ThoughtSpot Developer Workshop - Capital One"
+                  environment="web"
+                  feedback-link="https://developers.thoughtspot.com">
+    
+      <google-codelab-step label="Objectives / Goal" duration="5">
+        <h2 is-upgraded>Capital One Developer Day - Feb 2023</h2>
+<p>This workshop is designed to introduce you to ThoughSpot Everywhere. Together we will build a simple web application leveraging a small portion of ThoughtSpot&#39;s Visual Embed SDK and REST APIs.</p>
+<p>Through this workshop you will learn the mechanisms by which ThoughtSpot can:</p>
+<ul>
+<li>Enable Slingshot users with the freedom of exploration in an embedded application</li>
+<li>Provide dynamic insights and alerts</li>
+<li>Drive next-step actions and enhance/optimize user workflows</li>
+</ul>
+<h2 is-upgraded>Next Steps</h2>
+<p>Login to the ThoughtSpot environment: <a href="https://cap1slingshot.thoughtspot.cloud/" target="_blank">https://cap1slingshot.thoughtspot.cloud/</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using the Developer Playground" duration="20">
+        <p>In the previous portion of the workshop you have learned how to use the ThoughtSpot interface to create answers and liveboards. Now, it is time to take advantage of the Developer Playground. The Developer  Playground is a visual tool to help to build, test, and iterate on embedded components, prior to adding to your webapp. Unlike traditional approaches to development which require you to read documentation to piece together supported attributes, and configure local environments just to test your solution, the Developer Playground let&#39;s you quickly build your embed solution with confidence, greatly reducing time-to-market and avoid syntactical errors.</p>
+<ol type="1">
+<li>Select <strong>DEVELOP</strong> on the ThoughtSpot top navbar to open the Developer playground.</li>
+</ol>
+<p class="image-container"><img alt="C1-dev-tab" src="img/e8bf2da7eb8e7d70.png"></p>
+<p>The Develop area contains 4 sections: Home, Guide, Playground, Customizations.</p>
+<ul>
+<li><strong>Home</strong> provides immediate access to overview, 3 methods for embedding Search, Visualizations, and Pinboards, plus 1 method for accessing data via API where you then control how you want to visualize it.</li>
+<li><strong>Guide</strong> provides quick access to all of the visual embed commands and Rest API calls.</li>
+<li><strong>Playground</strong> provides a cloud-based sandbox environment to generate and test code needed to embed the ThoughtSpot Search experience, Visualizations/Liveboards that you or others on your team create, and the Full ThoughtSpot App (white labeling).</li>
+<li><strong>Customizations</strong> provide access to creating custom Actions that can invoke a URL or trigger a callback in your parent application, changing the Styles (look and feel) for app, visualizations, and white labeling, establish Security Settings to configure automatic authentication and query data programmatically with the REST API.</li>
+</ul>
+<h2 is-upgraded>Embed a Liveboard</h2>
+<p>Begin the playground experience by embedding the liveboard you created into the sample data app sandbox provided within the Developer Playground .</p>
+<ol type="1">
+<li>Select <strong>Liveboard</strong> from the <strong>Playground</strong> menu.</li>
+</ol>
+<p>If this is your first time doing this, a Start tour option is shown which will guide you through the steps to select and embed the ThoughtSpot object. For now, select No Thanks. Use the Start Tour button on the nav bar to revisit any time in free trial.</p>
+<ol type="1" start="2">
+<li>The ‘Select feature to embed&#39; is already set to Liveboard, select your pinboard and run to view it in the sample app</li>
+<li>Select your Liveboard &#34;<strong>Retail Banking Analysis</strong>&#34; from the drop-down selection menu and notice that upon choosing the liveboard, the code window on the bottom left automatically highlights the code that you would copy/paste directly into your data app.</li>
+<li>Select ‘ <strong>Run</strong> to render it in the sample SpotShop data app window.</li>
+</ol>
+<p class="image-container"><img alt="C2-playground-liveboard" src="img/27bb725f4b91e050.png"></p>
+<h2 is-upgraded>Modify available actions</h2>
+<p>There are many actions that can be disabled or hidden for example and all are documented in the <a href="https://developers.thoughtspot.com/docs/?pageid=action-config" target="_blank">Visual Embed guide</a> accessible from the <strong>Develop</strong> page.</p>
+<ol type="1">
+<li>First, look at the default actions available for a particular embedded component such as a Search or Liveboard item.</li>
+</ol>
+<p class="image-container"><img style="width: 400.00px" src="img/413d736476bc58c2.png"></p>
+<ol type="1" start="2">
+<li>Whilst still in the developer playground, make sure you have the  <strong>Retail Banking Analysis</strong>, then select the <strong>Modify available actions</strong> checkbox. This will add a code snippet into the editor section.</li>
+<li>Enter &#34;<strong>Action.Save</strong>&#34; inside the &#34;[]&#34; for the <code>disabledActions</code> setting.</li>
+<li>Change the &#34;Reason for disabling&#34; to &#34;<strong>Premium action, request upgrade.</strong>&#34; for the <code>disabledActionReason</code></li>
+<li>Enter &#34;<strong>Action.MakeACopy,Action.DownloadAsPdf,Action.AddFilter</strong>&#34; inside the &#34;[]&#34; for the <code>hiddenActions</code> setting.</li>
+<li>Select ‘ <strong>Run</strong> to render the changes.</li>
+<li>Select the pinboard menu &#34;...&#34; to view the results.</li>
+<li>Hover over <strong>Save</strong> to see the reason. Notice the other actions specified above are hidden.</li>
+</ol>
+<p class="image-container"><img style="width: 400.00px" src="img/2da202da21f80000.png"></p>
+<p>You have successfully applied modified actions.</p>
+<h2 is-upgraded>Set runtime filters</h2>
+<p>Applying run time filters provides additional controls on who can see what data. You may opt for forcing a particular filter based upon the user&#39;s role for example, or perhaps you would like to present filter choices in your own data app nav bar and push the selected values that the user selects.</p>
+<ol type="1">
+<li>The current liveboard, Retail Banking Analysis, includes the Total Revenue by Monthly Date chart. This shows a trend of revenue across all product categories. You will apply a run time filter to set the Product Category to <em>Loans</em> so chart only shows the trend for the Loans products.</li>
+<li>Select <strong>Set runtime filters</strong> under User experience customizations in the playground left pane. Notice the code window again, highlighting the code to be affected.</li>
+<li>Change <em>columnName1</em> to <strong>‘Product Category&#39;</strong> and <em>value1</em> to <strong>‘Loans&#39;</strong></li>
+<li>Select <strong>Run</strong> to render the changes.</li>
+</ol>
+<p class="image-container"><img style="width: 400.00px" src="img/61cfbcbf13c742b0.png"></p>
+<p>You can also add multiple runtime filters. Let&#39;s add one more filter to show only the data for bags. .</p>
+<ol type="1" start="5">
+<li>Copy the runtime filter code and paste it below the existing entry. Make sure you add an additional comma directly after <code>['Product Category']</code></li>
+<li>Modify <code>Product Category</code> in the 2nd run time filter to <strong>Gender</strong> and change ‘Loans&#39; to ‘<strong>Male</strong>&#39;.</li>
+<li>Select ‘ <strong>Run</strong> to render the changes. Now data is filtered by Loans issued specifically to Males.</li>
+</ol>
+<h2 is-upgraded>Embed a Search</h2>
+<p>Let&#39;s go ahead and use the Developer Playground to embed and customize a search component.</p>
+<ol type="1">
+<li>The ‘Select feature to embed&#39; to <strong>Search</strong></li>
+<li>Select your datasource &#34;<strong>Retail Banking</strong>&#34; from the drop-down selection menu and notice that upon choosing the datasource, the code window on the bottom left automatically highlights the code that you would copy/paste directly into your data app.</li>
+<li>Select ‘ <strong>Run</strong> to render it in the sample SpotShop data app window.</li>
+</ol>
+<p><em>Note: Search suggestions will automatically appear in the search bar based upon what you did previously.</em></p>
+<ol type="1" start="4">
+<li>Enter in the search bar: <strong>Revenue Weekly Product Category</strong></li>
+<li>Then press <strong>Enter</strong>, Select <strong>Go</strong>, or <strong>click</strong> below the search bar to launch the query. While you can change the chart time, keep this one for now.<img alt="C6-search-embed" src="img/3c35c19310049fff.png"></li>
+</ol>
+<p>_Note: As an option you may want to enter some starting search tokens like Product Category and let the user add more before sending the live query to the cloud data warehouse. Do that in the next task.*</p>
+<p>There are three search related actions <code>\[Collapse data panel, Hide data panel, Add search tokens\]</code> shown below. You will apply all for this task to create a starting point search and allow the user add more and then initiate the search.</p>
+<ol type="1">
+<li>Select <strong>Collapse data panel</strong></li>
+<li>Select <strong>Hide data panel</strong></li>
+<li>Select <strong>Add search tokens</strong></li>
+<li>Make the following changes to add search tokens, turn off automatic search and test it.</li>
+<li>Enter &#34;<strong>[Revenue] [Product Category]</strong>&#34; inside the single quotes of the <code>searchTokenString</code></li>
+<li>Select ‘ <strong>Run</strong> to render the changes.</li>
+<li>Enter &#34;<strong>Monthly</strong>&#34; in the search bar and press <strong>Go</strong> to run the search and voila, user self-service!</li>
+</ol>
+<p class="image-container"><img alt="C7-search-token" src="img/fa093a8197a5110d.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configure your App" duration="10">
+        <p>In your browser, go to <a href="http://codesandbox.io" target="_blank">codesandbox.io</a> and tap the <strong>Create a Sandbox</strong> button on the top right of the page, then select the <strong>React</strong> template. This will create a very simple web app, with code on the left, and rendered page on the right. Next, we have to add a few dependencies to our project.  Be cafeful to add the correct library as there are a a few similarly named libraries to the ones we need.</p>
+<h2 is-upgraded>Install Dependencies</h2>
+<ol type="1">
+<li>ThoughtSpot Visual Embed SDK<ul>
+<li>Type <code>@thoughtspot</code> into the dependency pane, then select the <code>Visual Embed SDK</code> from the autocomplete dropdown.</li>
+<li>In the Dependancy console click on the version 18.0, and switch it to 17.5</li>
+</ul>
+</li>
+<li>Material UI<ul>
+<li>Type <code>@mui/material</code> and select the corresponding package.</li>
+<li>Type <code>@emotion/react</code> and select the corresponding package.</li>
+<li>Type <code>@emotion/styled</code> and select the corresponding package.</li>
+</ul>
+</li>
+<li>React Router Dom<ul>
+<li>Type <code>react-router-dom</code> and select the corresponding package.</li>
+</ul>
+</li>
+</ol>
+<p class="image-container"><img alt="14-codesandbox" src="img/11d4ba57bea59b99.gif"></p>
+<h2 is-upgraded>Configure Authentication to ThoughtSpot</h2>
+<p>With your dependencies added, let&#39;s start by configuring the authentication to ThoughtSpot.</p>
+<ol type="1" start="4">
+<li>Replace the contents of your App.js file with:</li>
+</ol>
+<pre><code language="language-React" class="language-React">import React from &#34;react&#34;;
+import { AuthType, init } from &#34;@thoughtspot/visual-embed-sdk&#34;;
+
+var baseURL = &#34;https://cap1slingshot.thoughtspot.cloud/&#34;;
+
+init({
+  thoughtSpotHost: baseURL,
+  authType: AuthType.None
+});
+
+function App() {
+  return (
+    &lt;div className=&#34;App&#34;&gt;
+      Hello ThoughtSpot!
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre>
+<p>There are two important things happening in the ThoughtSpot <code>init</code> function.</p>
+<ul>
+<li>Setting the ThoughtSpot URL - Defining where the ThoughtSpot instance can be reached</li>
+<li>Setting the AuthType to None - Disabling the typical authentication (Trusted or Embedded SSO) for demonstration purposes. In this case, the user needs to log in manually through a login screen on the embed.</li>
+</ul>
+<p>Long term, you will want to use a more formal authentication method here such as:</p>
+<ul>
+<li><a href="https://developers.thoughtspot.com/docs/?pageid=embed-auth#trusted-auth-embed" target="_blank">Trusted Authentication</a></li>
+<li><a href="https://developers.thoughtspot.com/docs/?pageid=embed-auth#embedSSO" target="_blank">Embedded SSO</a></li>
+</ul>
+<p>*Note: there are security pre-requisites to enabling the connection see the following documention for more information:</p>
+<p><a href="https://developers.thoughtspot.com/docs/?pageid=security-settings" target="_blank">https://developers.thoughtspot.com/docs/?pageid=security-settings</a></p>
+<h2 is-upgraded>Save your project</h2>
+<p>Save the project and all files associated with it. You code-sandbox URL should now be distinct. Make sure to save periodically to not lose your work!</p>
+<p>You should now see something like the image below:</p>
+<p class="image-container"><img alt="14-default-app" src="img/f207e53a09eaac59.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configure Navigation" duration="0">
+        <h2 is-upgraded>Create a Navigation Component</h2>
+<p>To navigate around our application, lets create a simple navigation bar. In this example, we are using components from <a href="https://mui.com/" target="_blank">Material UI</a> to help us build something nice looking quickly. First lets create a simple horizontal container, with a button that links refers to the base url <code>/</code>.</p>
+<ol type="1">
+<li>Create a folder called <code>components</code> in your project. We will store several files here over the course of the workshop.</li>
+<li>Create a new file in the <code>components</code> folder called <strong>navigation.js</strong>. and add the following code:</li>
+</ol>
+<pre><code language="language-React" class="language-React">import { Stack, Button } from &#34;@mui/material&#34;;
+
+export default function Navigation(){
+    return (
+        &lt;Stack direction={&#34;row&#34;} spacing={2} style=&#123;&#123;padding: &#34;10px&#34;, boxShadow: &#34;0 2px 2px #f2f2f2&#34;}}&gt;
+            &lt;Button  href=&#34;/&#34;&gt;
+            Home
+            &lt;/Button&gt;
+        &lt;/Stack&gt;  
+    )
+}
+
+</code></pre>
+<ol type="1" start="3">
+<li>Let&#39;s go back to the <strong>App.js</strong> file and import our <code>Navigation</code> component. At the top of the file, add a new import:</li>
+</ol>
+<pre><code language="language-React" class="language-React">import Navigation from &#39;./components/navigation&#39;;
+</code></pre>
+<ol type="1" start="4">
+<li>Then, above <code>Hello ThoughtSpot!</code> add the Navigation component itself:</li>
+</ol>
+<pre><code language="language-React" class="language-React">function App() {
+  return (
+    &lt;div className=&#34;App&#34;&gt;
+        &lt;Navigation&gt;&lt;/Navigation&gt;
+        Hello ThoughtSpot!
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<p>You should now see the link &#34;Home&#34; and the words &#34;Hello ThoughtSpot!&#34;:</p>
+<p class="image-container"><img alt="14-default-app" src="img/dba3c997aa92a40e.png"></p>
+<h2 is-upgraded>Setup React Router</h2>
+<p>In the end, we will create components for several different embed types including liveboards and searches. To handle the navigation between these components we will use react router.</p>
+<ol type="1" start="5">
+<li>In <strong>App.js</strong>, add an import for react-router-dom, and Material UI&#39;s <code>Typography</code> and <code>Container</code>. This can go below the Navigation import we just added.</li>
+</ol>
+<pre><code language="language-React" class="language-React">import { BrowserRouter, Routes, Route } from &#39;react-router-dom&#39;;
+import { Typography, Container } from &#39;@mui/material&#39;;
+</code></pre>
+<ol type="1" start="6">
+<li>Let&#39;s replace <code>Hello ThoughtSpot!</code> with a Material UI container, and Routes to each URL we wish to create. In this case we only have the Home page, so we will simply render the word <code>Home</code>.</li>
+</ol>
+<pre><code language="language-React" class="language-React">function App() {
+  return (
+    &lt;div className=&#34;App&#34;&gt;
+        &lt;Navigation&gt;&lt;/Navigation&gt;
+        &lt;Container style=&#123;&#123;height:&#39;calc(100vh - 60px)&#39;,overflow:&#39;auto&#39;, paddingTop:&#39;25px&#39;}}&gt;
+          &lt;BrowserRouter&gt;
+            &lt;Routes&gt;
+              &lt;Route path=&#34;/&#34; element={&lt;Typography&gt;Home&lt;/Typography&gt;} /&gt;
+            &lt;/Routes&gt;
+          &lt;/BrowserRouter&gt;
+        &lt;/Container&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<p>Once complete, your default app and project should look like this:</p>
+<p class="image-container"><img alt="C16-nav-bar-router" src="img/edbe85a179dc23af.png"></p>
+<p>You will notice that the code includes some logic to authenticate with ThoughtSpot. In this tutorial, we are using AuthType.None. This will prompt the user to log in when the page loads. This is fine for the tutorial, but not recommended for a production app. For a detailed overview of security options supported by the Visual Embed SDK, please check out the <a href="https://developers.thoughtspot.com/docs/?pageid=embed-auth" target="_blank">online documentation</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Embed Liveboard Component" duration="15">
+        <h2 is-upgraded>Create a Liveboard Page</h2>
+<p>With the app structure set up and running, the next task is to add a new page to embed a liveboard component.</p>
+<ol type="1">
+<li>Within your IDE, select the <code>components</code> folder and add a new file <strong>liveboard.js</strong>.</li>
+</ol>
+<p class="image-container"><img alt="C17-liveboard-file" src="img/a4bdce025a976a29.png"></p>
+<ol type="1" start="2">
+<li>Add the required React and Visual SDK import to <code>liveboard.js</code>.</li>
+</ol>
+<pre><code language="language-react" class="language-react">import React from &#39;react&#39;;
+import { LiveboardEmbed } from &#39;@thoughtspot/visual-embed-sdk/react&#39;;
+import { Stack } from &#34;@mui/material&#34;;
+</code></pre>
+<ol type="1" start="3">
+<li>Finally add a liveboard function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the LiveboardEmbed component.</li>
+</ol>
+<pre><code language="language-react" class="language-react">export default function Liveboard() {
+ return (
+   &lt;Stack&gt;
+      &lt;LiveboardEmbed
+        fullHeight={true}
+        liveboardId={&#34;ef2b8ff9-fabe-4a93-87b5-89896af760c6&#34;}
+      /&gt;
+    &lt;/Stack&gt;
+  )
+}
+</code></pre>
+<p>Looking at the liveboard embed component, you will see parameters you are already familiar with from the Developer Playground task previously.</p>
+<p>Notice that the LiveboardEmbed requires a <code>liveboardId</code>. In this case we have provided a default id. But there are two other ways you can obtain the UUID.</p>
+<ul>
+<li>Search for the livebaord in the Developer Playground and copy the ID from the generated code.</li>
+<li>Navigate to the liveboard in the ThoughtSpot UI and observe the URL. The first UUID is that of the liveboard itself.</li>
+</ul>
+<p>We have also specified <code>fullHeight</code> to be true. This means that the liveboard container will automatically expand to the height of the liveboard itself.</p>
+<h2 is-upgraded>Add the component to your application</h2>
+<ol type="1" start="4">
+<li>Open <strong>App.js</strong> and add an import for the liveboard component:</li>
+</ol>
+<pre><code language="language-React" class="language-React">import Liveboard from &#39;./components/liveboard&#39;;
+</code></pre>
+<ol type="1" start="5">
+<li>Next we can add a new Route after <code>Home</code>, that renders the liveboard on the URL <code>/liveboard</code>:</li>
+</ol>
+<pre><code language="language-react" class="language-react">function App() {
+  return (
+    &lt;div className=&#34;App&#34;&gt;
+    
+        &lt;Navigation&gt;&lt;/Navigation&gt;
+        
+        &lt;Container style=&#123;&#123;height:&#39;calc(100vh - 60px)&#39;,overflow:&#39;auto&#39;, paddingTop:&#39;25px&#39;}}&gt;
+          &lt;BrowserRouter&gt;
+            &lt;Routes&gt;
+              &lt;Route path=&#34;/&#34; element={&lt;Typography&gt;Home&lt;/Typography&gt;} /&gt;
+              &lt;Route path=&#34;/liveboard&#34; element={&lt;Liveboard/&gt;} /&gt;
+            &lt;/Routes&gt;
+          &lt;/BrowserRouter&gt;
+        &lt;/Container&gt;
+    &lt;/div&gt;
+  )
+}
+
+</code></pre>
+<p>Finally, let&#39;s add the new route to the navigation bar.</p>
+<ol type="1" start="5">
+<li>Open <strong>componets/navigation.js</strong> and add a new button that links to the URL <code>liveboard</code>:</li>
+</ol>
+<pre><code language="language-react" class="language-react">export default function Navigation() {
+  return (
+    &lt;Stack direction={&#34;row&#34;} spacing={2} style=&#123;&#123; padding: &#34;10px&#34;, boxShadow: &#34;0 2px 2px #f2f2f2&#34; }}&gt;
+    
+      &lt;Button href=&#34;/&#34;&gt;Home&lt;/Button&gt;
+      
+      &lt;Button  href=&#34;/liveboard&#34;&gt;
+        Liveboard
+      &lt;/Button&gt;
+      
+    &lt;/Stack&gt;
+  );
+}
+
+</code></pre>
+<p>If everything is completed correctly, you will be presented with the home page as before, but now in the navigation bar you will have an additional link to <code>Liveboard</code>. Tap that link to open the new page. Since this is your first time accessing the page you may be prompted to log into ThoughSpot, do this with the credentials provided. You should now see an embedded liveboard, Good job!</p>
+<p class="image-container"><img alt="C18-liveboard" src="img/9b14f0a904a7ff1f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Embed Search Component" duration="10">
+        <p>Embedding a Search component is very similar to what you just completed with the Liveboard component. You need to create a new page and add the Search component, then add it to your routes and the navigation menu. Let&#39;s jump right in.</p>
+<h2 is-upgraded>Create the Search page</h2>
+<ol type="1">
+<li>Add a new file, <strong>search.js</strong> in the <code>components</code> directory, and add the following code:</li>
+</ol>
+<pre><code language="language-react" class="language-react">import React, { useState } from &#34;react&#34;;
+import {SearchEmbed, useEmbedRef} from &#34;@thoughtspot/visual-embed-sdk/react&#34;;
+import { Stack } from &#34;@mui/system&#34;;
+
+export default function Search() {
+  
+    return (
+        &lt;Stack spacing={2}&gt;
+        
+            &lt;SearchEmbed
+              collapseDataSources={true}
+              frameParams=&#123;&#123; height: &#34;600px&#34; }}
+            /&gt;
+            
+        &lt;/Stack&gt;
+
+    );
+}
+</code></pre>
+<p>The syntax for this looks very similar to the liveboard component, but in this case we are using the SearchEmbed, with a few new parameters.</p>
+<p>We have hardcoded the search <code>height</code> to be 600px, and we have specified <code>collapseDataSources</code> to be true. This means that the typical left-hand Data panel where you can select columns via clicking, is collapsed by default. This is one of the many options we can pass to control the look and behavior of the embedded object.</p>
+<h2 is-upgraded>Add Search Route</h2>
+<ol type="1" start="2">
+<li>Open <strong>App.js</strong> and import the Search component after the Liveboard import:</li>
+</ol>
+<pre><code language="language-react" class="language-react">import Search from &#39;./components/search&#39;;
+</code></pre>
+<ol type="1" start="3">
+<li>Add the function to the <code>Routes</code> element after the Search route:</li>
+</ol>
+<pre><code language="language-react" class="language-react">&lt;Route path=&#34;/search&#34; element={&lt;Search /&gt;} /&gt;
+</code></pre>
+<h2 is-upgraded>Add Search to the navigation menu</h2>
+<ol type="1" start="4">
+<li>Open <strong>components/navigation.js</strong> and add a button to the search route, after the liveboard navigation item:</li>
+</ol>
+<pre><code language="language-react" class="language-react">export default function Navigation() {
+  return (
+    &lt;Stack direction={&#34;row&#34;} spacing={2} style=&#123;&#123; padding: &#34;10px&#34;, boxShadow: &#34;0 2px 2px #f2f2f2&#34; }}&gt;
+      
+      &lt;Button href=&#34;/&#34;&gt;Home&lt;/Button&gt;
+      
+      &lt;Button  href=&#34;/liveboard&#34;&gt;
+        Liveboard
+      &lt;/Button&gt;
+      
+      &lt;Button  href=&#34;/search&#34;&gt;
+        Search
+      &lt;/Button&gt;
+      
+    &lt;/Stack&gt;
+  );
+}
+</code></pre>
+<ol type="1" start="5">
+<li>Click on the new navigation link to test the search embed, and give a simple search a shot:</li>
+</ol>
+<ul>
+<li><em>&#34;Revenue monthly Product Category&#34;</em></li>
+</ul>
+<p>Your result should look like the screenshot below:</p>
+<p class="image-container"><img alt="C19-search" src="img/fb637fb2d10a7c6d.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using REST API Calls" duration="5">
+        <p>The next thing we will try to do is to create a list of all Answers available to the user. Up until this point we have been leveraging the Visual Embed SDK. This next step will require that we use the ThoughtSpot REST API.</p>
+<p>Before we implement the call we need, let&#39;s take a second to explore the REST API, as this task is just one of the many tasks that the APIs can be used for, including:</p>
+<ul>
+<li>Controlling users and permissions</li>
+<li>Retrieving login tokens</li>
+<li>Querying data</li>
+<li>Querying content</li>
+<li>Version control</li>
+</ul>
+<p>The best place to quickly explore the other REST APIs available to us, is in the ThoughtSpot UI.</p>
+<ol type="1">
+<li>Navigate to the Rest API V2 playground in the ThoughtSpot UI&#39;s Develop page. <a href="https://cap1slingshot.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0" target="_blank">https://cap1slingshot.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0</a></li>
+<li>Take a second to explore the various calls availbe to us.</li>
+<li>Click on the API call called <code>Search Data</code> under the <code>Data</code> section. This endpoint can be used to retrieve the result of a search query in JSON format. This requires three variables.</li>
+</ol>
+<ul>
+<li>Set the <code>query_string</code> equal to <strong>[Revenue] [Product Category]</strong></li>
+<li>Set the <code>logical_table_identifier</code> to <strong>4598e2bf-5d86-4892-84dc-a9686eb5a8ac</strong>. This is the ID of our Retail Banking worksheet.</li>
+<li>Set the <code>data_format</code> to <strong>Compact</strong></li>
+</ul>
+<ol type="1" start="5">
+<li>Click <strong>Try it Out</strong> in the bottom right hand corner and explore the resulting dataset.</li>
+</ol>
+<p>You should see something like this:</p>
+<p class="image-container"><img alt="C20-rest-playground" src="img/ca9c2769c229dd78.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create an Answer Select Menu." duration="10">
+        <p>Searching by itself is great, but you will also want to save and re-visit your searches later. A saved search is called an <strong>Answer</strong> and we can load answers using the same search component we just created by specifying an <code>answerId</code>. As we did with the liveboard, we could find a hardcoded ID through the developer playground. But in this case we want to make it more dynamic, so let&#39;s create a new select component that will allow a user to choose from a list of all of the answers that they have saved.</p>
+<h2 is-upgraded>Create an AnswerSelect component</h2>
+<p>Coming back to our original goal of creating a select menu that contains a list of all answers the user created. To do this we will need to query the metadata within ThoughtSpot.</p>
+<p>In this example we will leverage the V1 API&#39;s <code>metadata/list</code>: <a href="https://developers.thoughtspot.com/docs/?pageid=metadata-api#metadata-list" target="_blank">https://developers.thoughtspot.com/docs/?pageid=metadata-api#metadata-list</a></p>
+<p>The equivialant call in V2 can be found here: <a href="https://developers.thoughtspot.com/docs/?pageid=rest-apiv2-reference#_metadata" target="_blank">https://developers.thoughtspot.com/docs/?pageid=rest-apiv2-reference#_metadata</a></p>
+<ol type="1">
+<li>First, create a new file in the <code>components</code> folder called <strong>answer_select.js</strong>, and add the following code:</li>
+</ol>
+<pre><code language="language-react" class="language-react">import { FormControl, InputLabel, MenuItem, Select } from &#34;@mui/material&#34;
+import { useEffect,useState } from &#34;react&#34;
+
+export default function AnswerSelect(props){
+    const {
+        selectedAnswer,
+        selectAnswer
+    } = props
+
+    const [answers,setAnswers] = useState([])
+
+    useEffect(()=&gt;{
+        var baseURL = &#34;https://cap1slingshot.thoughtspot.cloud/&#34;
+
+        fetch(baseURL+&#34;callosum/v1/tspublic/v1/metadata/list?type=QUESTION_ANSWER_BOOK&amp;category=MY&#34;,
+        {
+          credentials: &#39;include&#39;,
+        })
+        .then(response =&gt; response.json())
+        .then(data =&gt; {
+            if (data.headers){
+                setAnswers(data.headers)
+            }
+        })
+    },[selectedAnswer])
+
+    return (
+        &lt;FormControl&gt;
+            &lt;InputLabel id=&#34;demo-simple-select-label&#34;&gt;My Answers&lt;/InputLabel&gt;
+            &lt;Select 
+                style=&#123;&#123;width:&#39;200px&#39;}}
+                label=&#34;Select Answer&#34;
+                value={selectedAnswer ? selectedAnswer : &#39;&#39;}
+                onChange={(e)=&gt;selectAnswer(e.target.value)}
+            &gt;
+                {answers.map((answer)=&gt;{
+                    return &lt;MenuItem value={answer.id}&gt;{answer.name}&lt;/MenuItem&gt;
+                })}
+            &lt;/Select&gt;
+        &lt;/FormControl&gt;
+    )
+}
+</code></pre>
+<p>Let&#39;s take a look at what this does. First, this component is based on the <a href="https://mui.com/material-ui/react-select/" target="_blank">Material UI Select</a> component, which simply requires a list of <code>MenuItem</code> objects, much like a standard select input. To obtain this list we are are making a <code>fetch</code> call in the components <code>useEffect</code> function.</p>
+<p>The key to note here is the use of <code>credentials: 'include'</code>. Since we have already logged into ThoughtSpot, the session is able to be maintained in the browser. When we send the REST API call to ThoughtSpot we simply need to ensure that the Browser authentication comes along with, and ThoughtSpot will be able to use this authenticate oure user automatically.</p>
+<p>Because <strong>category</strong> is set to <code>MY</code>, ThoughtSpot will look at the authenticated sesison and only return the list of Answer objects available to the user.</p>
+<p>To store the list of available answers, we are using a state object of the array type called <code>answers</code>: <code>const [answers,setAnswers] = useState([])</code></p>
+<p>Finally we map a list of <code>Menu Items</code> into the Select component, setting the value equal to the answer&#39;s Id and the display equal to the answer&#39;s Name.</p>
+<h2 is-upgraded>Add AnswerSelect to the Search Page</h2>
+<ol type="1" start="2">
+<li>Navigate to the <strong>components/search.js</strong> file.</li>
+<li>Add the import for the AnswerSelect component.</li>
+</ol>
+<pre><code language="language-react" class="language-react">import AnswerSelect from &#34;./answer_select&#34;;
+import { Stack } from &#34;@mui/system&#34;;
+</code></pre>
+<ol type="1" start="4">
+<li>Add a new state object called <code>selectedAnswerId</code>. You can add this right above <code>const embedRef</code>.</li>
+</ol>
+<pre><code language="language-react" class="language-react">  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined)
+</code></pre>
+<ol type="1" start="5">
+<li>Create a function to update the selected answer given an answer Id. This will be used by the answer select we just created, and can be placed below the <code>const embedRef</code></li>
+</ol>
+<pre><code language="language-react" class="language-react">  function toggleAnswerSelect(answerUUID){
+      setSelectedAnswerId(answerUUID)
+  }
+</code></pre>
+<ol type="1" start="6">
+<li>Insert the AnswerSelect component. In this case we will create a horizontal menu of buttons using a Material UI Stack. Place this on top of the <code>SearchEmbed</code></li>
+</ol>
+<pre><code language="language-react" class="language-react">&lt;Stack direction={&#34;row&#34;}&gt;
+  &lt;AnswerSelect
+      selectAnswer={toggleAnswerSelect}
+      selectedAnswer={selectedAnswerId}
+  &gt;&lt;/AnswerSelect&gt;
+&lt;/Stack&gt;
+</code></pre>
+<ol type="1" start="7">
+<li>Update the <code>SearchEmbed</code> to refer to the currently selected answerId.</li>
+</ol>
+<pre><code language="language-react" class="language-react">&lt;SearchEmbed
+  collapseDataSources={true}
+  frameParams=&#123;&#123; height: &#34;600px&#34; }}
+  answerId={selectedAnswerId}
+  ref={embedRef}
+/&gt;
+</code></pre>
+<p>Finally, let&#39;s add a button to reset the <code>answerId</code> for a brand new search.</p>
+<ol type="1" start="8">
+<li>Add an import for Material UI Button.</li>
+</ol>
+<pre><code language="language-react" class="language-react">import { Button } from &#34;@mui/material&#34;;
+</code></pre>
+<ol type="1" start="9">
+<li>Below the <code>AnswerSelect</code> component, add a new Button that when clicked sets the <code>selectedAnswerId</code> to <strong>undefined</strong>.</li>
+</ol>
+<pre><code language="language-react" class="language-react">&lt;Button onClick={()=&gt;setSelectedAnswerId(undefined)}&gt;
+    New Search
+&lt;/Button&gt;
+</code></pre>
+<p>Your final code should look like the following:</p>
+<pre><code>import React, { useState } from &#34;react&#34;;
+import { SearchEmbed, useEmbedRef } from &#34;@thoughtspot/visual-embed-sdk/react&#34;;
+import { Stack } from &#34;@mui/system&#34;;
+import AnswerSelect from &#34;./answer_select&#34;;
+import { Button } from &#34;@mui/material&#34;;
+
+export default function Search() {
+  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined)
+
+  const embedRef = useEmbedRef();
+
+  function toggleAnswerSelect(answerUUID){
+      setSelectedAnswerId(answerUUID)
+  }
+  return (
+    &lt;Stack spacing={2}&gt;
+      &lt;Stack direction={&#34;row&#34;}&gt;
+        &lt;AnswerSelect
+            selectAnswer={toggleAnswerSelect}
+            selectedAnswer={selectedAnswerId}
+        &gt;&lt;/AnswerSelect&gt;
+        &lt;Button onClick={()=&gt;setSelectedAnswerId(undefined)}&gt;
+            New Search
+        &lt;/Button&gt;
+      &lt;/Stack&gt;
+      &lt;SearchEmbed
+        collapseDataSources={true}
+        frameParams=&#123;&#123; height: &#34;600px&#34; }}
+        answerId={selectedAnswerId}
+        ref={embedRef}
+      /&gt;
+    &lt;/Stack&gt;
+  );
+}
+</code></pre>
+<p>The resulting application should now look something like this:</p>
+<p class="image-container"><img alt="C21-answer-select" src="img/d9275cc44224748f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using Lifecycle Events" duration="5">
+        <p>ThoughtSpot Everywhere makes it easy to embed analytics into any webapp via the Visual Embed SDK. In addition to embedding components, the SDK also provides support for analytics lifecycle events such as when a search term has changed, new data is loaded, or a component is rendered on the page. In this tutorial, you will learn the different types of lifecycle events and how to utilize them to make more dynamic interactions. You will use the app you just created and extend it to support lifecycle events</p>
+<h2 is-upgraded>Event Types</h2>
+<p>Lifecycle events fall into two categories:</p>
+<h3 is-upgraded>EmbedEvents</h3>
+<p>EmbedEvents occur when the state of a component changes or is interacted with. This may be something like the component is rendered, new data is loaded, or a user clicks on a visualization</p>
+<h3 is-upgraded>HostEvents</h3>
+<p>HostEvents are hooks to allow the developer to programmatically change or update an embedded component. For example, you may want to change the search term used, or enable/disable features</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add an Embed Event" duration="5">
+        <p>Currently our list of answers shows us everything available to the user as of the time it was loaded. But what happens when a user wants to save one of their new searches?</p>
+<p>Give it a shot:</p>
+<ol type="1">
+<li>Click &#34;New Search&#34;</li>
+<li>Type <strong>Revenue Product Category</strong> into the search</li>
+<li>Click the three dots icon and select <code>Save</code></li>
+<li>Give it a good name and finish saving.</li>
+</ol>
+<p>Notice that the list has not updated. If you refresh the page, you will see that the changes are finally picked up. This is because of the way that state works in React. To make this work as we expect, we can listen for the <strong>Save</strong> event to occur inside of the embed, using <code>EmbedEvent.Save</code></p>
+<ol type="1">
+<li>First import the EmbedEvent enum from the ThoughtSpot SDK:</li>
+</ol>
+<pre><code language="language-react" class="language-react">import { EmbedEvent } from &#34;@thoughtspot/visual-embed-sdk&#34;;
+</code></pre>
+<ol type="1" start="2">
+<li>Add a new function called <code>onSearchLoad</code>. Because we are using React, we need to use the embedRef to add listeners and trigger events. In this case we are listening for the <code>EmbedEvent.Save</code>, which will fire when the user finishes saving the search.  To make this even more convenient for us, ThoughtSpot includes the newly saved <code>answerId</code> in the event data, which we can use to update the <code>selectedAnswerId</code>.</li>
+</ol>
+<pre><code language="language-react" class="language-react">function onSearchLoad(){
+  embedRef.current.on(EmbedEvent.Save, (event)=&gt;{
+    setSelectedAnswerId(event.data.answerId)
+  })
+}
+</code></pre>
+<ol type="1" start="3">
+<li>Add new parameter to the SearchEmbed to call this function:</li>
+</ol>
+<pre><code language="language-react" class="language-react">&lt;SearchEmbed
+  onLoad={onSearchLoad}
+  collapseDataSources={true}
+  frameParams=&#123;&#123; height: &#34;600px&#34; }}
+  answerId={selectedAnswerId}
+  ref={embedRef}
+/&gt;
+</code></pre>
+<p>Your final code should look like this:</p>
+<pre><code language="language-react" class="language-react">import React, { useState } from &#34;react&#34;;
+import { SearchEmbed, useEmbedRef } from &#34;@thoughtspot/visual-embed-sdk/react&#34;;
+import { Stack } from &#34;@mui/system&#34;;
+import AnswerSelect from &#34;./answer_select&#34;;
+import { Button } from &#34;@mui/material&#34;;
+import { EmbedEvent } from &#34;@thoughtspot/visual-embed-sdk&#34;;
+
+
+export default function Search() {
+  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined)
+
+  const embedRef = useEmbedRef();
+  function onSearchLoad(){
+    embedRef.current.on(EmbedEvent.Save, (event)=&gt;{
+      setSelectedAnswerId(event.data.answerId)
+    })
+  }
+  function toggleAnswerSelect(answerUUID){
+      setSelectedAnswerId(answerUUID)
+  }
+  return (
+    &lt;Stack spacing={2}&gt;
+      &lt;Stack direction={&#34;row&#34;}&gt;
+        &lt;AnswerSelect
+            selectedAnswer={selectedAnswerId}
+            selectAnswer={toggleAnswerSelect}
+        &gt;&lt;/AnswerSelect&gt;
+        &lt;Button onClick={()=&gt;setSelectedAnswerId(undefined)}&gt;
+            New Search
+        &lt;/Button&gt;
+      &lt;/Stack&gt;
+      &lt;SearchEmbed
+        onLoad={onSearchLoad}
+        collapseDataSources={true}
+        frameParams=&#123;&#123; height: &#34;600px&#34; }}
+        answerId={selectedAnswerId}
+        ref={embedRef}
+      /&gt;
+    &lt;/Stack&gt;
+  );
+}
+</code></pre>
+<ol type="1" start="4">
+<li>Give it a shot! Try to create a new search and save. Your menu should update instantly to the newly saved report name.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add a Host Event" duration="5">
+        <p>We now know when a save has been triggered, so let&#39;s do the opposite.</p>
+<p>Let&#39;s create a button that kicks off the save process.</p>
+<h2 is-upgraded>Triggering the Save Event</h2>
+<ol type="1">
+<li>First, in <strong>components/search.js</strong> update the import to include the HostEvent enum.</li>
+</ol>
+<pre><code language="language-react" class="language-react">import { EmbedEvent, HostEvent } from &#34;@thoughtspot/visual-embed-sdk&#34;;
+</code></pre>
+<ol type="1" start="2">
+<li>Next, add a function that triggers the <code>HostEvent.Save</code>:</li>
+</ol>
+<pre><code language="language-react" class="language-react">function saveSearch(){
+    embedRef.current.trigger(HostEvent.Save)
+}
+</code></pre>
+<p>Instead of simply adding the Button, let&#39;s take this a step further and conditionally render Buttons based on whether the user is creating a new search or is looking at an existing Answer. Currently we know this by the <code>selectedAnswerId</code>. If this is undefined, then the only action that makes sense is to <strong>Save</strong>. If this has a value, then the user is looking at an existing answer <strong>New Search</strong> will be more relevant.</p>
+<ol type="1" start="3">
+<li>Replace the New Search button with the following code:</li>
+</ol>
+<pre><code language="language-react" class="language-react">&lt;Button onClick={saveSearch}&gt;
+  Save Search
+&lt;/Button&gt;
+{selectedAnswerId ? (
+  &lt;Button onClick={() =&gt; setSelectedAnswerId(undefined)}&gt;
+    New Search
+  &lt;/Button&gt;
+) : null}
+</code></pre>
+<ol type="1" start="4">
+<li>Give it a shot! When you are viewing an existing Answer, the Save button will update the answer. When you click &#34;New Search&#34; and start fresh, the save button will create a brand new Answer.</li>
+</ol>
+<p>Your final code should look like this:</p>
+<pre><code language="language-react" class="language-react">import React, { useState } from &#34;react&#34;;
+import { SearchEmbed, useEmbedRef } from &#34;@thoughtspot/visual-embed-sdk/react&#34;;
+import { Stack } from &#34;@mui/system&#34;;
+import AnswerSelect from &#34;./answer_select&#34;;
+import { Button } from &#34;@mui/material&#34;;
+import { EmbedEvent, HostEvent } from &#34;@thoughtspot/visual-embed-sdk&#34;;
+
+export default function Search() {
+  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
+
+  const embedRef = useEmbedRef();
+  function onSearchLoad() {
+    embedRef.current.on(EmbedEvent.Save, (event) =&gt; {
+      setSelectedAnswerId(event.data.answerId);
+    });
+  }
+  function toggleAnswerSelect(answerUUID) {
+    setSelectedAnswerId(answerUUID);
+  }
+  function saveSearch() {
+    embedRef.current.trigger(HostEvent.Save);
+  }
+  return (
+    &lt;Stack spacing={2}&gt;
+      &lt;Stack direction={&#34;row&#34;}&gt;
+        &lt;AnswerSelect
+          selectedAnswer={selectedAnswerId}
+          selectAnswer={toggleAnswerSelect}
+        &gt;&lt;/AnswerSelect&gt;
+        &lt;Button onClick={saveSearch}&gt;Save Search&lt;/Button&gt;
+        {selectedAnswerId ? (
+          &lt;Button onClick={() =&gt; setSelectedAnswerId(undefined)}&gt;
+            New Search
+          &lt;/Button&gt;
+        ) : null}
+      &lt;/Stack&gt;
+      &lt;SearchEmbed
+        onLoad={onSearchLoad}
+        collapseDataSources={true}
+        frameParams=&#123;&#123; height: &#34;600px&#34; }}
+        answerId={selectedAnswerId}
+        ref={embedRef}
+      /&gt;
+    &lt;/Stack&gt;
+  );
+}
+</code></pre>
+<p>Your application should now look like this (if you are viewing an existing Answer):</p>
+<p class="image-container"><img alt="C22-save-new-buttons" src="img/d517f4d19541c2ab.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Adjust the Application Styles" duration="10">
+        <p>Our application works as we expect, but it doesnt quite match the look and feel we want.</p>
+<p>To get this looking a bit better we will adjust the sytling both of the application we just created, as well as the ThoughtSpot Embeds.</p>
+<p>Let&#39;s start with the application.</p>
+<h2 is-upgraded>Add a logo</h2>
+<p>A website doesn&#39;t feel quite right without a Logo.</p>
+<ol type="1">
+<li>Right click and save the image below to your local computer.</li>
+</ol>
+<p class="image-container"><img style="width: 200.00px" src="img/529c567baaa6c47d.png"></p>
+<ol type="1" start="2">
+<li>Drag and Drop this into the <code>/public</code> directory of the IDE file explorer</li>
+</ol>
+<p class="image-container"><img alt="C23-logo-public" src="img/bc039c04fd27fcec.png"></p>
+<ol type="1" start="3">
+<li>Open the <strong>components/navigation.js</strong> file and add it as an image before the other links.</li>
+</ol>
+<pre><code language="language-react" class="language-react">&lt;img height=&#34;50px&#34; alt=&#34;Logo&#34; src=&#34;/Capital-One-Logo.png&#34;&gt;&lt;/img&gt;
+</code></pre>
+<h2 is-upgraded>Adjust the Material UI Theme</h2>
+<p>Material UI allows us to control things like button color through a <strong>Theme</strong> object.</p>
+<ol type="1" start="5">
+<li>In your <strong>App.js</strong> file copy the following code after the last import:</li>
+</ol>
+<pre><code language="language-react" class="language-react">import { createTheme, ThemeProvider } from &#39;@mui/material/styles&#39;;
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: &#34;#396d92&#34;,
+      main: &#34;#016faa&#34;,
+      dark: &#34;#396d92&#34;,
+      contrastText: &#34;#fff&#34;
+    },
+    secondary: {
+      light: &#34;#da5853&#34;,
+      main: &#34;#016faa&#34;,
+      dark: &#34;#92201c&#34;,
+      contrastText: &#34;#fff&#34;
+    }
+  }
+});
+</code></pre>
+<ol type="1" start="6">
+<li>In the <code>App</code> function, wrap everything we have done in a theme provider, using the theme we just created:</li>
+</ol>
+<pre><code language="language-react" class="language-react">function App() {
+  return (
+    &lt;div className=&#34;App&#34;&gt;
+      &lt;ThemeProvider theme={theme}&gt;
+        &lt;Navigation&gt;&lt;/Navigation&gt;
+        &lt;Container
+          style=&#123;&#123;
+            height: &#34;calc(100vh - 60px)&#34;,
+            overflow: &#34;auto&#34;,
+            paddingTop: &#34;25px&#34;
+          }}
+        &gt;
+          &lt;BrowserRouter&gt;
+            &lt;Routes&gt;
+              &lt;Route path=&#34;/&#34; element={&lt;Typography&gt;Home&lt;/Typography&gt;} /&gt;
+              &lt;Route path=&#34;/liveboard&#34; element={&lt;Liveboard /&gt;} /&gt;
+              &lt;Route path=&#34;/search&#34; element={&lt;Search /&gt;} /&gt;
+            &lt;/Routes&gt;
+          &lt;/BrowserRouter&gt;
+        &lt;/Container&gt;
+      &lt;/ThemeProvider&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using CSS in ThoughtSpot" duration="0">
+        <p>Let&#39;s make the ThoughtSpot embeds match the rest of our page a bit better. We can do this by adjusting CSS.</p>
+<p>CSS can be provided both at a global level, through the <code>init</code> function, or provided within the Embed objects themselves such as SearchEmbed and LiveboardEmbed for more specific individual styling.</p>
+<p>This is done by providing a <code>customizations</code> object, that contains CSS variable overrides or a link to a CSS file.</p>
+<pre><code>  customizations: {
+    style: {
+      customCSSUrl: &#34;cdn.jsdelivr.net/gh/thoughtspot/custom-css-demo/css-variables.css&#34;,
+      customCSS: {
+        variables: {
+          &#34;--ts-var-button--primary-background&#34;: &#34;#016faa&#34;,
+        },
+      }
+    }
+  }
+</code></pre>
+<p>Going into a bit more detail on each of the override mechanisms:</p>
+<h3 is-upgraded>CSS Variables</h3>
+<p>To override large portions of the application quickly and easily, ThoughtSpot provides 70+ CSS variables that can be overriden. In this example we are overriding the primary button background color:</p>
+<p><code>"--ts-var-button--primary-background": "#016faa"</code></p>
+<p><a href="https://developers.thoughtspot.com/docs/?pageid=custom-css#supported-variables" target="_blank">Full List of CSS Variables</a></p>
+<h3 is-upgraded>Custom CSS File</h3>
+<p>It is also possible to reference a hosted CSS file that will be loaded with the ThoughtSpot emnbed and can similarily override variables and other rules. Typically this would reside on the application server. Note that this URL will need to be whitelisted by the ThoughtSpot server.</p>
+<p><code>customCSSUrl: "cdn.jsdelivr.net/gh/thoughtspot/custom-css-demo/css-variables.css",</code></p>
+<h3 is-upgraded>CSS Rules</h3>
+<p>For anything beyond what is currently possible with variables, you can provide specific rules. It is recommend that you use this sparingly, as individual classes are more subject to change than the well maintained variables. In this example we are adjusting the padding around the search component:</p>
+<p><code>".answer-module__answer": { padding: "2px" }</code></p>
+<h3 is-upgraded>Documentation</h3>
+<p>Feel free to explore the documentation on CSS: <a href="https://developers.thoughtspot.com/docs/?pageid=custom-css" target="_blank">CSS Documentation</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add CSS to ThoughtSpot Embed" duration="0">
+        <p>As a simple starting example of what is possible, we have overriden a few specific variables in ThoughtSpot to make the embeds look more like the rest of our styled site.</p>
+<ol type="1">
+<li>In the <strong>App.js</strong> file, find the ThoughtSpot <code>init</code> function, and replace it with the following code.</li>
+</ol>
+<pre><code language="language-react" class="language-react">init({
+  thoughtSpotHost: baseURL,
+  authType: AuthType.None,
+  customizations: {
+    style: {
+      customCSS: {
+        variables: {
+          &#34;--ts-var-button--primary-background&#34;: &#34;#016faa&#34;,
+          &#34;--ts-var-button--secondary-color&#34;: &#34;#454545&#34;,
+          &#34;--ts-var-root-background&#34;: &#34;#ffffff&#34;,
+          &#34;--ts-var-viz-border-radius&#34;: &#34;2px&#34;,
+          &#34;--ts-var-vis-box-shadow&#34;: &#34;0px 0px 4px #f2f2f2&#34;,
+          &#34;--ts-var-button-border-radius&#34;: &#34;5px&#34;
+        },
+        rules_UNSTABLE: {
+          &#34;.answer-module__answer&#34;: { padding: &#34;2px&#34; },
+          &#34;.answer-module__searchCurtain&#34;: { &#34;background-color&#34;: &#34;transparent&#34; }
+        }
+      }
+    }
+  }
+});
+</code></pre>
+<p class="image-container"><img alt="C24-styled" src="img/bf26b731bb9c8c41.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="(Optional) Listen for Custom Actions" duration="0">
+        <p>By now you should have a good understanding of how you can listen for and interact with the embed container through Embed and Host Events.</p>
+<p>In this section we will highlight a special type of EmbedEvent <em>Custom Actions</em>, which are linked to the broader mechanism in ThoughtSpot specifically intended to drive next step workflow and enable action on the data that the user is viewing.</p>
+<p><a href="https://docs.thoughtspot.com/cloud/latest/custom-actions" target="_blank">https://docs.thoughtspot.com/cloud/latest/custom-actions</a></p>
+<ol type="1">
+<li>We have already setup an action for you. Navigate to the liveboard page in your application, and ensure that you are using the <strong>Retail Banking Analysi</strong>s example liveboard.</li>
+</ol>
+<p><code>liveboardId: 'ef2b8ff9-fabe-4a93-87b5-89896af760c6'</code></p>
+<ol type="1" start="2">
+<li>Switch to the &#34;Action&#34; tab, and hover over the visualization. Notice that a button appears called ‘Custom Action&#39;</li>
+</ol>
+<p>This is a custom action that we have attached to the visualization, in the &#34;Primary Action&#34; position. Optionally we could have also placed this in the <strong>Right Click Contextual Menu</strong> or the <strong>Answer Three Dots Menu</strong>.</p>
+<p class="image-container"><img style="width: 600.00px" src="img/2a610f5073b6dace.png"></p>
+<p>When a user clicks this button, a specific action will be emitted that we can listen to.</p>
+<h2 is-upgraded>Listen for the Event in your Liveboard Page</h2>
+<ol type="1" start="3">
+<li>Switch to your <strong>components/liveboard.js</strong> file, and replace the existing code with the following:</li>
+</ol>
+<pre><code language="language-react" class="language-react">import React, { useState } from &#34;react&#34;;
+import {
+  LiveboardEmbed,
+  useEmbedRef
+} from &#34;@thoughtspot/visual-embed-sdk/react&#34;;
+import { EmbedEvent } from &#34;@thoughtspot/visual-embed-sdk&#34;;
+import { Stack, Modal, Typography, Box } from &#34;@mui/material&#34;;
+
+const style = {
+  position: &#34;absolute&#34;,
+  top: &#34;50%&#34;,
+  left: &#34;50%&#34;,
+  transform: &#34;translate(-50%, -50%)&#34;,
+  width: &#34;50%&#34;,
+  height: &#34;50%&#34;,
+  bgcolor: &#34;background.paper&#34;,
+  border: &#34;2px solid #000&#34;,
+  boxShadow: 24,
+  overflow: &#34;auto&#34;,
+  pt: 2,
+  px: 4,
+  pb: 3
+};
+
+export default function Liveboard() {
+  const embedRef = useEmbedRef();
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [actionData, setActionData] = useState({});
+
+  function onLiveboardLoad() {
+    embedRef.current.on(EmbedEvent.CustomAction, (action) =&gt; {
+      setActionData(action.data.embedAnswerData.data);
+      setModalVisible(true);
+    });
+  }
+  return (
+    &lt;Stack&gt;
+      &lt;Modal
+        open={modalVisible}
+        onClose={() =&gt; setModalVisible(false)}
+        aria-labelledby=&#34;modal-modal-title&#34;
+        aria-describedby=&#34;modal-modal-description&#34;
+      &gt;
+        &lt;Box sx=&#123;&#123; ...style }}&gt;
+          &lt;pre&gt;{JSON.stringify(actionData, null, 2)}&lt;/pre&gt;
+        &lt;/Box&gt;
+      &lt;/Modal&gt;
+      &lt;LiveboardEmbed
+        ref={embedRef}
+        fullHeight={true}
+        onLoad={onLiveboardLoad}
+        liveboardId={&#34;ef2b8ff9-fabe-4a93-87b5-89896af760c6&#34;}
+      /&gt;
+    &lt;/Stack&gt;
+  );
+}
+</code></pre>
+<h2 is-upgraded>Explore the code above</h2>
+<p>There are a few things going on here that are worth highlighting.</p>
+<p>The first is the event listener that we are creating for <code>EmbedEvent.CustomAction</code>. This will fire when the user clicks on any custom action. We are able to differentiate between the actions by looking at the data sent to us.</p>
+<ol type="1" start="4">
+<li>Try logging  this data to the console to see what exactly ThoughtSpot includes.</li>
+</ol>
+<p><em>Note:  that this object will change depending on the custom action used. If you use a </em></p>
+<p><strong><em>Click Action</em></strong></p>
+<p><em>, the data you see will be specific to the point clicked</em></p>
+<pre><code language="language-react" class="language-react">embedRef.current.on(EmbedEvent.CustomAction, (action) =&gt; {
+  console.log(action.data)
+  ...
+});
+</code></pre>
+<p>In the code above we simply take the dataset generated by the click, and create a Material UI <strong>Modal</strong> that displays the resulting dataset.</p>
+<ol type="1" start="5">
+<li>Try it out! Click on the button and see the modal appear. Think of how this could apply to your own workflows. For example, if a user was looking at a chart that listed high cost warehouses, we could take this data and trigger the automatic warehouse optimizer.</li>
+</ol>
+<p class="image-container"><img src="img/e07349c886f1ef43.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Summary" duration="5">
+        <p>Congratulations you have completed the workshop! At this stage, you&#39;ve completed your application and should have a great understanding of how you can use the capabilities of ThoughtSpot Everywhere to enhance the Slingshot application.</p>
+<p>Check out <a href="https://codesandbox.io/s/dazzling-wave-86pb82" target="_blank">the completed app</a> and compare your code.</p>
+<h2 is-upgraded>Additional Resources</h2>
+<p>We&#39;ve only scratched the surface of the features available to developers with ThoughtSpot Everywhere. To keep learning more, the following guides are a great starting point:</p>
+<ul>
+<li>Setting up your <a href="https://developers.thoughtspot.com/docs/?pageid=getting-started" target="_blank">local development</a> environment.</li>
+<li>An overview of <a href="https://developers.thoughtspot.com/docs/?pageid=auth-overview" target="_blank">authentication and security</a> settings.</li>
+<li>Using <a href="https://developers.thoughtspot.com/docs/?pageid=custom-action-intro" target="_blank">custom actions</a></li>
+<li>Working with the <a href="https://developers.thoughtspot.com/docs/?pageid=rest-apis" target="_blank">REST API</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
