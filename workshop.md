@@ -3,7 +3,7 @@
 
 
 summary: ThoughtSpot 2hr Developer Workshop
-id: ts-dev-workshop-feb-2023.1
+id: ts-dev-workshop-feb-2023.2
 categories: Meta
 tags: beginner, intermediate
 status: Published 
@@ -53,8 +53,6 @@ The Develop area contains 4 sections: Home, Guide, Playground, Customizations.
 * **Playground** provides a cloud-based sandbox environment to generate and test code needed to embed the ThoughtSpot Search experience, Visualizations/Liveboards that you or others on your team create, and the Full ThoughtSpot App (white labeling).
 
 * **Customizations** provide access to creating custom Actions that can invoke a URL or trigger a callback in your parent application, changing the Styles (look and feel) for app, visualizations, and white labeling, establish Security Settings to configure automatic authentication and query data programmatically with the REST API.  
-
-  _Note: Customizations are only available in the paid version of ThoughtSpot and not the free trial._
 
 
 
@@ -238,6 +236,10 @@ Long term, you will want to use a more formal authentication method here such as
 
 [https://developers.thoughtspot.com/docs/?pageid=security-settings](https://developers.thoughtspot.com/docs/?pageid=security-settings)
 
+### Save your project
+
+Save the project and all files associated with it. You code-sandbox URL should now be distinct. Make sure to save periodically to not lose your work!
+
 
 You should now see something like the image below:
 
@@ -251,7 +253,9 @@ You should now see something like the image below:
 
 To navigate around our application, lets create a simple navigation bar. In this example, we are using components from [Material UI](https://mui.com/) to help us build something nice looking quickly. First lets create a simple horizontal container, with a button that links refers to the base url `/`.
 
-1. Create a new file in the `components` folder called **navigation.js**. and add the following code:
+1. Create a folder called `components` in your project. We will store several files here over the course of the workshop.
+
+2. Create a new file in the `components` folder called **navigation.js**. and add the following code:
 
 ```React
 import { Stack, Button } from "@mui/material";
@@ -268,13 +272,13 @@ export default function Navigation(){
 
 ```
 
-2. Let's go back to the **App.js** file and import our `Navigation` component. At the top of the file, add a new import:
+3. Let's go back to the **App.js** file and import our `Navigation` component. At the top of the file, add a new import:
 
 ```React
 import Navigation from './components/navigation';
 ```
 
-3. Then, above `Hello ThoughtSpot!` add the Navigation component itself:
+4. Then, above `Hello ThoughtSpot!` add the Navigation component itself:
 
 ```React
 function App() {
@@ -296,14 +300,14 @@ You should now see the link "Home" and the words "Hello ThoughtSpot!":
 
 In the end, we will create components for several different embed types including liveboards and searches. To handle the navigation between these components we will use react router.
 
-4. In **App.js**, add an import for react-router-dom, and Material UI's `Typography` and `Container`. This can go below the Navigation import we just added.
+5. In **App.js**, add an import for react-router-dom, and Material UI's `Typography` and `Container`. This can go below the Navigation import we just added.
 
 ```React 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Typography, Container } from '@mui/material';
 ```
 
-5. Let's replace `Hello ThoughtSpot!` with a Material UI container, and Routes to each URL we wish to create. In this case we only have the Home page, so we will simply render the word `Home`. 
+6. Let's replace `Hello ThoughtSpot!` with a Material UI container, and Routes to each URL we wish to create. In this case we only have the Home page, so we will simply render the word `Home`. 
 
 ```React
 function App() {
@@ -345,6 +349,7 @@ With the app structure set up and running, the next task is to add a new page to
 ```react
 import React from 'react';
 import { LiveboardEmbed } from '@thoughtspot/visual-embed-sdk/react';
+import { Stack } from "@mui/material";
 ```
 
 3. Finally add a liveboard function below your imports. This function will return a snippet of HTML which gets rendered on display. Within this snippet we want to embed our answers component. Previously, in the Developer Playground section, you saw how you generate standard JavaScript code. For your convenience, the Visual Embed SDK also ships with React components. In this example, we will use the LiveboardEmbed component.
@@ -352,10 +357,12 @@ import { LiveboardEmbed } from '@thoughtspot/visual-embed-sdk/react';
 ```react
 export default function Liveboard() {
  return (
+   <Stack>
       <LiveboardEmbed
         fullHeight={true}
         liveboardId={"ef2b8ff9-fabe-4a93-87b5-89896af760c6"}
       />
+    </Stack>
   )
 }
 ```
@@ -422,7 +429,7 @@ export default function Navigation() {
 
 ```
 
-Save everything, and your app will automatically reload on the lefthand side. If everything is completed correctly, you will be presented with the home page as before, but now in the navigation bar you will have an additional link to `Liveboard`. Tap that link to open the new page. Since this is your first time accessing the page you may be prompted to log into ThoughSpot, do this with the credentials provided. You should now see an embedded liveboard, Good job!
+ If everything is completed correctly, you will be presented with the home page as before, but now in the navigation bar you will have an additional link to `Liveboard`. Tap that link to open the new page. Since this is your first time accessing the page you may be prompted to log into ThoughSpot, do this with the credentials provided. You should now see an embedded liveboard, Good job!
 
 ![C18-liveboard](images/C18-liveboard.png)
 
@@ -939,7 +946,7 @@ A website doesn't feel quite right without a Logo.
 
 1. Right click and save the image below to your local computer.
 
-![Capital-One-Logo](images/Capital-One-Logo.png)
+<img src="images/Capital-One-Logo.png" width="200">
 
 2. Drag and Drop this into the `/public` directory of the IDE file explorer
 
@@ -1089,6 +1096,116 @@ init({
 ```
 
 ![C24-styled](images/C24-styled.png)
+
+## (Optional) Listen for Custom Actions
+
+By now you should have a good understanding of how you can listen for and interact with the embed container through Embed and Host Events.
+
+In this section we will highlight a special type of EmbedEvent *Custom Actions*, which are linked to the broader mechanism in ThoughtSpot specifically intended to drive next step workflow and enable action on the data that the user is viewing. 
+
+[https://docs.thoughtspot.com/cloud/latest/custom-actions](https://docs.thoughtspot.com/cloud/latest/custom-actions)
+
+1. We have already setup an action for you. Navigate to the liveboard page in your application, and ensure that you are using the **Retail Banking Analysi**s example liveboard.
+
+`liveboardId: 'ef2b8ff9-fabe-4a93-87b5-89896af760c6'`
+
+2. Switch to the "Action" tab, and hover over the visualization. Notice that a button appears called 'Custom Action'
+
+
+This is a custom action that we have attached to the visualization, in the "Primary Action" position. Optionally we could have also placed this in the **Right Click Contextual Menu** or the **Answer Three Dots Menu**.
+
+<img src="images/C25-custom-action.png" width="600">
+
+When a user clicks this button, a specific action will be emitted that we can listen to.
+
+
+
+### Listen for the Event in your Liveboard Page
+
+3. Switch to your **components/liveboard.js** file, and replace the existing code with the following:
+
+```react
+import React, { useState } from "react";
+import {
+  LiveboardEmbed,
+  useEmbedRef
+} from "@thoughtspot/visual-embed-sdk/react";
+import { EmbedEvent } from "@thoughtspot/visual-embed-sdk";
+import { Stack, Modal, Typography, Box } from "@mui/material";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "50%",
+  height: "50%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  overflow: "auto",
+  pt: 2,
+  px: 4,
+  pb: 3
+};
+
+export default function Liveboard() {
+  const embedRef = useEmbedRef();
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [actionData, setActionData] = useState({});
+
+  function onLiveboardLoad() {
+    embedRef.current.on(EmbedEvent.CustomAction, (action) => {
+      setActionData(action.data.embedAnswerData.data);
+      setModalVisible(true);
+    });
+  }
+  return (
+    <Stack>
+      <Modal
+        open={modalVisible}
+        onClose={() => setModalVisible(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{ ...style }}>
+          <pre>{JSON.stringify(actionData, null, 2)}</pre>
+        </Box>
+      </Modal>
+      <LiveboardEmbed
+        ref={embedRef}
+        fullHeight={true}
+        onLoad={onLiveboardLoad}
+        liveboardId={"ef2b8ff9-fabe-4a93-87b5-89896af760c6"}
+      />
+    </Stack>
+  );
+}
+```
+### Explore the code above
+
+There are a few things going on here that are worth highlighting. 
+
+The first is the event listener that we are creating for `EmbedEvent.CustomAction`. This will fire when the user clicks on any custom action. We are able to differentiate between the actions by looking at the data sent to us. 
+
+4. Try logging  this data to the console to see what exactly ThoughtSpot includes. 
+
+*Note:  that this object will change depending on the custom action used. If you use a **Click Action**, the data you see will be specific to the point clicked*
+
+
+```react
+embedRef.current.on(EmbedEvent.CustomAction, (action) => {
+  console.log(action.data)
+  ...
+});
+```
+
+In the code above we simply take the dataset generated by the click, and create a Material UI **Modal** that displays the resulting dataset.
+
+5. Try it out! Click on the button and see the modal appear. Think of how this could apply to your own workflows. For example, if a user was looking at a chart that listed high cost warehouses, we could take this data and trigger the automatic warehouse optimizer.
+
+![](images/C26-custom-popup.png)
 
 ## Summary
 Duration: 05:00
