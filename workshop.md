@@ -3,7 +3,7 @@
 
 
 summary: ThoughtSpot 2hr Developer Workshop
-id: ts-dev-workshop-feb-2023.2
+id: ts-dev-workshop-feb-2023.1
 categories: Meta
 tags: beginner, intermediate
 status: Published 

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>ThoughtSpot Developer Workshop - Capital One</title>
+  <title>ThoughtSpot Developer Workshop</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -23,21 +23,21 @@
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="ts-dev-workshop-feb-2023.2"
-                  title="ThoughtSpot Developer Workshop - Capital One"
+                  title="ThoughtSpot Developer Workshop"
                   environment="web"
                   feedback-link="https://developers.thoughtspot.com">
     
       <google-codelab-step label="Objectives / Goal" duration="5">
-        <h2 is-upgraded>Capital One Developer Day - Feb 2023</h2>
+        <h2 is-upgraded>Developer Day Workshop - Feb 2023</h2>
 <p>This workshop is designed to introduce you to ThoughSpot Everywhere. Together we will build a simple web application leveraging a small portion of ThoughtSpot&#39;s Visual Embed SDK and REST APIs.</p>
 <p>Through this workshop you will learn the mechanisms by which ThoughtSpot can:</p>
 <ul>
-<li>Enable Slingshot users with the freedom of exploration in an embedded application</li>
+<li>Enable users with the freedom of exploration in an embedded application</li>
 <li>Provide dynamic insights and alerts</li>
 <li>Drive next-step actions and enhance/optimize user workflows</li>
 </ul>
 <h2 is-upgraded>Next Steps</h2>
-<p>Login to the ThoughtSpot environment: <a href="https://cap1slingshot.thoughtspot.cloud/" target="_blank">https://cap1slingshot.thoughtspot.cloud/</a></p>
+<p>Login to the ThoughtSpot environment: <a href="https://my1.thoughtspot.cloud/" target="_blank">https://my1.thoughtspot.cloud/</a></p>
 
 
       </google-codelab-step>
@@ -156,7 +156,7 @@
 <pre><code language="language-React" class="language-React">import React from &#34;react&#34;;
 import { AuthType, init } from &#34;@thoughtspot/visual-embed-sdk&#34;;
 
-var baseURL = &#34;https://cap1slingshot.thoughtspot.cloud/&#34;;
+var baseURL = &#34;https://my1.thoughtspot.cloud/&#34;;
 
 init({
   thoughtSpotHost: baseURL,
@@ -437,7 +437,7 @@ export default function Search() {
 </ul>
 <p>The best place to quickly explore the other REST APIs available to us, is in the ThoughtSpot UI.</p>
 <ol type="1">
-<li>Navigate to the Rest API V2 playground in the ThoughtSpot UI&#39;s Develop page. <a href="https://cap1slingshot.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0" target="_blank">https://cap1slingshot.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0</a></li>
+<li>Navigate to the Rest API V2 playground in the ThoughtSpot UI&#39;s Develop page. <a href="https://my1.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0" target="_blank">https://my1.thoughtspot.cloud/#/develop/api/rest/playgroundV2_0</a></li>
 <li>Take a second to explore the various calls availbe to us.</li>
 <li>Click on the API call called <code>Search Data</code> under the <code>Data</code> section. This endpoint can be used to retrieve the result of a search query in JSON format. This requires three variables.</li>
 </ol>
@@ -476,7 +476,7 @@ export default function AnswerSelect(props){
     const [answers,setAnswers] = useState([])
 
     useEffect(()=&gt;{
-        var baseURL = &#34;https://cap1slingshot.thoughtspot.cloud/&#34;
+        var baseURL = &#34;https://my1.thoughtspot.cloud/&#34;
 
         fetch(baseURL+&#34;callosum/v1/tspublic/v1/metadata/list?type=QUESTION_ANSWER_BOOK&amp;category=MY&#34;,
         {
@@ -799,15 +799,12 @@ export default function Search() {
 <ol type="1">
 <li>Right click and save the image below to your local computer.</li>
 </ol>
-<p class="image-container"><img style="width: 200.00px" src="img/529c567baaa6c47d.png"></p>
+<p class="image-container"><img style="width: 200.00px" src="img/8295f747ed08dfde.png"></p>
 <ol type="1" start="2">
 <li>Drag and Drop this into the <code>/public</code> directory of the IDE file explorer</li>
-</ol>
-<p class="image-container"><img alt="C23-logo-public" src="img/bc039c04fd27fcec.png"></p>
-<ol type="1" start="3">
 <li>Open the <strong>components/navigation.js</strong> file and add it as an image before the other links.</li>
 </ol>
-<pre><code language="language-react" class="language-react">&lt;img height=&#34;50px&#34; alt=&#34;Logo&#34; src=&#34;/Capital-One-Logo.png&#34;&gt;&lt;/img&gt;
+<pre><code language="language-react" class="language-react">&lt;img height=&#34;50px&#34; alt=&#34;Logo&#34; src=&#34;/logo-generic.png&#34;&gt;&lt;/img&gt;
 </code></pre>
 <h2 is-upgraded>Adjust the Material UI Theme</h2>
 <p>Material UI allows us to control things like button color through a <strong>Theme</strong> object.</p>
@@ -1030,7 +1027,7 @@ export default function Liveboard() {
       </google-codelab-step>
     
       <google-codelab-step label="Summary" duration="5">
-        <p>Congratulations you have completed the workshop! At this stage, you&#39;ve completed your application and should have a great understanding of how you can use the capabilities of ThoughtSpot Everywhere to enhance the Slingshot application.</p>
+        <p>Congratulations you have completed the workshop! At this stage, you&#39;ve completed your application and should have a great understanding of how you can use the capabilities of ThoughtSpot Everywhere to enhance your application.</p>
 <p>Check out <a href="https://codesandbox.io/s/dazzling-wave-86pb82" target="_blank">the completed app</a> and compare your code.</p>
 <h2 is-upgraded>Additional Resources</h2>
 <p>We&#39;ve only scratched the surface of the features available to developers with ThoughtSpot Everywhere. To keep learning more, the following guides are a great starting point:</p>
