@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2023-03-09T14:50:41-05:00",
+  "id": "ts-dev-workshop-feb-2023.1",
+  "duration": 105,
+  "title": "ThoughtSpot Developer Workshop",
+  "authors": "Quinton Wall, Nathan Schroeder",
+  "summary": "ThoughtSpot 2hr Developer Workshop",
+  "source": "workshop.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "meta"
+  ],
+  "tags": [
+    "beginner",
+    "intermediate"
+  ],
+  "feedback": "https://developers.thoughtspot.com",
+  "url": "ts-dev-workshop-feb-2023.1"
+}
